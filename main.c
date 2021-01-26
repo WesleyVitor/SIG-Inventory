@@ -1,13 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void menuSobre(void);
+void menuProduto(void);
+void menuCliente(void);
 
 int main(void) {
   menuSobre();
+  menuProduto();
+  menuCliente();
   return 0;
 }
 
 void menuSobre(void) {
+  system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -31,4 +37,63 @@ void menuSobre(void) {
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void menuProduto(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             =          Menu de Produtos           =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               1. Cadastrar um novo Produto                              ///\n");
+  printf("///               2. Pesquisa dados sobre um Produto                        ///\n");
+  printf("///               3. Apagar um Produto do sistema                           ///\n");
+  printf("///               4. Atualizar dados de um Produto                          ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 Entre com sua opção desejada:                           ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+
+void menuCliente(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             =          Menu de Clientes           =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               1. Cadastrar um novo Cliente                              ///\n");
+  printf("///               2. Pesquisa dados sobre um Cliente                        ///\n");
+  printf("///               3. Apagar um Cliente do sistema                           ///\n");
+  printf("///               4. Atualizar dados de um Cliente                          ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 Entre com sua opção desejada:                           ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
 }
