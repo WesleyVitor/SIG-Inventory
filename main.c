@@ -4,11 +4,13 @@
 void menuSobre(void);
 void menuProduto(void);
 void menuCliente(void);
+void menuRetirada(void);
 
 int main(void) {
   menuSobre();
   menuProduto();
   menuCliente();
+  menuRetirada();
   return 0;
 }
 
@@ -55,7 +57,7 @@ void menuProduto(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///               1. Cadastrar um novo Produto                              ///\n");
-  printf("///               2. Pesquisa dados sobre um Produto                        ///\n");
+  printf("///               2. Pesquisar dados sobre um Produto                       ///\n");
   printf("///               3. Apagar um Produto do sistema                           ///\n");
   printf("///               4. Atualizar dados de um Produto                          ///\n");
   printf("///                                                                         ///\n");
@@ -84,9 +86,37 @@ void menuCliente(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///               1. Cadastrar um novo Cliente                              ///\n");
-  printf("///               2. Pesquisa dados sobre um Cliente                        ///\n");
+  printf("///               2. Pesquisar dados sobre um Cliente                       ///\n");
   printf("///               3. Apagar um Cliente do sistema                           ///\n");
   printf("///               4. Atualizar dados de um Cliente                          ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 Entre com sua opção desejada:                           ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void menuRetirada(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             =           Menu de Retirada          =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               1. Cadastrar uma nova Retirada                            ///\n");
+  printf("///               2. Pesquisar dados sobre uma Retirada                     ///\n");
+  printf("///               3. Apagar uma Retirada do sistema                         ///\n");
+  printf("///               4. Atualizar dados de uma Retirada                        ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                 Entre com sua opção desejada:                           ///\n");
