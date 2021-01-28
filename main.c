@@ -5,16 +5,17 @@ void menuSobre(void);
 void menuProduto(void);
 void telaCadastroProduto(void);
 void telaPesquisarProduto(void);
-void telaAddValorPesquisa(void);
+void telaApagarProduto();
 void menuCliente(void);
 void menuRetirada(void);
-
+void telaAddValorPesquisa(void);
 
 int main(void) {
   menuSobre();
   menuProduto();
   telaCadastroProduto();
   telaPesquisarProduto();
+  telaApagarProduto();
   menuCliente();
   menuRetirada();
   telaAddValorPesquisa();
@@ -131,6 +132,33 @@ void telaPesquisarProduto(void){
   printf("///               Entre com uma opção desejada de pesquisa:                 ///\n");
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaApagarProduto(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =      Apagar Produto do Sistema      =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o Código do produto a ser apagado:               ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 Código:                                                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
