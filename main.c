@@ -4,15 +4,20 @@
 void menuSobre(void);
 void menuProduto(void);
 void telaCadastroProduto(void);
+void telaPesquisarProduto(void);
+void telaAddValorPesquisa(void);
 void menuCliente(void);
 void menuRetirada(void);
+
 
 int main(void) {
   menuSobre();
   menuProduto();
   telaCadastroProduto();
+  telaPesquisarProduto();
   menuCliente();
   menuRetirada();
+  telaAddValorPesquisa();
   return 0;
 }
 
@@ -50,11 +55,11 @@ void menuProduto(void){
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             =          Menu de Produtos           =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =          Menu de Produtos           =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -77,11 +82,11 @@ void telaCadastroProduto(void){
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             =       Cadastrar novo Produto        =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Cadastrar novo Produto        =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -100,16 +105,75 @@ void telaCadastroProduto(void){
   getchar();
 }
 
+void telaPesquisarProduto(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =    Pesquisar Produto no Sistema     =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Opções de Pesquisa Disponíveis:                           ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                a. Pesquisar por Código                                  ///\n");
+  printf("///                b. Pesquisar por Nome                                    ///\n");
+  printf("///                c. Pesquisar por Quantidade                              ///\n");
+  printf("///                d. Pesquisar por Validade                                ///\n");
+  printf("///                e. Pesquisar por Preço da Unidade                        ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///               Entre com uma opção desejada de pesquisa:                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaAddValorPesquisa(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =         Valor da Informação         =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com um valor desejado para pesquisar:                ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 Valor:                                                  ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
 void menuCliente(void){
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             =          Menu de Clientes           =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =          Menu de Clientes           =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -121,7 +185,7 @@ void menuCliente(void){
   printf("///                                                                         ///\n");
   printf("///                 Entre com sua opção desejada:                           ///\n");
   printf("///                                                                         ///\n");
-  printf("///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -133,11 +197,11 @@ void menuRetirada(void){
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             =           Menu de Retirada          =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =           Menu de Retirada          =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -149,7 +213,7 @@ void menuRetirada(void){
   printf("///                                                                         ///\n");
   printf("///                 Entre com sua opção desejada:                           ///\n");
   printf("///                                                                         ///\n");
-  printf("///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
