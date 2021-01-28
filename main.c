@@ -13,6 +13,8 @@ void menuCliente(void);
 void telaCadastroClientePF(void);
 void telaCadastroClientePJ(void);
 void telaEscolhaTipoCliente(void);
+void telaPesquisarClientePF(void);
+void telaPesquisarClientePJ(void);
 
 void menuRetirada(void);
 void telaAddValor(void);
@@ -31,6 +33,8 @@ int main(void) {
   telaCadastroClientePF();
   telaCadastroClientePJ();
   telaEscolhaTipoCliente();
+  telaPesquisarClientePF();
+  telaPesquisarClientePJ();
 
   menuRetirada();
   telaAddValor();
@@ -127,27 +131,22 @@ void telaPesquisarProduto(void){
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
-  printf("///              =                                     =                    ///\n");
-  printf("///              =    Pesquisar Produto no Sistema     =                    ///\n");
-  printf("///              =                                     =                    ///\n");
-  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =     Pesquisar Produto no Sistema    =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///               Opções de Pesquisa Disponíveis:                           ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o Código do produto a ser pesquisado             ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                a. Pesquisar por Código                                  ///\n");
-  printf("///                b. Pesquisar por Nome                                    ///\n");
-  printf("///                c. Pesquisar por Quantidade                              ///\n");
-  printf("///                d. Pesquisar por Validade                                ///\n");
-  printf("///                e. Pesquisar por Preço da Unidade                        ///\n");
+  printf("///                 Código:                                                 ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///               Entre com uma opção desejada de pesquisa:                 ///\n");
-  printf("///                                                                         ///\n");
-  printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -383,6 +382,60 @@ void telaEscolhaTipoCliente(void){
   printf("///                Entre com uma opção desejada:                            ///\n");
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaPesquisarClientePF(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =    Pesquisar Cliente no Sistema     =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o CPF do Cliente a ser pesquisado                ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 CPF:                                                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaPesquisarClientePJ(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =    Pesquisar Cliente no Sistema     =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o CNPJ do Cliente a ser pesquisado               ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 CNPJ:                                                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
