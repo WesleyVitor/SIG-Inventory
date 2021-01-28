@@ -2,24 +2,36 @@
 #include <stdlib.h>
 
 void menuSobre(void);
+
 void menuProduto(void);
 void telaCadastroProduto(void);
 void telaPesquisarProduto(void);
 void telaApagarProduto(void);
 void telaAtualizarProduto(void);
+
 void menuCliente(void);
+void telaCadastroClientePF(void);
+void telaCadastroClientePJ(void);
+void telaEscolhaTipoCliente(void);
+
 void menuRetirada(void);
 void telaAddValor(void);
 void telaConfirmacao(void);
 
 int main(void) {
   menuSobre();
+
   menuProduto();
   telaCadastroProduto();
   telaPesquisarProduto();
   telaApagarProduto();
   telaAtualizarProduto();
+
   menuCliente();
+  telaCadastroClientePF();
+  telaCadastroClientePJ();
+  telaEscolhaTipoCliente();
+
   menuRetirada();
   telaAddValor();
   telaConfirmacao();
@@ -244,8 +256,8 @@ void telaConfirmacao(void){
   printf("///               Opções de Confirmações Disponíveis:                       ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 c. Confirmar Operação                                   ///\n");
-  printf("///                 n. Negar Operação                                       ///\n");
+  printf("///                 1. Confirmar Operação                                   ///\n");
+  printf("///                 0. Negar Operação                                       ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                Entre com uma opção desejada:                            ///\n");
@@ -279,6 +291,98 @@ void menuCliente(void){
   printf("///                 Entre com sua opção desejada:                           ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaCadastroClientePJ(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =   Cadastrar Cliente Pessoa Jurídica =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Entre com as informações abaixo:                          ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                CNPJ:                                                    ///\n");
+  printf("///                Nome:                                                    ///\n");
+  printf("///                Ramo:                                                    ///\n");
+  printf("///                Rua:                                                     ///\n");
+  printf("///                Bairro:                                                  ///\n");
+  printf("///                Número:                                                  ///\n");
+  printf("///                Complemento:                                             ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaCadastroClientePF(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =   Cadastrar Cliente Pessoa Física   =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Entre com as informações abaixo:                          ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                Cpf:                                                     ///\n");
+  printf("///                Nome:                                                    ///\n");
+  printf("///                Data de Nascimento:                                      ///\n");
+  printf("///                Rua:                                                     ///\n");
+  printf("///                Bairro:                                                  ///\n");
+  printf("///                Número:                                                  ///\n");
+  printf("///                Complemento:                                             ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+
+}
+
+void telaEscolhaTipoCliente(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =           Tipo de Cliente           =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Opções de Confirmações Disponíveis:                       ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 1. Pessoa Física                                        ///\n");
+  printf("///                 2. Pessoa Jurídica                                      ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                Entre com uma opção desejada:                            ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
