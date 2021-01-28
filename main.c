@@ -5,10 +5,11 @@ void menuSobre(void);
 void menuProduto(void);
 void telaCadastroProduto(void);
 void telaPesquisarProduto(void);
-void telaApagarProduto();
+void telaApagarProduto(void);
+void telaAtualizarProduto(void);
 void menuCliente(void);
 void menuRetirada(void);
-void telaAddValorPesquisa(void);
+void telaAddValor(void);
 
 int main(void) {
   menuSobre();
@@ -16,9 +17,10 @@ int main(void) {
   telaCadastroProduto();
   telaPesquisarProduto();
   telaApagarProduto();
+  telaAtualizarProduto();
   menuCliente();
   menuRetirada();
-  telaAddValorPesquisa();
+  telaAddValor();
   return 0;
 }
 
@@ -152,7 +154,7 @@ void telaApagarProduto(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///              Entre com o Código do produto a ser apagado:               ///\n");
+  printf("///              Entre com o Código do produto a ser apagado                ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                 Código:                                                 ///\n");
@@ -165,7 +167,39 @@ void telaApagarProduto(void){
   getchar();
 }
 
-void telaAddValorPesquisa(void){
+void telaAtualizarProduto(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =    Atualizar Produto no Sistema     =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Opções de Atualização Disponíveis:                        ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                a. Atualizar Nome                                        ///\n");
+  printf("///                b. Atualizar Quantidade                                  ///\n");
+  printf("///                c. Atualizar Validade                                    ///\n");
+  printf("///                d. Atualizar Preço da Unidade                            ///\n");
+  printf("///                e. Atualizar Descrição                                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///               Entre com uma opção desejada de pesquisa:                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaAddValor(void){
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -179,10 +213,10 @@ void telaAddValorPesquisa(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///              Entre com um valor desejado para pesquisar:                ///\n");
+  printf("///                    Entre com um valor desejado                          ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Valor:                                                  ///\n");
+  printf("///                    Valor:                                               ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
