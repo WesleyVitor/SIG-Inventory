@@ -10,6 +10,7 @@ void telaAtualizarProduto(void);
 void menuCliente(void);
 void menuRetirada(void);
 void telaAddValor(void);
+void telaConfirmacao(void);
 
 int main(void) {
   menuSobre();
@@ -21,6 +22,7 @@ int main(void) {
   menuCliente();
   menuRetirada();
   telaAddValor();
+  telaConfirmacao();
   return 0;
 }
 
@@ -220,6 +222,35 @@ void telaAddValor(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaConfirmacao(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =      Confirmação da operação        =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Opções de Confirmações Disponíveis:                       ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 c. Confirmar Operação                                   ///\n");
+  printf("///                 n. Negar Operação                                       ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                Entre com uma opção desejada:                            ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
