@@ -3,12 +3,14 @@
 
 void menuSobre(void);
 void menuProduto(void);
+void telaCadastroProduto(void);
 void menuCliente(void);
 void menuRetirada(void);
 
 int main(void) {
   menuSobre();
   menuProduto();
+  telaCadastroProduto();
   menuCliente();
   menuRetirada();
   return 0;
@@ -70,7 +72,33 @@ void menuProduto(void){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
 }
-
+void telaCadastroProduto(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             =       Cadastrar novo Produto        =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Código:                                                   ///\n");
+  printf("///               Nome:                                                     ///\n");
+  printf("///               Quantidade:                                               ///\n");
+  printf("///               Validade:                                                 ///\n");
+  printf("///               Preço da Unidade:                                         ///\n");
+  printf("///               Descrição:                                                ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
 
 void menuCliente(void){
   system("clear");
