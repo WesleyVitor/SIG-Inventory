@@ -156,6 +156,7 @@ void telaCadastroRetirada(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
+  printf("///               Código:                                                   ///\n");
   printf("///               Produto:                                                  ///\n");
   printf("///               Quantidade:                                               ///\n");
   printf("///               Nome do Cliente:                                          ///\n");
@@ -184,13 +185,14 @@ void telaPesquisarRetirada(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///               1.Pesquisar por nome do Cliente                           ///\n");
-  printf("///               2.Pesquisar por Despachante                               ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o Código da Retirada a ser pesquisada            ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Entre com sua opção desejada:                           ///\n");
   printf("///                                                                         ///\n");
-  printf("///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
+  printf("///                 Código:                                                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
