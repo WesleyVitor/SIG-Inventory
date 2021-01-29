@@ -5,25 +5,26 @@ void menuSobre(void);
 void menuProduto(void);
 void menuCliente(void);
 
-// menu Retirada e Submenus
 void menuRetirada(void);
 void telaCadastroRetirada(void);
 void telaPesquisarRetirada(void);
 void telaApagarRetirada(void);
-void telaAtualizarRetirada(void);
 void telaCodigoRetirada(void);
-
+void telaAtualizarRetirada(void);
 
 int main(void) {
   menuSobre();
+
   menuProduto();
+
   menuCliente();
+
   menuRetirada();
   telaCadastroRetirada();
   telaPesquisarRetirada();
   telaApagarRetirada();
-  telaAtualizarRetirada();
   telaCodigoRetirada();
+  telaAtualizarRetirada();
   return 0;
 }
 
