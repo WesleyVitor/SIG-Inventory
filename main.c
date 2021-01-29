@@ -17,6 +17,8 @@ void telaPesquisarClientePF(void);
 void telaPesquisarClientePJ(void);
 void telaApagarClientePF(void);
 void telaApagarClientePJ(void);
+void telaAtualizarClientePF(void);
+void telaAtualizarClientePJ(void);
 
 void menuRetirada(void);
 void telaAddValor(void);
@@ -39,6 +41,9 @@ int main(void) {
   telaPesquisarClientePJ();
   telaApagarClientePF();
   telaApagarClientePJ();
+  telaAtualizarClientePF();
+  telaAtualizarClientePJ();
+
 
   menuRetirada();
   telaAddValor();
@@ -495,6 +500,72 @@ void telaApagarClientePJ(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaAtualizarClientePF(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =    Atualizar Cliente no Sistema     =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Opções de Atualização Disponíveis:                        ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                a. Atualizar Nome                                        ///\n");
+  printf("///                b. Atualizar Data de Nascimento                          ///\n");
+  printf("///                c. Atualizar Rua                                         ///\n");
+  printf("///                d. Atualizar Bairro                                      ///\n");
+  printf("///                e. Atualizar Número                                      ///\n");
+  printf("///                e. Atualizar Complemento                                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///               Entre com uma opção desejada de pesquisa:                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaAtualizarClientePJ(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =    Atualizar Cliente no Sistema     =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Opções de Atualização Disponíveis:                        ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                a. Atualizar Nome                                        ///\n");
+  printf("///                b. Atualizar Ramo                                        ///\n");
+  printf("///                c. Atualizar Rua                                         ///\n");
+  printf("///                d. Atualizar Bairro                                      ///\n");
+  printf("///                e. Atualizar Número                                      ///\n");
+  printf("///                e. Atualizar Complemento                                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///               Entre com uma opção desejada de pesquisa:                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
