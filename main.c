@@ -15,6 +15,8 @@ void telaCadastroClientePJ(void);
 void telaEscolhaTipoCliente(void);
 void telaPesquisarClientePF(void);
 void telaPesquisarClientePJ(void);
+void telaApagarClientePF(void);
+void telaApagarClientePJ(void);
 
 void menuRetirada(void);
 void telaAddValor(void);
@@ -35,6 +37,8 @@ int main(void) {
   telaEscolhaTipoCliente();
   telaPesquisarClientePF();
   telaPesquisarClientePJ();
+  telaApagarClientePF();
+  telaApagarClientePJ();
 
   menuRetirada();
   telaAddValor();
@@ -430,6 +434,61 @@ void telaPesquisarClientePJ(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///              Entre com o CNPJ do Cliente a ser pesquisado               ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 CNPJ:                                                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+
+void telaApagarClientePF(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =      Apagar Cliente do Sistema      =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o CPF do Cliente a ser apagado                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 CPF:                                                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void telaApagarClientePJ(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =      Apagar Cliente do Sistema      =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o CNPJ do Cliente a ser apagado                  ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                 CNPJ:                                                   ///\n");
