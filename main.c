@@ -21,6 +21,12 @@ void telaAtualizarClientePF(void);
 void telaAtualizarClientePJ(void);
 
 void menuRetirada(void);
+void telaCadastroRetirada(void);
+void telaPesquisarRetirada(void);
+void telaApagarRetirada(void);
+void telaCodigoRetirada(void);
+void telaAtualizarRetirada(void);
+
 void telaAddValor(void);
 void telaConfirmacao(void);
 
@@ -43,9 +49,14 @@ int main(void) {
   telaApagarClientePJ();
   telaAtualizarClientePF();
   telaAtualizarClientePJ();
-
-
+  
   menuRetirada();
+  telaCadastroRetirada();
+  telaPesquisarRetirada();
+  telaApagarRetirada();
+  telaCodigoRetirada();
+  telaAtualizarRetirada();
+  
   telaAddValor();
   telaConfirmacao();
   return 0;
@@ -572,6 +583,7 @@ void telaAtualizarClientePJ(void){
   getchar();
 }
 
+// menu de Retirada
 void menuRetirada(void){
   system("clear");
   printf("\n");
@@ -592,6 +604,158 @@ void menuRetirada(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                 Entre com sua opção desejada:                           ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+// menu de Retirada: submenu Cadastrar
+void telaCadastroRetirada(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             =       Cadastrar Nova Retirada       =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Código:                                                   ///\n");
+  printf("///               Produto:                                                  ///\n");
+  printf("///               Quantidade:                                               ///\n");
+  printf("///               Nome do Cliente:                                          ///\n");
+  printf("///               Tipo de Pagamento:                                        ///\n");
+  printf("///               Despachante:                                              ///\n");
+  printf("///               Valor:                                                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+// menu de Retirada: submenu Pesquisar
+void telaPesquisarRetirada(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             =         Pesquisar Retirada          =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o Código da Retirada a ser pesquisada            ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 Código:                                                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+// menu de Retirada: submenu Apagar
+void telaApagarRetirada(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             =         Apagar uma Retirada         =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o Código da Retirada a ser apagada               ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 Código:                                                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+// menu de Retirada: informar código
+// de retirada para editar
+void telaCodigoRetirada(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             =    Atualizar Retirada no Sistema    =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o Código da Retirada a ser editada               ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 Código:                                                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+// menu de Retirada: submenu Editar -> Novos dados
+void telaAtualizarRetirada(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             =   Atualizar Retirada no Sistema     =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Opções de Atualização Disponíveis:                        ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///               a. Atualizar Produto                                      ///\n");
+  printf("///               b. Atualizar Quantidade                                   ///\n");
+  printf("///               c. Atualizar Nome do Cliente                              ///\n");
+  printf("///               d. Atualizar Tipo de Pagamento                            ///\n");
+  printf("///               e. Atualizar Despachante                                  ///\n");
+  printf("///               f. Atualizar Preço                                        ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///               Entre com a opção desejada de atualização                 ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 Opção:                                                  ///\n");
+  printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
