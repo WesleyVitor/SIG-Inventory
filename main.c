@@ -291,6 +291,7 @@ void telaAddValor(void){
 }
 
 void telaConfirmacao(void){
+  char opcao;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -310,7 +311,9 @@ void telaConfirmacao(void){
   printf("///                 0. Negar Operação                                       ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                Entre com uma opção desejada:                            ///\n");
+  printf("                   Entre com uma opção desejada:   ");
+  scanf("%[0-1]",&opcao);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
