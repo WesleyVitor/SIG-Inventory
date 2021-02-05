@@ -24,14 +24,14 @@ char menuRetirada(void);
 void telaCadastroRetirada(void);
 void telaPesquisarRetirada(void);
 void telaApagarRetirada(void);
-void telaCodigoRetirada(void);
+char telaCodigoRetirada(void);
 void telaAtualizarRetirada(void);
 
 void telaAddValor(void);
 void telaConfirmacao(void);
 
 int main(void) {
-  char opcaoMenuRetirada;
+  char opcaoMenuRetirada, opcaoEditarRetirada;
   menuSobre();
 
   menuProduto();
@@ -55,7 +55,7 @@ int main(void) {
   telaCadastroRetirada();
   telaPesquisarRetirada();
   telaApagarRetirada();
-  telaCodigoRetirada();
+  opcaoEditarRetirada = telaCodigoRetirada();
   telaAtualizarRetirada();
   
   telaAddValor();
@@ -723,7 +723,8 @@ void telaApagarRetirada(void){
 
 // menu de Retirada: informar código
 // de retirada para editar
-void telaCodigoRetirada(void){
+char telaCodigoRetirada(void){
+  char codigo[15];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -741,24 +742,28 @@ void telaCodigoRetirada(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Código:                                                 ///\n");
+  printf("                  Código:   ");
+  scanf("%[0-9]", codigo);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return codigo;
 }
 
 // menu de Retirada: submenu Editar -> Novos dados
-void telaAtualizarRetirada(void){
+void telaAtualizarRetirada(){
+  char opcao;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
   printf("///             =                                     =                     ///\n");
-  printf("///             =   Atualizar Retirada no Sistema     =                     ///\n");
+  printf("///             =         Atualizar Retirada          =                     ///\n");
   printf("///             =                                     =                     ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
   printf("///                                                                         ///\n");
@@ -770,15 +775,13 @@ void telaAtualizarRetirada(void){
   printf("///               a. Atualizar Produto                                      ///\n");
   printf("///               b. Atualizar Quantidade                                   ///\n");
   printf("///               c. Atualizar Nome do Cliente                              ///\n");
-  printf("///               d. Atualizar Tipo de Pagamento                            ///\n");
-  printf("///               e. Atualizar Despachante                                  ///\n");
-  printf("///               f. Atualizar Preço                                        ///\n");
+  printf("///               d. Atualizar Preço                                        ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///               Entre com a opção desejada de atualização                 ///\n");
+  printf("///               Entre com a opção desejada de atualização:    ");
+  scanf("%[a-d]", &opcao);
+  getchar();
   printf("///                                                                         ///\n");
-  printf("///                                                                         ///\n");
-  printf("///                 Opção:                                                  ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
