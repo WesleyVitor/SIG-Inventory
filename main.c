@@ -605,7 +605,7 @@ char menuRetirada(void){
   printf("///               4. Atualizar dados de uma Retirada                        ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("                      Entre com sua opção desejada:    ");
+  printf("                      Entre com sua opção desejada:   ");
   scanf("%[1-4]", &opcao);
   getchar();
   printf("///                                                                         ///\n");
@@ -619,6 +619,11 @@ char menuRetirada(void){
 
 // menu de Retirada: submenu Cadastrar
 void telaCadastroRetirada(void){
+  char codigo[15];
+  char produto[25];
+  int quantidade;
+  char cliente[51];
+  float preco;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -631,13 +636,21 @@ void telaCadastroRetirada(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///               Código:                                                   ///\n");
-  printf("///               Produto:                                                  ///\n");
-  printf("///               Quantidade:                                               ///\n");
-  printf("///               Nome do Cliente:                                          ///\n");
-  printf("///               Tipo de Pagamento:                                        ///\n");
-  printf("///               Despachante:                                              ///\n");
-  printf("///               Valor:                                                    ///\n");
+  printf("                  Código:   ");
+  scanf("%[0-9]", codigo);
+  getchar();
+  printf("                  Produto:   ");
+  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ]", produto);
+  getchar();
+  printf("                  Quantidade:   ");
+  scanf("%d", &quantidade);
+  getchar();
+  printf("                  Nome do Cliente:   ");
+  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ]", cliente);
+  getchar();
+  printf("                  Preço (R$):   ");
+  scanf("%f", &preco);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
