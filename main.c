@@ -20,7 +20,7 @@ void telaApagarClientePJ(void);
 void telaAtualizarClientePF(void);
 void telaAtualizarClientePJ(void);
 
-void menuRetirada(void);
+char menuRetirada(void);
 void telaCadastroRetirada(void);
 void telaPesquisarRetirada(void);
 void telaApagarRetirada(void);
@@ -31,6 +31,7 @@ void telaAddValor(void);
 void telaConfirmacao(void);
 
 int main(void) {
+  char opcaoMenuRetirada;
   menuSobre();
 
   menuProduto();
@@ -50,7 +51,7 @@ int main(void) {
   telaAtualizarClientePF();
   telaAtualizarClientePJ();
   
-  menuRetirada();
+  opcaoMenuRetirada = menuRetirada();
   telaCadastroRetirada();
   telaPesquisarRetirada();
   telaApagarRetirada();
@@ -584,7 +585,8 @@ void telaAtualizarClientePJ(void){
 }
 
 // menu de Retirada
-void menuRetirada(void){
+char menuRetirada(void){
+  char opcao;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -603,13 +605,16 @@ void menuRetirada(void){
   printf("///               4. Atualizar dados de uma Retirada                        ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Entre com sua opção desejada:                           ///\n");
+  printf("                      Entre com sua opção desejada:    ");
+  scanf("%[1-4]", &opcao);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return opcao;
 }
 
 // menu de Retirada: submenu Cadastrar
