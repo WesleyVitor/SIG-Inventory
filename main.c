@@ -661,6 +661,7 @@ void telaCadastroRetirada(void){
 
 // menu de Retirada: submenu Pesquisar
 void telaPesquisarRetirada(void){
+  char codigo[15];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -678,7 +679,9 @@ void telaPesquisarRetirada(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Código:                                                 ///\n");
+  printf("                  Código:   ");
+  scanf("%[0-9]", codigo);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -689,6 +692,7 @@ void telaPesquisarRetirada(void){
 
 // menu de Retirada: submenu Apagar
 void telaApagarRetirada(void){
+  char codigo[15];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -706,7 +710,9 @@ void telaApagarRetirada(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Código:                                                 ///\n");
+  printf("                  Código:   ");
+  scanf("%[0-9]", codigo);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
