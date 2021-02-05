@@ -39,20 +39,20 @@ int main(void) {
 
   menuSobre();
 
-  // opcao = menuProduto();
-  // telaCadastroProduto();
-  // telaPesquisarProduto();
-  // telaApagarProduto();
-  // opcaoAtualizarProduto = telaAtualizarProduto();
+  opcao = menuProduto();
+  telaCadastroProduto();
+  telaPesquisarProduto();
+  telaApagarProduto();
+  opcaoAtualizarProduto = telaAtualizarProduto();
 
-  // opcao = menuCliente();
-  // telaCadastroClientePJ();
-  // telaCadastroClientePF();
-  // opcaoTipoCliente = telaEscolhaTipoCliente();
-  // telaPesquisarClientePF();
-  // telaPesquisarClientePJ();
-  //telaApagarClientePF();
-  //telaApagarClientePJ();
+  opcao = menuCliente();
+  telaCadastroClientePJ();
+  telaCadastroClientePF();
+  opcaoTipoCliente = telaEscolhaTipoCliente();
+  telaPesquisarClientePF();
+  telaPesquisarClientePJ();
+  telaApagarClientePF();
+  telaApagarClientePJ();
   opcaoAtualizarClientePF = telaAtualizarClientePF();
   opcaoAtualizarClientePJ = telaAtualizarClientePJ();
   
