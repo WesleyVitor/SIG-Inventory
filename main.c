@@ -118,7 +118,7 @@ char menuProduto(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    Entre com sua opção desejada:   ");
-  scanf("%[1-4]",&opcao);
+  scanf("%c",&opcao);
   getchar();
   printf("\n///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -162,9 +162,9 @@ void telaCadastroProduto(void){
   scanf("%f",&preco);
   getchar();
   printf("                  Descrição:   ");
-  scanf("%s",descricao);
+  scanf("%[A-Z a-z0-9]",descricao);
   getchar();
-  printf("\n///                                                                         ///\n");
+  printf("\n///                                                                       ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -349,7 +349,7 @@ char menuCliente(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    Entre com sua opção desejada:   ");
-  scanf("%[1-4]",&opcao);
+  scanf("%c",&opcao);
   getchar();
   printf("\n///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -401,7 +401,7 @@ void telaCadastroClientePJ(void){
   scanf("%[0-9.]",numero);
   getchar();
   printf("                   Complemento:   ");
-  scanf("%[A-Za-z]",complemento);
+  scanf("%[A-Z a-z]",complemento);
   getchar();
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
