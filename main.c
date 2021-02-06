@@ -3,22 +3,22 @@
 
 void menuSobre(void);
 
-void menuProduto(void);
+char menuProduto(void);
 void telaCadastroProduto(void);
 void telaPesquisarProduto(void);
 void telaApagarProduto(void);
-void telaAtualizarProduto(void);
+char telaAtualizarProduto(void);
 
-void menuCliente(void);
-void telaCadastroClientePF(void);
+char menuCliente(void);
 void telaCadastroClientePJ(void);
-void telaEscolhaTipoCliente(void);
+void telaCadastroClientePF(void);
+char telaEscolhaTipoCliente(void);
 void telaPesquisarClientePF(void);
 void telaPesquisarClientePJ(void);
 void telaApagarClientePF(void);
 void telaApagarClientePJ(void);
-void telaAtualizarClientePF(void);
-void telaAtualizarClientePJ(void);
+char telaAtualizarClientePF(void);
+char telaAtualizarClientePJ(void);
 
 void menuRetirada(void);
 void telaCadastroRetirada(void);
@@ -31,24 +31,30 @@ void telaAddValor(void);
 void telaConfirmacao(void);
 
 int main(void) {
+  char opcao;
+  char opcaoTipoCliente;
+  char opcaoAtualizarProduto;
+  char opcaoAtualizarClientePF;
+  char opcaoAtualizarClientePJ;
+
   menuSobre();
 
-  menuProduto();
+  opcao = menuProduto();
   telaCadastroProduto();
   telaPesquisarProduto();
   telaApagarProduto();
-  telaAtualizarProduto();
+  opcaoAtualizarProduto = telaAtualizarProduto();
 
-  menuCliente();
-  telaCadastroClientePF();
+  opcao = menuCliente();
   telaCadastroClientePJ();
-  telaEscolhaTipoCliente();
+  telaCadastroClientePF();
+  opcaoTipoCliente = telaEscolhaTipoCliente();
   telaPesquisarClientePF();
   telaPesquisarClientePJ();
   telaApagarClientePF();
   telaApagarClientePJ();
-  telaAtualizarClientePF();
-  telaAtualizarClientePJ();
+  opcaoAtualizarClientePF = telaAtualizarClientePF();
+  opcaoAtualizarClientePJ = telaAtualizarClientePJ();
   
   menuRetirada();
   telaCadastroRetirada();
@@ -91,7 +97,8 @@ void menuSobre(void) {
   getchar();
 }
 
-void menuProduto(void){
+char menuProduto(void){
+  char opcao;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -110,15 +117,23 @@ void menuProduto(void){
   printf("///               4. Atualizar dados de um Produto                          ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Entre com sua opção desejada:                           ///\n");
-  printf("///                                                                         ///\n");
-  printf("///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
+  printf("                    Entre com sua opção desejada:   ");
+  scanf("%c",&opcao);
+  getchar();
+  printf("\n///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return opcao;
 }
 void telaCadastroProduto(void){
+  char codigo[15];
+  char nome[25];
+  char validade[11];
+  int quantidade;
+  float preco;
+  char descricao[50];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -131,13 +146,25 @@ void telaCadastroProduto(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///               Código:                                                   ///\n");
-  printf("///               Nome:                                                     ///\n");
-  printf("///               Quantidade:                                               ///\n");
-  printf("///               Validade:                                                 ///\n");
-  printf("///               Preço da Unidade:                                         ///\n");
-  printf("///               Descrição:                                                ///\n");
-  printf("///                                                                         ///\n");
+  printf("                  Código:   ");
+  scanf("%[0-9]",codigo);
+  getchar();
+  printf("                  Nome:   ");
+  scanf("%[A-Z a-zÁÉÍÓÚÃáéíóúã]",nome);
+  getchar();
+  printf("                  Quantidade:   ");
+  scanf("%d",&quantidade);
+  getchar();
+  printf("                  Validade:   ");
+  scanf("%[0-9/]",validade);
+  getchar();
+  printf("                  Preço da Unidade:   ");
+  scanf("%f",&preco);
+  getchar();
+  printf("                  Descrição:   ");
+  scanf("%[A-Z a-z0-9]",descricao);
+  getchar();
+  printf("\n///                                                                       ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -147,6 +174,7 @@ void telaCadastroProduto(void){
 }
 
 void telaPesquisarProduto(void){
+  char codigo[15];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -163,8 +191,10 @@ void telaPesquisarProduto(void){
   printf("///              Entre com o Código do produto a ser pesquisado             ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Código:                                                 ///\n");
-  printf("///                                                                         ///\n");
+  printf("                    Código:   ");
+  scanf("%[0-9]",codigo);
+  getchar();
+  printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -174,6 +204,7 @@ void telaPesquisarProduto(void){
 }
 
 void telaApagarProduto(void){
+  char codigo[15];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -190,8 +221,10 @@ void telaApagarProduto(void){
   printf("///              Entre com o Código do produto a ser apagado                ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Código:                                                 ///\n");
-  printf("///                                                                         ///\n");
+  printf("                    Código:   ");
+  scanf("%[0-9]",codigo);
+  getchar();
+  printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -200,7 +233,8 @@ void telaApagarProduto(void){
   getchar();
 }
 
-void telaAtualizarProduto(void){
+char telaAtualizarProduto(void){
+  char opcao;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -223,13 +257,16 @@ void telaAtualizarProduto(void){
   printf("///                e. Atualizar Descrição                                   ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///               Entre com uma opção desejada de pesquisa:                 ///\n");
-  printf("///                                                                         ///\n");
+  printf("                  Entre com uma opção desejada de atualização:   ");
+  scanf("%[a-e]",&opcao);
+  getchar();
+  printf("\n///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return opcao;
 }
 
 void telaAddValor(void){
@@ -260,6 +297,7 @@ void telaAddValor(void){
 }
 
 void telaConfirmacao(void){
+  char opcao;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -279,8 +317,10 @@ void telaConfirmacao(void){
   printf("///                 0. Negar Operação                                       ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                Entre com uma opção desejada:                            ///\n");
-  printf("///                                                                         ///\n");
+  printf("                   Entre com uma opção desejada:   ");
+  scanf("%[0-1]",&opcao);
+  getchar();
+  printf("\n///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
@@ -288,7 +328,8 @@ void telaConfirmacao(void){
   getchar();
 }
 
-void menuCliente(void){
+char menuCliente(void){
+  char opcao;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -307,16 +348,26 @@ void menuCliente(void){
   printf("///               4. Atualizar dados de um Cliente                          ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Entre com sua opção desejada:                           ///\n");
-  printf("///                                                                         ///\n");
+  printf("                    Entre com sua opção desejada:   ");
+  scanf("%c",&opcao);
+  getchar();
+  printf("\n///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return opcao;
 }
 
 void telaCadastroClientePJ(void){
+  char cnpj[19];
+  char nome[45];
+  char ramo[20];
+  char rua[30];
+  char bairro[30];
+  char numero[7];
+  char complemento[10];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -331,14 +382,28 @@ void telaCadastroClientePJ(void){
   printf("///                                                                         ///\n");
   printf("///               Entre com as informações abaixo:                          ///\n");
   printf("///                                                                         ///\n");
-  printf("///                CNPJ:                                                    ///\n");
-  printf("///                Nome:                                                    ///\n");
-  printf("///                Ramo:                                                    ///\n");
-  printf("///                Rua:                                                     ///\n");
-  printf("///                Bairro:                                                  ///\n");
-  printf("///                Número:                                                  ///\n");
-  printf("///                Complemento:                                             ///\n");
-  printf("///                                                                         ///\n");
+  printf("                   CNPJ:   ");
+  scanf("%[0-9./]",cnpj);
+  getchar();
+  printf("                   Nome:   ");
+  scanf("%[A-Z a-zzáéíóúÁÉÍÓÚ]",nome);
+  getchar();
+  printf("                   Ramo:   ");
+  scanf("%[A-Z a-z/]",ramo);
+  getchar();
+  printf("                   Rua:   ");
+  scanf("%[A-Z a-z0-9]",rua);
+  getchar();
+  printf("                   Bairro:   ");
+  scanf("%[A-Z a-z0-9]",bairro);
+  getchar();
+  printf("                   Número:   ");
+  scanf("%[0-9.]",numero);
+  getchar();
+  printf("                   Complemento:   ");
+  scanf("%[A-Z a-z]",complemento);
+  getchar();
+  printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -348,6 +413,13 @@ void telaCadastroClientePJ(void){
 }
 
 void telaCadastroClientePF(void){
+  char cpf[12];
+  char nome[45];
+  char dataDeNascimento[11];
+  char rua[30];
+  char bairro[30];
+  char numero[7];
+  char complemento[10];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -362,14 +434,28 @@ void telaCadastroClientePF(void){
   printf("///                                                                         ///\n");
   printf("///               Entre com as informações abaixo:                          ///\n");
   printf("///                                                                         ///\n");
-  printf("///                Cpf:                                                     ///\n");
-  printf("///                Nome:                                                    ///\n");
-  printf("///                Data de Nascimento:                                      ///\n");
-  printf("///                Rua:                                                     ///\n");
-  printf("///                Bairro:                                                  ///\n");
-  printf("///                Número:                                                  ///\n");
-  printf("///                Complemento:                                             ///\n");
-  printf("///                                                                         ///\n");
+  printf("                   Cpf:   ");
+  scanf("%[0-9.-]",cpf);
+  getchar();
+  printf("                   Nome:   ");
+  scanf("%[A-Z a-záéíóúÁÉÍÓÚ]",nome);
+  getchar();
+  printf("                   Data de Nascimento:   ");
+  scanf("%[0-9/]",dataDeNascimento);
+  getchar();
+  printf("                   Rua:   ");
+  scanf("%[A-Z a-z0-9]",rua);
+  getchar();
+  printf("                   Bairro:   ");
+  scanf("%[A-Z a-z0-9]",bairro);
+  getchar();
+  printf("                   Número:   ");
+  scanf("%[0-9]",numero);
+  getchar();
+  printf("                   Complemento:   ");
+  scanf("%[A-Z a-z]",complemento);
+  getchar();
+  printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -379,7 +465,8 @@ void telaCadastroClientePF(void){
 
 }
 
-void telaEscolhaTipoCliente(void){
+char telaEscolhaTipoCliente(void){
+  char opcao;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -399,16 +486,20 @@ void telaEscolhaTipoCliente(void){
   printf("///                 2. Pessoa Jurídica                                      ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                Entre com uma opção desejada:                            ///\n");
-  printf("///                                                                         ///\n");
+  printf("                   Entre com uma opção desejada:   ");
+  scanf("%c",&opcao);
+  getchar();
+  printf("\n///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return opcao;
 }
 
 void telaPesquisarClientePF(void){
+  char cpf[12];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -425,7 +516,9 @@ void telaPesquisarClientePF(void){
   printf("///              Entre com o CPF do Cliente a ser pesquisado                ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 CPF:                                                    ///\n");
+  printf("                    CPF:   ");
+  scanf("%[0-9.-]",cpf);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -436,6 +529,7 @@ void telaPesquisarClientePF(void){
 }
 
 void telaPesquisarClientePJ(void){
+  char cnpj[19];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -452,7 +546,9 @@ void telaPesquisarClientePJ(void){
   printf("///              Entre com o CNPJ do Cliente a ser pesquisado               ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 CNPJ:                                                   ///\n");
+  printf("                    CNPJ:   ");
+  scanf("%[0-9.-/]",cnpj);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -464,6 +560,7 @@ void telaPesquisarClientePJ(void){
 
 
 void telaApagarClientePF(void){
+  char cpf[12];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -480,7 +577,9 @@ void telaApagarClientePF(void){
   printf("///              Entre com o CPF do Cliente a ser apagado                   ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 CPF:                                                    ///\n");
+  printf("                    CPF:   ");
+  scanf("%[0-9.-/]",cpf);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -491,6 +590,7 @@ void telaApagarClientePF(void){
 }
 
 void telaApagarClientePJ(void){
+  char cnpj[19];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -507,7 +607,9 @@ void telaApagarClientePJ(void){
   printf("///              Entre com o CNPJ do Cliente a ser apagado                  ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 CNPJ:                                                   ///\n");
+  printf("                    CNPJ:   ");
+  scanf("%[0-9.-/]",cnpj);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -517,7 +619,8 @@ void telaApagarClientePJ(void){
   getchar();
 }
 
-void telaAtualizarClientePF(void){
+char telaAtualizarClientePF(void){
+  char opcao;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -538,19 +641,23 @@ void telaAtualizarClientePF(void){
   printf("///                c. Atualizar Rua                                         ///\n");
   printf("///                d. Atualizar Bairro                                      ///\n");
   printf("///                e. Atualizar Número                                      ///\n");
-  printf("///                e. Atualizar Complemento                                 ///\n");
+  printf("///                f. Atualizar Complemento                                 ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///               Entre com uma opção desejada de pesquisa:                 ///\n");
+  printf("                  Entre com uma opção desejada:   ");
+  scanf("%[a-f]",&opcao);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return opcao;
 }
 
-void telaAtualizarClientePJ(void){
+char telaAtualizarClientePJ(void){
+  char opcao;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -571,16 +678,19 @@ void telaAtualizarClientePJ(void){
   printf("///                c. Atualizar Rua                                         ///\n");
   printf("///                d. Atualizar Bairro                                      ///\n");
   printf("///                e. Atualizar Número                                      ///\n");
-  printf("///                e. Atualizar Complemento                                 ///\n");
+  printf("///                f. Atualizar Complemento                                 ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///               Entre com uma opção desejada de pesquisa:                 ///\n");
+  printf("                  Entre com uma opção desejada:   ");
+  scanf("%[a-f]",&opcao);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return opcao;
 }
 
 // menu de Retirada
