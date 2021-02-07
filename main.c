@@ -24,19 +24,19 @@ char menuRetirada(void);
 void telaCadastroRetirada(void);
 void telaPesquisarRetirada(void);
 void telaApagarRetirada(void);
-char telaCodigoRetirada(void);
+void telaCodigoRetirada(void);
 void telaAtualizarRetirada(void);
 
 void telaAddValor(void);
 void telaConfirmacao(void);
 
 int main(void) {
-  char opcaoMenuRetirada, opcaoEditarRetirada;
   char opcao;
   char opcaoTipoCliente;
   char opcaoAtualizarProduto;
   char opcaoAtualizarClientePF;
   char opcaoAtualizarClientePJ;
+  char opcaoMenuRetirada;
 
   menuSobre();
 
@@ -61,7 +61,7 @@ int main(void) {
   telaCadastroRetirada();
   telaPesquisarRetirada();
   telaApagarRetirada();
-  opcaoEditarRetirada = telaCodigoRetirada();
+  telaCodigoRetirada();
   telaAtualizarRetirada();
   
   telaAddValor();
@@ -165,7 +165,7 @@ void telaCadastroProduto(void){
   printf("                  Descrição:   ");
   scanf("%[A-Z a-z0-9]",descricao);
   getchar();
-  printf("\n///                                                                       ///\n");
+  printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -288,7 +288,7 @@ void telaAddValor(void){
   printf("///                    Entre com um valor desejado                          ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                    Valor:   ");
+  printf("                       Valor:   ");
   scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ0-9.,]", valor);
   getchar();
   printf("///                                                                         ///\n");
@@ -836,7 +836,7 @@ void telaApagarRetirada(void){
 
 // menu de Retirada: informar código
 // de retirada para editar
-char telaCodigoRetirada(void){
+void telaCodigoRetirada(void){
   char codigo[15];
   system("clear");
   printf("\n");
@@ -864,7 +864,6 @@ char telaCodigoRetirada(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
-  return codigo;
 }
 
 // menu de Retirada: submenu Editar -> Novos dados
@@ -891,7 +890,7 @@ void telaAtualizarRetirada(){
   printf("///               d. Atualizar Preço                                        ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///               Entre com a opção desejada de atualização:    ");
+  printf("                  Entre com a opção desejada de atualização:    ");
   scanf("%[a-d]", &opcao);
   getchar();
   printf("///                                                                         ///\n");
