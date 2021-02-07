@@ -271,6 +271,7 @@ char telaAtualizarProduto(void){
 }
 
 void telaAddValor(void){
+  char valor[50];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -287,7 +288,9 @@ void telaAddValor(void){
   printf("///                    Entre com um valor desejado                          ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                    Valor:                                               ///\n");
+  printf("///                    Valor:   ");
+  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ0-9.,]", valor);
+  getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
