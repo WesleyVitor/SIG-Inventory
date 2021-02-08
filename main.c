@@ -58,11 +58,24 @@ int main(void) {
   opcaoAtualizarClientePJ = telaAtualizarClientePJ();
   
   opcaoMenuRetirada = menuRetirada();
-  telaCadastroRetirada();
-  telaPesquisarRetirada();
-  telaApagarRetirada();
-  telaCodigoRetirada();
-  telaAtualizarRetirada();
+  switch(opcaoMenuRetirada){
+    case '1':
+      telaCadastroRetirada();
+      break;
+    case '2':
+      telaPesquisarRetirada();
+      break;
+    case '3':
+      telaApagarRetirada();
+      telaConfirmacao();
+      break;
+    case '4':
+      telaCodigoRetirada();
+      telaAtualizarRetirada();
+      break;
+    default:
+      menuRetirada();
+  }
   
   telaAddValor();
   telaConfirmacao();
