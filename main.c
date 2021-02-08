@@ -735,7 +735,7 @@ void telaCadastroRetirada(void){
   char codigo[15];
   char produto[25];
   int quantidade;
-  char cliente[51];
+  char cliente[19];
   float preco;
   system("clear");
   printf("\n");
@@ -758,8 +758,8 @@ void telaCadastroRetirada(void){
   printf("                  Quantidade:   ");
   scanf("%d", &quantidade);
   getchar();
-  printf("                  Nome do Cliente:   ");
-  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ]", cliente);
+  printf("                  CPF/CNPJ do Cliente:   ");
+  scanf("%[0-9.-/]", cliente);
   getchar();
   printf("                  Preço (R$):   ");
   scanf("%f", &preco);
