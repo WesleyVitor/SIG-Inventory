@@ -96,15 +96,18 @@ void navegacaoMenuProduto(void){
     switch(opcao){
       case '1':
         telaCadastroProduto();
+        telaConfirmacao();
         break;
       case '2':
         telaPesquisarProduto();
         break;
       case '3':
         telaApagarProduto();
+        telaConfirmacao();
         break;
       case '4':
         telaAtualizarProduto();
+        telaConfirmacao();
         break;
     }
   }while(opcao!='0');
