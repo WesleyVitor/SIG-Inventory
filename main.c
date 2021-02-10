@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 void menuSobre(void);
+char menuPrincipal(void);
 
 char menuProduto(void);
 void telaCadastroProduto(void);
@@ -38,7 +39,7 @@ int main(void) {
   char opcaoAtualizarClientePJ;
 
   menuSobre();
-
+  opcao = menuPrincipal();
   opcao = menuProduto();
   telaCadastroProduto();
   telaPesquisarProduto();
@@ -95,6 +96,37 @@ void menuSobre(void) {
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+}
+
+char menuPrincipal(void){
+  char opcao;
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =           Menu Principal            =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               1. Módulo de Produto                                      ///\n");
+  printf("///               2. Módulo de Cliente                                      ///\n");
+  printf("///               3. Módulo de Retirada                                     ///\n");
+  printf("///               0. Sair do programa                                       ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("                    Entre com sua opção desejada:   ");
+  scanf("%c",&opcao);
+  getchar();
+  printf("\n///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+  return opcao;
 }
 
 char menuProduto(void){
