@@ -34,18 +34,33 @@ void telaConfirmacao(void);
 int main(void) {
   char opcao;
   char opcaoTipoCliente;
-  char opcaoAtualizarProduto;
   char opcaoAtualizarClientePF;
   char opcaoAtualizarClientePJ;
   char opcaoMenuRetirada;
 
   menuSobre();
   opcao = menuPrincipal();
-  opcao = menuProduto();
-  telaCadastroProduto();
-  telaPesquisarProduto();
-  telaApagarProduto();
-  opcaoAtualizarProduto = telaAtualizarProduto();
+  do{
+    opcao = menuProduto();
+    switch(opcao){
+      case '1':
+        telaCadastroProduto();
+        break;
+      case '2':
+        telaPesquisarProduto();
+        break;
+      case '3':
+        telaApagarProduto();
+        break;
+      case '4':
+        telaAtualizarProduto();
+        break;
+    }
+  }while(opcao!='0');
+  
+  
+  
+  
 
   opcao = menuCliente();
   telaCadastroClientePJ();
