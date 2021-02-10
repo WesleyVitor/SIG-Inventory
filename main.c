@@ -9,6 +9,7 @@ void telaCadastroProduto(void);
 void telaPesquisarProduto(void);
 void telaApagarProduto(void);
 char telaAtualizarProduto(void);
+void navegacaoMenuProduto(void);
 
 char menuCliente(void);
 void telaCadastroClientePJ(void);
@@ -39,22 +40,12 @@ int main(void) {
   char opcaoMenuRetirada;
 
   menuSobre();
-  opcao = menuPrincipal();
+  
   do{
-    opcao = menuProduto();
+    opcao = menuPrincipal();
     switch(opcao){
       case '1':
-        telaCadastroProduto();
-        break;
-      case '2':
-        telaPesquisarProduto();
-        break;
-      case '3':
-        telaApagarProduto();
-        break;
-      case '4':
-        telaAtualizarProduto();
-        break;
+        navegacaoMenuProduto();
     }
   }while(opcao!='0');
   
@@ -96,6 +87,27 @@ int main(void) {
   telaAddValor();
   telaConfirmacao();
   return 0;
+}
+
+void navegacaoMenuProduto(void){
+  char opcao;
+  do{
+    opcao = menuProduto();
+    switch(opcao){
+      case '1':
+        telaCadastroProduto();
+        break;
+      case '2':
+        telaPesquisarProduto();
+        break;
+      case '3':
+        telaApagarProduto();
+        break;
+      case '4':
+        telaAtualizarProduto();
+        break;
+    }
+  }while(opcao!='0');
 }
 
 void menuSobre(void) {
@@ -176,6 +188,7 @@ char menuProduto(void){
   printf("///               2. Pesquisar dados sobre um Produto                       ///\n");
   printf("///               3. Apagar um Produto do sistema                           ///\n");
   printf("///               4. Atualizar dados de um Produto                          ///\n");
+  printf("///               0. Volta para a tela anterior                             ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    Entre com sua opção desejada:   ");
@@ -188,6 +201,9 @@ char menuProduto(void){
   getchar();
   return opcao;
 }
+
+
+
 void telaCadastroProduto(void){
   char codigo[15];
   char nome[25];
