@@ -2,12 +2,14 @@
 #include <stdlib.h>
 
 void menuSobre(void);
+char menuPrincipal(void);
 
 char menuProduto(void);
 void telaCadastroProduto(void);
 void telaPesquisarProduto(void);
 void telaApagarProduto(void);
 char telaAtualizarProduto(void);
+void navegacaoMenuProduto(void);
 
 char menuCliente(void);
 void telaCadastroClientePJ(void);
@@ -19,6 +21,12 @@ void telaApagarClientePF(void);
 void telaApagarClientePJ(void);
 char telaAtualizarClientePF(void);
 char telaAtualizarClientePJ(void);
+void navegacaoMenuCliente(void);
+void navegacaoCadastroCliente(void);
+void navegacaoPesquisaCliente(void);
+void navegacaoApagarCliente(void);
+void navegacaoAtualizarCliente(void);
+
 
 char menuRetirada(void);
 void telaCadastroRetirada(void);
@@ -33,29 +41,21 @@ void telaConfirmacao(void);
 int main(void) {
   char opcao;
   char opcaoTipoCliente;
-  char opcaoAtualizarProduto;
   char opcaoAtualizarClientePF;
   char opcaoAtualizarClientePJ;
   char opcaoMenuRetirada;
 
   menuSobre();
-
-  opcao = menuProduto();
-  telaCadastroProduto();
-  telaPesquisarProduto();
-  telaApagarProduto();
-  opcaoAtualizarProduto = telaAtualizarProduto();
-
-  opcao = menuCliente();
-  telaCadastroClientePJ();
-  telaCadastroClientePF();
-  opcaoTipoCliente = telaEscolhaTipoCliente();
-  telaPesquisarClientePF();
-  telaPesquisarClientePJ();
-  telaApagarClientePF();
-  telaApagarClientePJ();
-  opcaoAtualizarClientePF = telaAtualizarClientePF();
-  opcaoAtualizarClientePJ = telaAtualizarClientePJ();
+  
+  do{
+    opcao = menuPrincipal();
+    switch(opcao){
+      case '1':
+        navegacaoMenuProduto();
+      case '2':
+        navegacaoMenuCliente();
+    }
+  }while(opcao!='0');
   
   opcaoMenuRetirada = menuRetirada();
   switch(opcaoMenuRetirada){
@@ -80,6 +80,125 @@ int main(void) {
   telaAddValor();
   telaConfirmacao();
   return 0;
+}
+
+void navegacaoCadastroCliente(void){
+  char opcaoTipoCliente;
+  do{
+    opcaoTipoCliente = telaEscolhaTipoCliente();
+    switch(opcaoTipoCliente){
+      case '1':
+        telaCadastroClientePF();
+        break;
+      case '2':
+        telaCadastroClientePJ();
+        break;
+    }
+  }while(opcaoTipoCliente != '0');
+}
+
+void navegacaoPesquisaCliente(void){
+  char opcaoTipoCliente;
+  do{
+    opcaoTipoCliente = telaEscolhaTipoCliente();
+    switch(opcaoTipoCliente){
+      case '1':
+        telaPesquisarClientePF();
+        break;
+      case '2':
+        telaPesquisarClientePJ();
+        break;
+    }
+  }while(opcaoTipoCliente != '0');
+}
+
+void navegacaoApagarCliente(void){
+  char opcaoTipoCliente;
+  do{
+    opcaoTipoCliente = telaEscolhaTipoCliente();
+    switch(opcaoTipoCliente){
+      case '1':
+        telaApagarClientePF();
+        telaConfirmacao();
+        break;
+      case '2':
+        telaApagarClientePJ();
+        telaConfirmacao();
+        break;
+    }
+    
+  }while(opcaoTipoCliente != '0');
+}
+
+void navegacaoAtualizarCliente(void){
+  char opcaoTipoCliente;
+  do{
+    opcaoTipoCliente = telaEscolhaTipoCliente();
+    switch(opcaoTipoCliente){
+      case '1':
+        telaAtualizarClientePF();
+        //Cuidado com o tipo da variável
+        //Possivelmente mudável
+        telaAddValor();
+        telaConfirmacao();
+        break;
+      case '2':
+        telaAtualizarClientePJ();
+        //Cuidado com o tipo da variável
+        //Possivelmente mudável
+        telaAddValor();
+        telaConfirmacao();
+        break;
+    }
+    
+  }while(opcaoTipoCliente != '0');
+}
+
+void navegacaoMenuCliente(void){
+  char opcao;
+  do{
+    opcao = menuCliente();
+    switch(opcao){
+      case '1':
+        navegacaoCadastroCliente();
+        break;
+      case '2':
+        navegacaoPesquisaCliente();
+        break;
+      case '3':
+        navegacaoApagarCliente();
+        break;
+      case '4':
+        navegacaoAtualizarCliente();
+        break;
+    }
+  }while(opcao!='0');
+}
+
+void navegacaoMenuProduto(void){
+  char opcao;
+  do{
+    opcao = menuProduto();
+    switch(opcao){
+      case '1':
+        telaCadastroProduto();
+        telaConfirmacao();
+        break;
+      case '2':
+        telaPesquisarProduto();
+        break;
+      case '3':
+        telaApagarProduto();
+        telaConfirmacao();
+        break;
+      case '4':
+        telaAtualizarProduto();
+        //Cuidado com o tipo da variável
+        telaAddValor();
+        telaConfirmacao();
+        break;
+    }
+  }while(opcao!='0');
 }
 
 void menuSobre(void) {
@@ -111,6 +230,37 @@ void menuSobre(void) {
   getchar();
 }
 
+char menuPrincipal(void){
+  char opcao;
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =           Menu Principal            =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               1. Módulo de Produto                                      ///\n");
+  printf("///               2. Módulo de Cliente                                      ///\n");
+  printf("///               3. Módulo de Retirada                                     ///\n");
+  printf("///               0. Sair do programa                                       ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("                    Entre com sua opção desejada:   ");
+  scanf("%c",&opcao);
+  getchar();
+  printf("\n///            = = = = = = = = = = = = = = = = = = = =                      ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+  return opcao;
+}
+
 char menuProduto(void){
   char opcao;
   system("clear");
@@ -129,6 +279,7 @@ char menuProduto(void){
   printf("///               2. Pesquisar dados sobre um Produto                       ///\n");
   printf("///               3. Apagar um Produto do sistema                           ///\n");
   printf("///               4. Atualizar dados de um Produto                          ///\n");
+  printf("///               0. Volta para a tela anterior                             ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    Entre com sua opção desejada:   ");
@@ -141,6 +292,9 @@ char menuProduto(void){
   getchar();
   return opcao;
 }
+
+
+
 void telaCadastroProduto(void){
   char codigo[15];
   char nome[25];
@@ -331,7 +485,7 @@ void telaConfirmacao(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                 1. Confirmar Operação                                   ///\n");
-  printf("///                 0. Negar Operação                                       ///\n");
+  printf("///                 2. Negar Operação                                       ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                   Entre com uma opção desejada:   ");
@@ -363,6 +517,7 @@ char menuCliente(void){
   printf("///               2. Pesquisar dados sobre um Cliente                       ///\n");
   printf("///               3. Apagar um Cliente do sistema                           ///\n");
   printf("///               4. Atualizar dados de um Cliente                          ///\n");
+  printf("///               0. Volta para a tela anterior                             ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    Entre com sua opção desejada:   ");
@@ -496,11 +651,12 @@ char telaEscolhaTipoCliente(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///               Opções de Confirmações Disponíveis:                       ///\n");
+  printf("///               Opções de Clientes Disponíveis:                           ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                 1. Pessoa Física                                        ///\n");
   printf("///                 2. Pessoa Jurídica                                      ///\n");
+  printf("///                 0. Voltar ao menu Anterior                              ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                   Entre com uma opção desejada:   ");
