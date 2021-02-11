@@ -21,6 +21,9 @@ void telaApagarClientePF(void);
 void telaApagarClientePJ(void);
 char telaAtualizarClientePF(void);
 char telaAtualizarClientePJ(void);
+void navegacaoMenuCliente(void);
+void navegacaoCadastroCliente(void);
+void navegacaoPesquisaCliente(void);
 
 char menuRetirada(void);
 void telaCadastroRetirada(void);
@@ -46,19 +49,11 @@ int main(void) {
     switch(opcao){
       case '1':
         navegacaoMenuProduto();
+      case '2':
+        navegacaoMenuCliente();
     }
   }while(opcao!='0');
   
-  
-  
-  
-
-  opcao = menuCliente();
-  telaCadastroClientePJ();
-  telaCadastroClientePF();
-  opcaoTipoCliente = telaEscolhaTipoCliente();
-  telaPesquisarClientePF();
-  telaPesquisarClientePJ();
   telaApagarClientePF();
   telaApagarClientePJ();
   opcaoAtualizarClientePF = telaAtualizarClientePF();
@@ -87,6 +82,51 @@ int main(void) {
   telaAddValor();
   telaConfirmacao();
   return 0;
+}
+
+void navegacaoCadastroCliente(void){
+  char opcaoTipoCliente;
+  do{
+    opcaoTipoCliente = telaEscolhaTipoCliente();
+    switch(opcaoTipoCliente){
+      case '1':
+        telaCadastroClientePF();
+        break;
+      case '2':
+        telaCadastroClientePJ();
+        break;
+    }
+  }while(opcaoTipoCliente != '0');
+}
+
+void navegacaoPesquisaCliente(void){
+  char opcaoTipoCliente;
+  do{
+    opcaoTipoCliente = telaEscolhaTipoCliente();
+    switch(opcaoTipoCliente){
+      case '1':
+        telaPesquisarClientePF();
+        break;
+      case '2':
+        telaPesquisarClientePJ();
+        break;
+    }
+  }while(opcaoTipoCliente != '0');
+}
+
+void navegacaoMenuCliente(void){
+  char opcao;
+  do{
+    opcao = menuCliente();
+    switch(opcao){
+      case '1':
+        navegacaoCadastroCliente();
+        break;
+      case '2':
+        navegacaoPesquisaCliente();
+        break;
+    }
+  }while(opcao!='0');
 }
 
 void navegacaoMenuProduto(void){
@@ -429,6 +469,7 @@ char menuCliente(void){
   printf("///               2. Pesquisar dados sobre um Cliente                       ///\n");
   printf("///               3. Apagar um Cliente do sistema                           ///\n");
   printf("///               4. Atualizar dados de um Cliente                          ///\n");
+  printf("///               0. Volta para a tela anterior                             ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    Entre com sua opção desejada:   ");
@@ -567,6 +608,7 @@ char telaEscolhaTipoCliente(void){
   printf("///                                                                         ///\n");
   printf("///                 1. Pessoa Física                                        ///\n");
   printf("///                 2. Pessoa Jurídica                                      ///\n");
+  printf("///                 0. Voltar ao menu Anterior                              ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                   Entre com uma opção desejada:   ");
