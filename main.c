@@ -25,6 +25,8 @@ void navegacaoMenuCliente(void);
 void navegacaoCadastroCliente(void);
 void navegacaoPesquisaCliente(void);
 void navegacaoApagarCliente(void);
+void navegacaoAtualizarCliente(void);
+
 
 char menuRetirada(void);
 void telaCadastroRetirada(void);
@@ -54,11 +56,6 @@ int main(void) {
         navegacaoMenuCliente();
     }
   }while(opcao!='0');
-  
-  telaApagarClientePF();
-  telaApagarClientePJ();
-  opcaoAtualizarClientePF = telaAtualizarClientePF();
-  opcaoAtualizarClientePJ = telaAtualizarClientePJ();
   
   opcaoMenuRetirada = menuRetirada();
   switch(opcaoMenuRetirada){
@@ -133,6 +130,30 @@ void navegacaoApagarCliente(void){
   }while(opcaoTipoCliente != '0');
 }
 
+void navegacaoAtualizarCliente(void){
+  char opcaoTipoCliente;
+  do{
+    opcaoTipoCliente = telaEscolhaTipoCliente();
+    switch(opcaoTipoCliente){
+      case '1':
+        telaAtualizarClientePF();
+        //Cuidado com o tipo da variável
+        //Possivelmente mudável
+        telaAddValor();
+        telaConfirmacao();
+        break;
+      case '2':
+        telaAtualizarClientePJ();
+        //Cuidado com o tipo da variável
+        //Possivelmente mudável
+        telaAddValor();
+        telaConfirmacao();
+        break;
+    }
+    
+  }while(opcaoTipoCliente != '0');
+}
+
 void navegacaoMenuCliente(void){
   char opcao;
   do{
@@ -146,6 +167,9 @@ void navegacaoMenuCliente(void){
         break;
       case '3':
         navegacaoApagarCliente();
+        break;
+      case '4':
+        navegacaoAtualizarCliente();
         break;
     }
   }while(opcao!='0');
@@ -169,6 +193,8 @@ void navegacaoMenuProduto(void){
         break;
       case '4':
         telaAtualizarProduto();
+        //Cuidado com o tipo da variável
+        telaAddValor();
         telaConfirmacao();
         break;
     }
