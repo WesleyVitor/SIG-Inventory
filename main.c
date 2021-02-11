@@ -24,6 +24,7 @@ char telaAtualizarClientePJ(void);
 void navegacaoMenuCliente(void);
 void navegacaoCadastroCliente(void);
 void navegacaoPesquisaCliente(void);
+void navegacaoApagarCliente(void);
 
 char menuRetirada(void);
 void telaCadastroRetirada(void);
@@ -114,6 +115,24 @@ void navegacaoPesquisaCliente(void){
   }while(opcaoTipoCliente != '0');
 }
 
+void navegacaoApagarCliente(void){
+  char opcaoTipoCliente;
+  do{
+    opcaoTipoCliente = telaEscolhaTipoCliente();
+    switch(opcaoTipoCliente){
+      case '1':
+        telaApagarClientePF();
+        telaConfirmacao();
+        break;
+      case '2':
+        telaApagarClientePJ();
+        telaConfirmacao();
+        break;
+    }
+    
+  }while(opcaoTipoCliente != '0');
+}
+
 void navegacaoMenuCliente(void){
   char opcao;
   do{
@@ -124,6 +143,9 @@ void navegacaoMenuCliente(void){
         break;
       case '2':
         navegacaoPesquisaCliente();
+        break;
+      case '3':
+        navegacaoApagarCliente();
         break;
     }
   }while(opcao!='0');
@@ -437,7 +459,7 @@ void telaConfirmacao(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                 1. Confirmar Operação                                   ///\n");
-  printf("///                 0. Negar Operação                                       ///\n");
+  printf("///                 2. Negar Operação                                       ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                   Entre com uma opção desejada:   ");
@@ -603,7 +625,7 @@ char telaEscolhaTipoCliente(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///               Opções de Confirmações Disponíveis:                       ///\n");
+  printf("///               Opções de Clientes Disponíveis:                           ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                 1. Pessoa Física                                        ///\n");
