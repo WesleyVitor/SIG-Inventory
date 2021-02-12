@@ -206,11 +206,13 @@ void navegacaoMenuRetirada(void){
       case '4':
         telaCodigoRetirada();
         tipoAtt = telaAtualizarRetirada();
-        if (tipoAtt == 'b'){
+        if (tipoAtt == 'b' | tipoAtt == 'B'){
           addValorInt();
-        } else if (tipoAtt == 'd'){
+        } else if (tipoAtt == 'd' | tipoAtt == 'D'){
           addValorFloat();
-        } else{
+        } else if (tipoAtt == 'a' | tipoAtt == 'A' |
+                   tipoAtt == 'c' | tipoAtt == 'C')
+        {
           addValorString();
         }
         telaConfirmacao();
@@ -1170,7 +1172,7 @@ char telaAtualizarRetirada(){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                  Entre com a opção desejada de atualização:    ");
-  scanf("%[a-d]", &opcao);
+  scanf("%[a-dA-D]", &opcao);
   getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
