@@ -598,7 +598,7 @@ void telaConfirmacao(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                   Entre com uma opção desejada:   ");
-  scanf("%[0-1]",&opcao);
+  scanf("%[1-2]",&opcao);
   getchar();
   printf("\n///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
