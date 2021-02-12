@@ -41,9 +41,9 @@ void telaConfirmacao(void);
 
 int main(void) {
   char opcao;
-  char opcaoTipoCliente;
-  char opcaoAtualizarClientePF;
-  char opcaoAtualizarClientePJ;
+  // char opcaoTipoCliente;
+  // char opcaoAtualizarClientePF;
+  // char opcaoAtualizarClientePJ;
 
   menuSobre();
   
@@ -178,6 +178,30 @@ void navegacaoMenuProduto(void){
         telaAtualizarProduto();
         //Cuidado com o tipo da variável
         telaAddValor();
+        telaConfirmacao();
+        break;
+    }
+  }while(opcao!='0');
+}
+
+void navegacaoMenuRetirada(void){
+  char opcao;
+  do{
+    opcao = menuRetirada();
+    switch(opcao){
+      case '1':
+        telaCadastroRetirada();
+        break;
+      case '2':
+        telaPesquisarRetirada();
+        break;
+      case '3':
+        telaApagarRetirada();
+        telaConfirmacao();
+        break;
+      case '4':
+        telaCodigoRetirada();
+        telaAtualizarRetirada();
         telaConfirmacao();
         break;
     }
@@ -848,31 +872,6 @@ char telaAtualizarClientePJ(void){
   getchar();
   return opcao;
 }
-
-void navegacaoMenuRetirada(void){
-  char opcao;
-  do{
-    opcao = menuRetirada();
-    switch(opcao){
-      case '1':
-        telaCadastroRetirada();
-        break;
-      case '2':
-        telaPesquisarRetirada();
-        break;
-      case '3':
-        telaApagarRetirada();
-        telaConfirmacao();
-        break;
-      case '4':
-        telaCodigoRetirada();
-        telaAtualizarRetirada();
-        telaConfirmacao();
-        break;
-    }
-  }while(opcao!='0');
-}
-
 
 // menu de Retirada
 char menuRetirada(void){
