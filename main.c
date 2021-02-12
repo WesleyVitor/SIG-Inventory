@@ -28,22 +28,25 @@ void navegacaoApagarCliente(void);
 void navegacaoAtualizarCliente(void);
 
 
+void navegacaoMenuRetirada(void);
 char menuRetirada(void);
 void telaCadastroRetirada(void);
 void telaPesquisarRetirada(void);
 void telaApagarRetirada(void);
 void telaCodigoRetirada(void);
-void telaAtualizarRetirada(void);
+char telaAtualizarRetirada(void);
 
 void telaAddValor(void);
+void addValorString(void);
+void addValorInt(void);
+void addValorFloat(void);
 void telaConfirmacao(void);
 
 int main(void) {
   char opcao;
-  char opcaoTipoCliente;
-  char opcaoAtualizarClientePF;
-  char opcaoAtualizarClientePJ;
-  char opcaoMenuRetirada;
+  // char opcaoTipoCliente;
+  // char opcaoAtualizarClientePF;
+  // char opcaoAtualizarClientePJ;
 
   menuSobre();
   
@@ -52,33 +55,16 @@ int main(void) {
     switch(opcao){
       case '1':
         navegacaoMenuProduto();
+        break;
       case '2':
         navegacaoMenuCliente();
+        break;
+      case '3':
+        navegacaoMenuRetirada();
+        break;
     }
   }while(opcao!='0');
   
-  opcaoMenuRetirada = menuRetirada();
-  switch(opcaoMenuRetirada){
-    case '1':
-      telaCadastroRetirada();
-      break;
-    case '2':
-      telaPesquisarRetirada();
-      break;
-    case '3':
-      telaApagarRetirada();
-      telaConfirmacao();
-      break;
-    case '4':
-      telaCodigoRetirada();
-      telaAtualizarRetirada();
-      break;
-    default:
-      menuRetirada();
-  }
-  
-  telaAddValor();
-  telaConfirmacao();
   return 0;
 }
 
@@ -195,6 +181,40 @@ void navegacaoMenuProduto(void){
         telaAtualizarProduto();
         //Cuidado com o tipo da variável
         telaAddValor();
+        telaConfirmacao();
+        break;
+    }
+  }while(opcao!='0');
+}
+
+void navegacaoMenuRetirada(void){
+  char opcao;
+  char tipoAtt;
+  do{
+    opcao = menuRetirada();
+    switch(opcao){
+      case '1':
+        telaCadastroRetirada();
+        break;
+      case '2':
+        telaPesquisarRetirada();
+        break;
+      case '3':
+        telaApagarRetirada();
+        telaConfirmacao();
+        break;
+      case '4':
+        telaCodigoRetirada();
+        tipoAtt = telaAtualizarRetirada();
+        if (tipoAtt == 'b' | tipoAtt == 'B'){
+          addValorInt();
+        } else if (tipoAtt == 'd' | tipoAtt == 'D'){
+          addValorFloat();
+        } else if (tipoAtt == 'a' | tipoAtt == 'A' |
+                   tipoAtt == 'c' | tipoAtt == 'C')
+        {
+          addValorString();
+        }
         telaConfirmacao();
         break;
     }
@@ -467,6 +487,97 @@ void telaAddValor(void){
   getchar();
 }
 
+void addValorString(void){
+  char valor[50];
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =         Valor da Informação         =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                    Entre com um valor desejado                          ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("                       Valor:   ");
+  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ]", valor);
+  getchar();
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void addValorInt(void){
+  int valor;
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =           Valor Inteiro             =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                    Entre com a quantidade desejada                      ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("                       Quantidade:   ");
+  scanf("%d", &valor);
+  getchar();
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+void addValorFloat(void){
+  float valor;
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =         Valor da Informação         =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                    Entre com um valor desejado                          ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("                       Valor:   ");
+  scanf("%f", &valor);
+  getchar();
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+
 void telaConfirmacao(void){
   char opcao;
   system("clear");
@@ -489,7 +600,7 @@ void telaConfirmacao(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                   Entre com uma opção desejada:   ");
-  scanf("%[0-1]",&opcao);
+  scanf("%[1-2]",&opcao);
   getchar();
   printf("\n///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
@@ -885,10 +996,11 @@ char menuRetirada(void){
   printf("///               2. Pesquisar dados sobre uma Retirada                     ///\n");
   printf("///               3. Apagar uma Retirada do sistema                         ///\n");
   printf("///               4. Atualizar dados de uma Retirada                        ///\n");
+  printf("///               0. Voltar para tela anterior                              ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                      Entre com sua opção desejada:   ");
-  scanf("%[1-4]", &opcao);
+  scanf("%c", &opcao);
   getchar();
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
@@ -1036,7 +1148,7 @@ void telaCodigoRetirada(void){
 }
 
 // menu de Retirada: submenu Editar -> Novos dados
-void telaAtualizarRetirada(){
+char telaAtualizarRetirada(){
   char opcao;
   system("clear");
   printf("\n");
@@ -1060,7 +1172,7 @@ void telaAtualizarRetirada(){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                  Entre com a opção desejada de atualização:    ");
-  scanf("%[a-d]", &opcao);
+  scanf("%[a-dA-D]", &opcao);
   getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -1070,4 +1182,5 @@ void telaAtualizarRetirada(){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return opcao;
 }
