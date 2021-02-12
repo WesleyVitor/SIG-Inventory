@@ -52,8 +52,10 @@ int main(void) {
     switch(opcao){
       case '1':
         navegacaoMenuProduto();
+        break;
       case '2':
         navegacaoMenuCliente();
+        break;
       case '3':
         navegacaoMenuRetirada();
         break;
