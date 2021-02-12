@@ -62,8 +62,6 @@ int main(void) {
     }
   }while(opcao!='0');
   
-  telaAddValor();
-  telaConfirmacao();
   return 0;
 }
 
