@@ -28,6 +28,7 @@ void navegacaoApagarCliente(void);
 void navegacaoAtualizarCliente(void);
 
 
+void navegacaoMenuRetirada(void);
 char menuRetirada(void);
 void telaCadastroRetirada(void);
 void telaPesquisarRetirada(void);
@@ -43,7 +44,6 @@ int main(void) {
   char opcaoTipoCliente;
   char opcaoAtualizarClientePF;
   char opcaoAtualizarClientePJ;
-  char opcaoMenuRetirada;
 
   menuSobre();
   
@@ -54,28 +54,11 @@ int main(void) {
         navegacaoMenuProduto();
       case '2':
         navegacaoMenuCliente();
+      case '3':
+        navegacaoMenuRetirada();
+        break;
     }
   }while(opcao!='0');
-  
-  opcaoMenuRetirada = menuRetirada();
-  switch(opcaoMenuRetirada){
-    case '1':
-      telaCadastroRetirada();
-      break;
-    case '2':
-      telaPesquisarRetirada();
-      break;
-    case '3':
-      telaApagarRetirada();
-      telaConfirmacao();
-      break;
-    case '4':
-      telaCodigoRetirada();
-      telaAtualizarRetirada();
-      break;
-    default:
-      menuRetirada();
-  }
   
   telaAddValor();
   telaConfirmacao();
@@ -866,6 +849,31 @@ char telaAtualizarClientePJ(void){
   return opcao;
 }
 
+void navegacaoMenuRetirada(void){
+  char opcao;
+  do{
+    opcao = menuRetirada();
+    switch(opcao){
+      case '1':
+        telaCadastroRetirada();
+        break;
+      case '2':
+        telaPesquisarRetirada();
+        break;
+      case '3':
+        telaApagarRetirada();
+        telaConfirmacao();
+        break;
+      case '4':
+        telaCodigoRetirada();
+        telaAtualizarRetirada();
+        telaConfirmacao();
+        break;
+    }
+  }while(opcao!='0');
+}
+
+
 // menu de Retirada
 char menuRetirada(void){
   char opcao;
@@ -885,10 +893,11 @@ char menuRetirada(void){
   printf("///               2. Pesquisar dados sobre uma Retirada                     ///\n");
   printf("///               3. Apagar uma Retirada do sistema                         ///\n");
   printf("///               4. Atualizar dados de uma Retirada                        ///\n");
+  printf("///               0. Voltar para tela anterior                              ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                      Entre com sua opção desejada:   ");
-  scanf("%[1-4]", &opcao);
+  scanf("%c", &opcao);
   getchar();
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
