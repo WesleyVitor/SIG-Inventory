@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../moduloExtra/funcoesExtra.h"
+
+
 char menuProduto(void){
   char opcao;
   system("clear");
@@ -172,4 +175,30 @@ char telaAtualizarProduto(void){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
   return opcao;
+}
+
+void navegacaoMenuProduto(void){
+  char opcao;
+  do{
+    opcao = menuProduto();
+    switch(opcao){
+      case '1':
+        telaCadastroProduto();
+        telaConfirmacao();
+        break;
+      case '2':
+        telaPesquisarProduto();
+        break;
+      case '3':
+        telaApagarProduto();
+        telaConfirmacao();
+        break;
+      case '4':
+        telaAtualizarProduto();
+        //Cuidado com o tipo da variável
+        telaAddValor();
+        telaConfirmacao();
+        break;
+    }
+  }while(opcao!='0');
 }
