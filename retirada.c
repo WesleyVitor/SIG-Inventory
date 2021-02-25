@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "retirada.h"
+
+
 //funcao navegacaoMenuRetirada
 void navegacaoMenuRetirada(void){
   char opcao;
