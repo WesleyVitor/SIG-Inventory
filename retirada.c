@@ -228,7 +228,7 @@ char telaAtualizarRetirada(){
   printf("///                                                                         ///\n");
   printf("///               a. Atualizar Produto                                      ///\n");
   printf("///               b. Atualizar Quantidade                                   ///\n");
-  printf("///               c. Atualizar Nome do Cliente                              ///\n");
+  printf("///               c. Atualizar CPF do Cliente                               ///\n");
   printf("///               d. Atualizar Preço                                        ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
