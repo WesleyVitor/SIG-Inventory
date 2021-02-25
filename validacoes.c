@@ -51,7 +51,7 @@ void addValorString(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                       Valor:   ");
-  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ]", valor);
+  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ0-9.-]", valor);
   getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
