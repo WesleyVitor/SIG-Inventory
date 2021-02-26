@@ -2,14 +2,12 @@
 #include <stdlib.h>
 #include "moduloProduto/funcoesProduto.h"
 #include "moduloCliente/funcoesCliente.h"
-#include "moduloExtra/funcoesExtra.h"
-#include "retirada.h"
-#include "validacoes.h"
+#include "moduloValidacao/validacoes.h"
+#include "moduloRetirada/retirada.h"
 
 void menuSobre(void);
 char menuPrincipal(void);
 
-//void navegacaoMenuProduto(void);
 
 int main(void) {
   char opcao;
