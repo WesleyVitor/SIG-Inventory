@@ -1,0 +1,15 @@
+char menuCliente(void);
+void telaCadastroClientePJ(void);
+void telaCadastroClientePF(void);
+char telaEscolhaTipoCliente(void);
+void telaPesquisarClientePF(void);
+void telaPesquisarClientePJ(void);
+void telaApagarClientePF(void);
+void telaApagarClientePJ(void);
+char telaAtualizarClientePF(void);
+char telaAtualizarClientePJ(void);
+void navegacaoMenuCliente(void);
+void navegacaoCadastroCliente(void);
+void navegacaoPesquisaCliente(void);
+void navegacaoApagarCliente(void);
+void navegacaoAtualizarCliente(void);

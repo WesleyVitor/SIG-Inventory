@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "retirada.h"
-#include "validacoes.h"
+#include "../moduloValidacao/validacoes.h"
 
 
 //funcao navegacaoMenuRetirada
