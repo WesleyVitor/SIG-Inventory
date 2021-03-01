@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../moduloValidacao/validacoes.h"
-
+#include "./funcoesCliente.h"
 
 
 char menuCliente(void){
@@ -37,8 +37,32 @@ char menuCliente(void){
   return opcao;
 }
 
+void tratarValidacaoCNPJ(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Seu CNPJ está incorreto       =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                 Clique enter para ser redirecionado                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  getchar();
+  //Redirecionado para o menu de navegação
+  navegacaoMenuCliente();
+}
+
 void telaCadastroClientePJ(void){
-  char cnpj[19];
+  char cnpj[14];
   char nome[45];
   char ramo[20];
   char rua[30];
@@ -59,9 +83,13 @@ void telaCadastroClientePJ(void){
   printf("///                                                                         ///\n");
   printf("///               Entre com as informações abaixo:                          ///\n");
   printf("///                                                                         ///\n");
-  printf("                   CNPJ:   ");
+  printf("                   CNPJ(Apenas Números):   ");
   scanf("%[0-9./]",cnpj);
   getchar();
+  //Caso o cnpj não seja válido será redirecionado a tela de tratamento
+  if(!validarCNPJ(cnpj)){
+    tratarValidacaoCNPJ();
+  }
   printf("                   Nome:   ");
   scanf("%[A-Z a-zzáéíóúÁÉÍÓÚ]",nome);
   getchar();
@@ -207,7 +235,7 @@ void telaPesquisarClientePF(void){
 }
 
 void telaPesquisarClientePJ(void){
-  char cnpj[19];
+  char cnpj[14];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -227,6 +255,10 @@ void telaPesquisarClientePJ(void){
   printf("                    CNPJ:   ");
   scanf("%[0-9.-/]",cnpj);
   getchar();
+  //Caso o cnpj não seja válido será redirecionado a tela de tratamento
+  if(!validarCNPJ(cnpj)){
+    tratarValidacaoCNPJ();
+  }
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -268,7 +300,7 @@ void telaApagarClientePF(void){
 }
 
 void telaApagarClientePJ(void){
-  char cnpj[19];
+  char cnpj[14];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -288,6 +320,10 @@ void telaApagarClientePJ(void){
   printf("                    CNPJ:   ");
   scanf("%[0-9.-/]",cnpj);
   getchar();
+  //Caso o cnpj não seja válido será redirecionado a tela de tratamento
+  if(!validarCNPJ(cnpj)){
+    tratarValidacaoCNPJ();
+  }
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");

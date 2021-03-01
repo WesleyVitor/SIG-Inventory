@@ -153,3 +153,111 @@ void telaConfirmacao(void){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
 }
+
+int validarPrimeiroDigitoSubmetido(char cnpj[14]){
+  int soma=0;
+  int contadorDigito;
+  int primeiroMultiplicador=5;
+  int segundoMultiplicador=9;
+  int primeiroDigitoSubmetido = cnpj[12];
+  int resto;
+
+  for(contadorDigito=0;contadorDigito<11;contadorDigito++){
+    char digito;
+    int digitoAtual;
+    int resultado;
+    int primeiroDigito;
+    
+    digito = cnpj[contadorDigito];
+    digitoAtual = (int) digito;
+    //Segundo a regra os digitos da esquerda a direita deve ser multiplicados por uma variável 
+    //que vai diminuindo até 2 e inicia uma nova variável apartir de 9 que será multiplicada adiante
+    if(primeiroMultiplicador>=2){
+      resultado = primeiroMultiplicador*digitoAtual;
+      soma +=resultado;
+      primeiroMultiplicador-=1;
+    }else{
+      resultado = segundoMultiplicador*digitoAtual;
+      soma +=resultado;
+      segundoMultiplicador-=1;
+    }
+
+    resto = soma%11;
+
+  if(resto<2){
+    primeiroDigito = '0';
+  }else{
+    //Converte o inteiro em char
+    primeiroDigito = (char) 11-resto;
+  }
+
+  if(primeiroDigito = primeiroDigitoSubmetido){
+    return 1;
+  }else{
+    return 0;
+  }
+
+  }
+}
+
+int validarSegundoDigitoSubmetido(char cnpj[14]){
+  int soma=0;
+  int contadorDigito;
+  int primeiroMultiplicador=6;
+  int segundoMultiplicador=9;
+  int segundoDigitoSubmetido = cnpj[13];
+  int resto;
+  for(contadorDigito=0;contadorDigito<12;contadorDigito++){
+    char digito;
+    int digitoAtual;
+    int resultado;
+    int segundoDigito;
+    
+    digito = cnpj[contadorDigito];
+    digitoAtual = (int) digito;
+    //Segundo a regra os digitos da esquerda a direita deve ser multiplicados por uma variável 
+    //que vai diminuindo até 2 e inicia uma nova variável apartir de 9 que será multiplicada adiante
+    if(primeiroMultiplicador>=2){
+      resultado = primeiroMultiplicador*digitoAtual;
+      soma +=resultado;
+      primeiroMultiplicador-=1;
+    }else{
+      resultado = segundoMultiplicador*digitoAtual;
+      soma +=resultado;
+      segundoMultiplicador-=1;
+    }
+
+    resto = soma%11;
+
+  if(resto<2){
+    segundoDigito = '0';
+  }else{
+    //Converte o inteiro em char
+    segundoDigito = (char) 11-resto;
+  }
+  //Verifica se o digito submetido é igual ao que deveria
+  if(segundoDigito = segundoDigitoSubmetido){
+    return 1;
+  }else{
+    return 0;
+  }
+
+  }
+}
+
+int validarCNPJ(char cnpj[14]){
+  //Verifica se o primeiro Digito de verificação é válido
+  if(!validarPrimeiroDigitoSubmetido(cnpj)){
+    return 0;
+  }else{
+    //Verifica se o segundo Digito de verificação é válido
+    if(!validarSegundoDigitoSubmetido(cnpj)){
+      return 0;
+    }else{
+       return 1;
+    } 
+  }
+}
+
+
+
