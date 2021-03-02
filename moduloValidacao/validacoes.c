@@ -267,5 +267,102 @@ int validarCNPJ(char cnpj[14]){
   }
 }
 
+int testarPrimeiroDigitoSubmetido(char cpf[11]){
+  int soma = 0;
+  int contadorDigito;
+  int contador=10;
+  int resto;
+  char primeiroDigito;
+  char primeiroDigitoSubmetido = cpf[9];
+
+  //O primeiro passo é calcular o primeiro dígito verificador, e para isso, separamos os 
+  //primeiros 9 dígitos do CPF (111.444.777) e multiplicamos cada um dos números, da esquerda 
+  //para a direita por números descrecente até o número 2
+  for(contadorDigito=0;contadorDigito<8;contadorDigito++){
+    char digito;
+    int numeroAtual;
+    int resultado;
+    //Converte o string em inteiro
+    digito = cpf[contadorDigito];
+    numeroAtual = (int) digito;
+    resultado = contador * numeroAtual;
+    soma+=resultado;
+    contador-=1;
+  }
+  resto = soma%11;
+
+  if(resto<2){
+    primeiroDigito = '0';
+  }else{
+    //Converte o inteiro em char
+    primeiroDigito = (char) 11-resto;
+  }
+
+  if(primeiroDigito = primeiroDigitoSubmetido){
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+int testarSegundoDigitoSubmetido(char cpf[11]){
+  int soma = 0;
+  int contadorDigito;
+  int contador=11;
+  int resto;
+  char segundoDigito;
+  char segundoDigitoSubmetido = cpf[10];
+
+  //O primeiro passo é calcular o primeiro dígito verificador, e para isso, separamos os 
+  //primeiros 9 dígitos do CPF (111.444.777) e multiplicamos cada um dos números, da esquerda 
+  //para a direita por números descrecente até o número 2
+  for(contadorDigito=0;contadorDigito<9;contadorDigito++){
+    char digito;
+    int numeroAtual;
+    int resultado;
+    //Converte o string em inteiro
+    digito = cpf[contadorDigito];
+    numeroAtual = (int) digito;
+    resultado = contador * numeroAtual;
+    soma+=resultado;
+    contador-=1;
+  }
+  resto = soma%11;
+  if(resto<2){
+    segundoDigito = '0';
+  }else{
+    //Converte o inteiro em char
+    segundoDigito = (char) 11-resto;
+  }
+
+  if(segundoDigito = segundoDigitoSubmetido){
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+int validarCPF(char cpf[11]){
+  //Se o cpf passado não foi um digito ele retorna 0
+  int isNumeric=1;
+  for(int contador=0;contador<11;contador++){
+    if(!isdigit(cpf[contador])){
+      isNumeric = 0;
+      return 0;
+    }
+  }
+  //Verifica se o primeiro Digito de verificação é válido
+  if(!testarPrimeiroDigitoSubmetido(cpf)){
+    return 0;
+  }else{
+    if(!testarSegundoDigitoSubmetido(cpf)){
+      return 0;
+    }else{
+      return 1;
+    }
+  }
+  
+}
+
 
 

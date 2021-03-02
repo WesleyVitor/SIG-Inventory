@@ -61,6 +61,30 @@ void tratarValidacaoCNPJ(void){
   navegacaoMenuCliente();
 }
 
+void tratarValidacaoCPF(void){
+  
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Seu CPF está incorreto        =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+  //Redirecionado para o menu de navegação
+  navegacaoMenuCliente();
+}
+
 void telaCadastroClientePJ(void){
   char cnpj[14];
   char nome[45];
@@ -140,8 +164,12 @@ void telaCadastroClientePF(void){
   printf("///               Entre com as informações abaixo:                          ///\n");
   printf("///                                                                         ///\n");
   printf("                   Cpf:   ");
-  scanf("%[0-9.-]",cpf);
+  scanf("%s",cpf);
   getchar();
+  //Caso o cpf não seja válido será redirecionado a tela de tratamento
+  if(!validarCPF(cpf)){
+    tratarValidacaoCPF();
+  }
   printf("                   Nome:   ");
   scanf("%[A-Z a-záéíóúÁÉÍÓÚ]",nome);
   getchar();
@@ -223,8 +251,12 @@ void telaPesquisarClientePF(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    CPF:   ");
-  scanf("%[0-9.-]",cpf);
+  scanf("%s",cpf);
   getchar();
+  //Caso o cpf não seja válido será redirecionado a tela de tratamento
+  if(!validarCPF(cpf)){
+    tratarValidacaoCPF();
+  }
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -288,8 +320,12 @@ void telaApagarClientePF(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    CPF:   ");
-  scanf("%[0-9.-/]",cpf);
+  scanf("%s",cpf);
   getchar();
+  //Caso o cpf não seja válido será redirecionado a tela de tratamento
+  if(!validarCPF(cpf)){
+    tratarValidacaoCPF();
+  }
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
