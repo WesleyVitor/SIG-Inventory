@@ -38,6 +38,7 @@ char menuCliente(void){
 }
 
 void tratarValidacaoCNPJ(void){
+  
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -51,11 +52,10 @@ void tratarValidacaoCNPJ(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                 Clique enter para ser redirecionado                     ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
   //Redirecionado para o menu de navegação
   navegacaoMenuCliente();
@@ -84,7 +84,7 @@ void telaCadastroClientePJ(void){
   printf("///               Entre com as informações abaixo:                          ///\n");
   printf("///                                                                         ///\n");
   printf("                   CNPJ(Apenas Números):   ");
-  scanf("%[0-9./]",cnpj);
+  scanf("%s",cnpj);
   getchar();
   //Caso o cnpj não seja válido será redirecionado a tela de tratamento
   if(!validarCNPJ(cnpj)){
@@ -252,8 +252,8 @@ void telaPesquisarClientePJ(void){
   printf("///              Entre com o CNPJ do Cliente a ser pesquisado               ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("                    CNPJ:   ");
-  scanf("%[0-9.-/]",cnpj);
+  printf("                    CNPJ(Apenas Números):   ");
+  scanf("%s",cnpj);
   getchar();
   //Caso o cnpj não seja válido será redirecionado a tela de tratamento
   if(!validarCNPJ(cnpj)){
@@ -317,8 +317,8 @@ void telaApagarClientePJ(void){
   printf("///              Entre com o CNPJ do Cliente a ser apagado                  ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("                    CNPJ:   ");
-  scanf("%[0-9.-/]",cnpj);
+  printf("                    CNPJ(Apenas Números):   ");
+  scanf("%s",cnpj);
   getchar();
   //Caso o cnpj não seja válido será redirecionado a tela de tratamento
   if(!validarCNPJ(cnpj)){
@@ -481,6 +481,7 @@ void navegacaoAtualizarCliente(void){
 }
 
 void navegacaoMenuCliente(void){
+
   char opcao;
   do{
     opcao = menuCliente();
@@ -500,3 +501,4 @@ void navegacaoMenuCliente(void){
     }
   }while(opcao!='0');
 }
+

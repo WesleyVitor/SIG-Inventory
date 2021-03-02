@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "validacoes.h"
-
+#include <ctype.h>
 void telaAddValor(void){
   char valor[50];
   system("clear");
@@ -246,6 +246,14 @@ int validarSegundoDigitoSubmetido(char cnpj[14]){
 }
 
 int validarCNPJ(char cnpj[14]){
+  //Se o cnpj passado não foi um digito ele retorna 0
+  int isNumeric=1;
+  for(int contador=0;contador<14;contador++){
+    if(!isdigit(cnpj[contador])){
+      isNumeric = 0;
+      return 0;
+    }
+  }
   //Verifica se o primeiro Digito de verificação é válido
   if(!validarPrimeiroDigitoSubmetido(cnpj)){
     return 0;
