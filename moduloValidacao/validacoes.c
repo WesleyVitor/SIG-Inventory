@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "validacoes.h"
 #include <ctype.h>
+#include <string.h>
 void telaAddValor(void){
   char valor[50];
   system("clear");
@@ -160,13 +161,14 @@ int validarPrimeiroDigitoSubmetido(char cnpj[14]){
   int primeiroMultiplicador=5;
   int segundoMultiplicador=9;
   int primeiroDigitoSubmetido = cnpj[12];
+  int primeiroDigito;
   int resto;
 
   for(contadorDigito=0;contadorDigito<11;contadorDigito++){
     char digito;
     int digitoAtual;
     int resultado;
-    int primeiroDigito;
+    
     
     digito = cnpj[contadorDigito];
     digitoAtual = (int) digito;
@@ -181,8 +183,8 @@ int validarPrimeiroDigitoSubmetido(char cnpj[14]){
       soma +=resultado;
       segundoMultiplicador-=1;
     }
-
-    resto = soma%11;
+  }
+  resto = soma%11;
 
   if(resto<2){
     primeiroDigito = '0';
@@ -197,7 +199,6 @@ int validarPrimeiroDigitoSubmetido(char cnpj[14]){
     return 0;
   }
 
-  }
 }
 
 int validarSegundoDigitoSubmetido(char cnpj[14]){
@@ -206,12 +207,13 @@ int validarSegundoDigitoSubmetido(char cnpj[14]){
   int primeiroMultiplicador=6;
   int segundoMultiplicador=9;
   int segundoDigitoSubmetido = cnpj[13];
+  int segundoDigito;
   int resto;
   for(contadorDigito=0;contadorDigito<12;contadorDigito++){
     char digito;
     int digitoAtual;
     int resultado;
-    int segundoDigito;
+    
     
     digito = cnpj[contadorDigito];
     digitoAtual = (int) digito;
@@ -226,8 +228,8 @@ int validarSegundoDigitoSubmetido(char cnpj[14]){
       soma +=resultado;
       segundoMultiplicador-=1;
     }
-
-    resto = soma%11;
+  }
+  resto = soma%11;
 
   if(resto<2){
     segundoDigito = '0';
@@ -242,15 +244,17 @@ int validarSegundoDigitoSubmetido(char cnpj[14]){
     return 0;
   }
 
-  }
 }
 
 int validarCNPJ(char cnpj[14]){
+  int tamanhoCNPJ;
+  tamanhoCNPJ = strlen(cnpj);
+  if(tamanhoCNPJ != 14){
+    return 0;
+  }
   //Se o cnpj passado não foi um digito ele retorna 0
-  int isNumeric=1;
   for(int contador=0;contador<14;contador++){
     if(!isdigit(cnpj[contador])){
-      isNumeric = 0;
       return 0;
     }
   }
@@ -343,11 +347,15 @@ int testarSegundoDigitoSubmetido(char cpf[11]){
 }
 
 int validarCPF(char cpf[11]){
+  int tamanhoCPF;
+  tamanhoCPF = strlen(cpf);
+  if(tamanhoCPF != 11){
+    return 0;
+  }
   //Se o cpf passado não foi um digito ele retorna 0
-  int isNumeric=1;
+  
   for(int contador=0;contador<11;contador++){
     if(!isdigit(cpf[contador])){
-      isNumeric = 0;
       return 0;
     }
   }
