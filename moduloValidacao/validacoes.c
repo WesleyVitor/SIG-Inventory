@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "validacoes.h"
+#include <string.h>
 #include <ctype.h>
+#include "validacoes.h"
+
 void telaAddValor(void){
   char valor[50];
   system("clear");
@@ -364,5 +366,59 @@ int validarCPF(char cpf[11]){
   
 }
 
+// funcao que verifica se
+// o ano informado é bissexto
+int bissexto(int ano){
+  if ((ano % 4 == 0) && (ano % 100 != 0)){
+    return 1;
+  } else if (ano % 400 == 0) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
 
+int validaData(char data[11]){
+  int listaData[3]; //data em partes
+  int i = 0;
 
+  //dividindo a data em 3 partes
+  char *token;
+  token = strtok(data, "/");
+  while (token != NULL){
+    //funcao atoi() converte
+    //string para inteiro
+    listaData[i++] = atoi(token);
+    token = strtok(NULL, "/");
+  }
+
+  //guardando cada parte nas variaveis
+  int dia = listaData[0];
+  int mes = listaData[1];
+  int ano = listaData[2];
+
+  //teste de mês
+  if (mes < 1 || mes > 12){
+    return 0;
+  }
+  //teste de ano
+  if (ano < 1900 || ano > 2121){
+    return 0;
+  }
+
+  //chamando funcao bissexto
+  int listaDias[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+  int anoBissexto;
+  anoBissexto = bissexto(ano);
+  if (anoBissexto){
+    listaDias[1] = 29;
+  }
+
+  // maxDia pega o maior dia
+  // do mês informado
+  int maxDia = listaDias[mes-1];
+  if (dia < 1 || dia > maxDia ){
+    return 0;
+  }
+  return 1;
+}
