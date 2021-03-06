@@ -13,3 +13,4 @@ void navegacaoCadastroCliente(void);
 void navegacaoPesquisaCliente(void);
 void navegacaoApagarCliente(void);
 void navegacaoAtualizarCliente(void);
+void tratarValidacaoCNPJ(void);
