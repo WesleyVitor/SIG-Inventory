@@ -155,23 +155,60 @@ void telaConfirmacao(void){
   getchar();
 }
 
-int validarPrimeiroDigitoSubmetido(char cnpj[14]){
+
+
+int validarCNPJ(char cnpj[]){
+  if(strlen(cnpj)!=14){
+    return 0;
+  }
+  if(!verificarDigitosCNPJ(cnpj)){
+    return 0;
+  }
+  //Verifica se o primeiro Digito de verificação é válido
+  if(!testarPrimeiroDigitoCNPJSubmetido(cnpj)){
+    return 0;
+  }else{
+    //Verifica se o segundo Digito de verificação é válido
+    if(!testarSegundoDigitoCNPJSubmetido(cnpj)){
+      return 0;
+    }else{
+      return 1;
+    }
+  }
+}
+
+int verificarDigitosCNPJ(char cnpj[]){
+  //Se o cnpj passado não foi um digito ele retorna 0
+  for(int contador=0;contador<14;contador++){
+    if(!isdigit(cnpj[contador])){
+      return 0;
+    }
+  }
+  return 1;
+}
+
+int testarPrimeiroDigitoCNPJSubmetido(char cnpj[]){
   int soma=0;
   int contadorDigito;
   int primeiroMultiplicador=5;
   int segundoMultiplicador=9;
-  int primeiroDigitoSubmetido = cnpj[12];
-  int primeiroDigito;
+  char primeiroDigitoSubmetido = cnpj[12];
+  char primeiroDigito;
   int resto;
+  int resultado;
 
-  for(contadorDigito=0;contadorDigito<11;contadorDigito++){
-    char digito;
+  for(contadorDigito=0;contadorDigito<=11;contadorDigito++){
     int digitoAtual;
-    int resultado;
+    //Converte de caracter para inteiro
+    /*
+      Explicação:
+      int digitoAtual = digito - '0';
+      <=>
+      digitoAtual = (int)digito - (int) '0' => Pegando a correspondência inteira do digito na tabela ASCII e subtraindo da
+                                    correspondência inteira do caracter 0(48) na tabela
     
-    
-    digito = cnpj[contadorDigito];
-    digitoAtual = (int) digito;
+     */
+    digitoAtual = cnpj[contadorDigito] - '0';
     //Segundo a regra os digitos da esquerda a direita deve ser multiplicados por uma variável 
     //que vai diminuindo até 2 e inicia uma nova variável apartir de 9 que será multiplicada adiante
     if(primeiroMultiplicador>=2){
@@ -185,38 +222,38 @@ int validarPrimeiroDigitoSubmetido(char cnpj[14]){
     }
   }
   resto = soma%11;
-
   if(resto<2){
     primeiroDigito = '0';
   }else{
     //Converte o inteiro em char
-    primeiroDigito = (char) 11-resto;
+    /*
+      Explicação:
+      char primeiroDigito = (11-resto) + 48; <=> Pega o valor da equação(11-resto) e soma com 48 que corresponde em inteiro
+                                                ao 0 na tabela ASCII, assim resultará em um inteiro que corresponde a algum
+                                                caracter entre 0 e 9 na tabela ASCII
+     */
+    primeiroDigito = (11-resto)+48;
   }
-
-  if(primeiroDigito = primeiroDigitoSubmetido){
+  if(primeiroDigito == primeiroDigitoSubmetido){
     return 1;
   }else{
     return 0;
   }
-
 }
 
-int validarSegundoDigitoSubmetido(char cnpj[14]){
+int testarSegundoDigitoCNPJSubmetido(char cnpj[]){
   int soma=0;
   int contadorDigito;
   int primeiroMultiplicador=6;
   int segundoMultiplicador=9;
-  int segundoDigitoSubmetido = cnpj[13];
-  int segundoDigito;
+  char segundoDigitoSubmetido = cnpj[13];
   int resto;
-  for(contadorDigito=0;contadorDigito<12;contadorDigito++){
-    char digito;
+  char segundoDigito;
+  int resultado;
+  for(contadorDigito=0;contadorDigito<=12;contadorDigito++){
     int digitoAtual;
-    int resultado;
-    
-    
-    digito = cnpj[contadorDigito];
-    digitoAtual = (int) digito;
+  
+    digitoAtual = cnpj[contadorDigito] - '0';
     //Segundo a regra os digitos da esquerda a direita deve ser multiplicados por uma variável 
     //que vai diminuindo até 2 e inicia uma nova variável apartir de 9 que será multiplicada adiante
     if(primeiroMultiplicador>=2){
@@ -235,41 +272,19 @@ int validarSegundoDigitoSubmetido(char cnpj[14]){
     segundoDigito = '0';
   }else{
     //Converte o inteiro em char
-    segundoDigito = (char) 11-resto;
+    segundoDigito = (11-resto)+48;
   }
   //Verifica se o digito submetido é igual ao que deveria
-  if(segundoDigito = segundoDigitoSubmetido){
+  if(segundoDigito == segundoDigitoSubmetido){
     return 1;
   }else{
     return 0;
   }
 
+  
 }
 
-int validarCNPJ(char cnpj[14]){
-  int tamanhoCNPJ;
-  tamanhoCNPJ = strlen(cnpj);
-  if(tamanhoCNPJ != 14){
-    return 0;
-  }
-  //Se o cnpj passado não foi um digito ele retorna 0
-  for(int contador=0;contador<14;contador++){
-    if(!isdigit(cnpj[contador])){
-      return 0;
-    }
-  }
-  //Verifica se o primeiro Digito de verificação é válido
-  if(!validarPrimeiroDigitoSubmetido(cnpj)){
-    return 0;
-  }else{
-    //Verifica se o segundo Digito de verificação é válido
-    if(!validarSegundoDigitoSubmetido(cnpj)){
-      return 0;
-    }else{
-       return 1;
-    } 
-  }
-}
+
 
 int testarPrimeiroDigitoSubmetido(char cpf[11]){
   int soma = 0;
