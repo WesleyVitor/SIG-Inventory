@@ -284,26 +284,41 @@ int testarSegundoDigitoCNPJSubmetido(char cnpj[]){
   
 }
 
+int verificarDigitosCPF(char cpf[]){
+  //Se o cpf passado não foi um digito ele retorna 0
+  
+  for(int contador=0;contador<11;contador++){
+    if(!isdigit(cpf[contador])){
+      return 0;
+    }
+  }
+  return 1;
 
+}
 
-int testarPrimeiroDigitoSubmetido(char cpf[11]){
+int testarPrimeiroDigitoCPFSubmetido(char cpf[]){
   int soma = 0;
   int contadorDigito;
   int contador=10;
   int resto;
   char primeiroDigito;
   char primeiroDigitoSubmetido = cpf[9];
-
+  int resultado;
   //O primeiro passo é calcular o primeiro dígito verificador, e para isso, separamos os 
   //primeiros 9 dígitos do CPF (111.444.777) e multiplicamos cada um dos números, da esquerda 
   //para a direita por números descrecente até o número 2
-  for(contadorDigito=0;contadorDigito<8;contadorDigito++){
-    char digito;
+  for(contadorDigito=0;contadorDigito<=8;contadorDigito++){
     int numeroAtual;
-    int resultado;
-    //Converte o string em inteiro
-    digito = cpf[contadorDigito];
-    numeroAtual = (int) digito;
+    //Converte de caracter para inteiro
+    /*
+      Explicação:
+      int numeroAtual = cpf[contadorDigito]-'0';
+      <=>
+      digitoAtual = (int)digito - (int) '0' => Pegando a correspondência inteira do digito na tabela ASCII e subtraindo da
+                                    correspondência inteira do caracter 0(48) na tabela
+    
+     */
+    numeroAtual = cpf[contadorDigito]-'0';
     resultado = contador * numeroAtual;
     soma+=resultado;
     contador-=1;
@@ -314,34 +329,39 @@ int testarPrimeiroDigitoSubmetido(char cpf[11]){
     primeiroDigito = '0';
   }else{
     //Converte o inteiro em char
-    primeiroDigito = (char) 11-resto;
+    /*
+      Explicação:
+      char primeiroDigito = (11-resto) + 48; <=> Pega o valor da equação(11-resto) e soma com 48 que corresponde em inteiro
+                                                ao 0 na tabela ASCII, assim resultará em um inteiro que corresponde a algum
+                                                caracter entre 0 e 9 na tabela ASCII
+     *///Converte o inteiro em char
+    primeiroDigito = (11-resto)+48;
   }
 
-  if(primeiroDigito = primeiroDigitoSubmetido){
+  if(primeiroDigito == primeiroDigitoSubmetido){
     return 1;
   }else{
     return 0;
   }
 }
 
-int testarSegundoDigitoSubmetido(char cpf[11]){
+int testarSegundoDigitoCPFSubmetido(char cpf[11]){
   int soma = 0;
   int contadorDigito;
   int contador=11;
   int resto;
   char segundoDigito;
   char segundoDigitoSubmetido = cpf[10];
-
+  int resultado;
   //O primeiro passo é calcular o primeiro dígito verificador, e para isso, separamos os 
   //primeiros 9 dígitos do CPF (111.444.777) e multiplicamos cada um dos números, da esquerda 
   //para a direita por números descrecente até o número 2
   for(contadorDigito=0;contadorDigito<9;contadorDigito++){
-    char digito;
+    
     int numeroAtual;
-    int resultado;
+    
     //Converte o string em inteiro
-    digito = cpf[contadorDigito];
-    numeroAtual = (int) digito;
+    numeroAtual = cpf[contadorDigito]-'0';
     resultado = contador * numeroAtual;
     soma+=resultado;
     contador-=1;
@@ -351,34 +371,31 @@ int testarSegundoDigitoSubmetido(char cpf[11]){
     segundoDigito = '0';
   }else{
     //Converte o inteiro em char
-    segundoDigito = (char) 11-resto;
+    segundoDigito = (11-resto)+48;
   }
 
-  if(segundoDigito = segundoDigitoSubmetido){
+  if(segundoDigito == segundoDigitoSubmetido){
     return 1;
   }else{
     return 0;
   }
 }
 
-int validarCPF(char cpf[11]){
+int validarCPF(char cpf[]){
   int tamanhoCPF;
   tamanhoCPF = strlen(cpf);
   if(tamanhoCPF != 11){
     return 0;
   }
-  //Se o cpf passado não foi um digito ele retorna 0
-  
-  for(int contador=0;contador<11;contador++){
-    if(!isdigit(cpf[contador])){
-      return 0;
-    }
+  if(!verificarDigitosCPF(cpf)){
+    return 0;
   }
+  
   //Verifica se o primeiro Digito de verificação é válido
-  if(!testarPrimeiroDigitoSubmetido(cpf)){
+  if(!testarPrimeiroDigitoCPFSubmetido(cpf)){
     return 0;
   }else{
-    if(!testarSegundoDigitoSubmetido(cpf)){
+    if(!testarSegundoDigitoCPFSubmetido(cpf)){
       return 0;
     }else{
       return 1;
