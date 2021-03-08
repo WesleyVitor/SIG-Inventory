@@ -155,13 +155,23 @@ void telaConfirmacao(void){
   getchar();
 }
 
-
+int verificarDigitos(char vetorCaracteres[],int quantidadeVetor){
+  int contador;
+  //Se o cnpj passado não foi um digito ele retorna 0
+  for(contador=0;contador<quantidadeVetor;contador++){
+    if(!isdigit(vetorCaracteres[contador])){
+      return 0;
+    }
+  }
+  return 1;
+}
 
 int validarCNPJ(char cnpj[]){
-  if(strlen(cnpj)!=14){
+  int tamanhoCNPJ = strlen(cnpj);
+  if(tamanhoCNPJ!=14){
     return 0;
   }
-  if(!verificarDigitosCNPJ(cnpj)){
+  if(!verificarDigitos(cnpj,tamanhoCNPJ)){
     return 0;
   }
   //Verifica se o primeiro Digito de verificação é válido
@@ -175,16 +185,6 @@ int validarCNPJ(char cnpj[]){
       return 1;
     }
   }
-}
-
-int verificarDigitosCNPJ(char cnpj[]){
-  //Se o cnpj passado não foi um digito ele retorna 0
-  for(int contador=0;contador<14;contador++){
-    if(!isdigit(cnpj[contador])){
-      return 0;
-    }
-  }
-  return 1;
 }
 
 int testarPrimeiroDigitoCNPJSubmetido(char cnpj[]){
@@ -284,18 +284,6 @@ int testarSegundoDigitoCNPJSubmetido(char cnpj[]){
   
 }
 
-int verificarDigitosCPF(char cpf[]){
-  //Se o cpf passado não foi um digito ele retorna 0
-  
-  for(int contador=0;contador<11;contador++){
-    if(!isdigit(cpf[contador])){
-      return 0;
-    }
-  }
-  return 1;
-
-}
-
 int testarPrimeiroDigitoCPFSubmetido(char cpf[]){
   int soma = 0;
   int contadorDigito;
@@ -345,7 +333,7 @@ int testarPrimeiroDigitoCPFSubmetido(char cpf[]){
   }
 }
 
-int testarSegundoDigitoCPFSubmetido(char cpf[11]){
+int testarSegundoDigitoCPFSubmetido(char cpf[]){
   int soma = 0;
   int contadorDigito;
   int contador=11;
@@ -356,7 +344,7 @@ int testarSegundoDigitoCPFSubmetido(char cpf[11]){
   //O primeiro passo é calcular o primeiro dígito verificador, e para isso, separamos os 
   //primeiros 9 dígitos do CPF (111.444.777) e multiplicamos cada um dos números, da esquerda 
   //para a direita por números descrecente até o número 2
-  for(contadorDigito=0;contadorDigito<9;contadorDigito++){
+  for(contadorDigito=0;contadorDigito<=9;contadorDigito++){
     
     int numeroAtual;
     
@@ -382,12 +370,11 @@ int testarSegundoDigitoCPFSubmetido(char cpf[11]){
 }
 
 int validarCPF(char cpf[]){
-  int tamanhoCPF;
-  tamanhoCPF = strlen(cpf);
+  int tamanhoCPF = strlen(cpf);
   if(tamanhoCPF != 11){
     return 0;
   }
-  if(!verificarDigitosCPF(cpf)){
+  if(!verificarDigitos(cpf,tamanhoCPF)){
     return 0;
   }
   
