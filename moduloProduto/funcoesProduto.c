@@ -35,6 +35,21 @@ char menuProduto(void){
   return opcao;
 }
 
+void tratarData(void){
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =            Data inválida!           =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("                  Nova data (dd/mm/aaaa): ");
+}
+
 void telaCadastroProduto(void){
   char codigo[15];
   char nome[25];
@@ -64,7 +79,14 @@ void telaCadastroProduto(void){
   scanf("%d",&quantidade);
   getchar();
   printf("                  Validade:   ");
-  scanf("%[0-9/]",validade);
+  scanf("%s",validade);
+  int retorno = 0;
+  retorno = validaData(validade);
+  while (retorno != 1){
+    tratarData();
+    scanf("%s", validade);
+    retorno = validaData(validade);
+  }
   getchar();
   printf("                  Preço da Unidade:   ");
   scanf("%f",&preco);
