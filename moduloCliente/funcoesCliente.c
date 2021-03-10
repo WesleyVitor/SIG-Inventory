@@ -38,7 +38,6 @@ char menuCliente(void){
 }
 
 void tratarValidacaoCNPJ(void){
-  
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -51,18 +50,12 @@ void tratarValidacaoCNPJ(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///                                                                         ///\n");
-  printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
-  //Redirecionado para o menu de navegação
-  navegacaoMenuCliente();
+  printf("///                   Adicione um CNPJ válido: ");
+  
+  
 }
 
 void tratarValidacaoCPF(void){
-  
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -76,13 +69,8 @@ void tratarValidacaoCPF(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
-  //Redirecionado para o menu de navegação
-  navegacaoMenuCliente();
+  printf("///                   Adicione um CPF válido: ");
+  
 }
 
 void telaCadastroClientePJ(void){
@@ -110,9 +98,10 @@ void telaCadastroClientePJ(void){
   printf("                   CNPJ(Apenas Números):   ");
   scanf("%s",cnpj);
   getchar();
-  //Caso o cnpj não seja válido será redirecionado a tela de tratamento
-  if(!validarCNPJ(cnpj)){
+  while(!validarCNPJ(cnpj)){
     tratarValidacaoCNPJ();
+    scanf("%s",cnpj);
+    getchar();
   }
   printf("                   Nome:   ");
   scanf("%[A-Z a-zzáéíóúÁÉÍÓÚ]",nome);
@@ -166,9 +155,10 @@ void telaCadastroClientePF(void){
   printf("                   Cpf:   ");
   scanf("%s",cpf);
   getchar();
-  //Caso o cpf não seja válido será redirecionado a tela de tratamento
-  if(!validarCPF(cpf)){
+  while(!validarCPF(cpf)){
     tratarValidacaoCPF();
+    scanf("%s",cpf);
+    getchar();
   }
   printf("                   Nome:   ");
   scanf("%[A-Z a-záéíóúÁÉÍÓÚ]",nome);
@@ -253,9 +243,10 @@ void telaPesquisarClientePF(void){
   printf("                    CPF:   ");
   scanf("%s",cpf);
   getchar();
-  //Caso o cpf não seja válido será redirecionado a tela de tratamento
-  if(!validarCPF(cpf)){
+  while(!validarCPF(cpf)){
     tratarValidacaoCPF();
+    scanf("%s",cpf);
+    getchar();
   }
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -287,9 +278,10 @@ void telaPesquisarClientePJ(void){
   printf("                    CNPJ(Apenas Números):   ");
   scanf("%s",cnpj);
   getchar();
-  //Caso o cnpj não seja válido será redirecionado a tela de tratamento
-  if(!validarCNPJ(cnpj)){
+  while(!validarCNPJ(cnpj)){
     tratarValidacaoCNPJ();
+    scanf("%s",cnpj);
+    getchar();
   }
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -322,9 +314,10 @@ void telaApagarClientePF(void){
   printf("                    CPF:   ");
   scanf("%s",cpf);
   getchar();
-  //Caso o cpf não seja válido será redirecionado a tela de tratamento
-  if(!validarCPF(cpf)){
+  while(!validarCPF(cpf)){
     tratarValidacaoCPF();
+    scanf("%s",cpf);
+    getchar();
   }
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -356,9 +349,10 @@ void telaApagarClientePJ(void){
   printf("                    CNPJ(Apenas Números):   ");
   scanf("%s",cnpj);
   getchar();
-  //Caso o cnpj não seja válido será redirecionado a tela de tratamento
-  if(!validarCNPJ(cnpj)){
+  while(!validarCNPJ(cnpj)){
     tratarValidacaoCNPJ();
+    scanf("%s",cnpj);
+    getchar();
   }
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");

@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "validacoes.h"
+#include <string.h>
 
 void telaAddValor(void){
   char valor[50];
@@ -156,22 +157,60 @@ void telaConfirmacao(void){
   getchar();
 }
 
-int validarPrimeiroDigitoSubmetido(char cnpj[14]){
+int verificarDigitos(char vetorCaracteres[],int quantidadeVetor){
+  int contador;
+  //Se o cnpj passado não foi um digito ele retorna 0
+  for(contador=0;contador<quantidadeVetor;contador++){
+    if(!isdigit(vetorCaracteres[contador])){
+      return 0;
+    }
+  }
+  return 1;
+}
+
+int validarCNPJ(char cnpj[]){
+  int tamanhoCNPJ = strlen(cnpj);
+  if(tamanhoCNPJ!=14){
+    return 0;
+  }
+  if(!verificarDigitos(cnpj,tamanhoCNPJ)){
+    return 0;
+  }
+  //Verifica se o primeiro Digito de verificação é válido
+  if(!testarPrimeiroDigitoCNPJSubmetido(cnpj)){
+    return 0;
+  }else{
+    //Verifica se o segundo Digito de verificação é válido
+    if(!testarSegundoDigitoCNPJSubmetido(cnpj)){
+      return 0;
+    }else{
+      return 1;
+    }
+  }
+}
+
+int testarPrimeiroDigitoCNPJSubmetido(char cnpj[]){
   int soma=0;
   int contadorDigito;
   int primeiroMultiplicador=5;
   int segundoMultiplicador=9;
-  int primeiroDigitoSubmetido = cnpj[12];
+  char primeiroDigitoSubmetido = cnpj[12];
+  char primeiroDigito;
   int resto;
+  int resultado;
 
-  for(contadorDigito=0;contadorDigito<11;contadorDigito++){
-    char digito;
+  for(contadorDigito=0;contadorDigito<=11;contadorDigito++){
     int digitoAtual;
-    int resultado;
-    int primeiroDigito;
+    //Converte de caracter para inteiro
+    /*
+      Explicação:
+      int digitoAtual = digito - '0';
+      <=>
+      digitoAtual = (int)digito - (int) '0' => Pegando a correspondência inteira do digito na tabela ASCII e subtraindo da
+                                    correspondência inteira do caracter 0(48) na tabela
     
-    digito = cnpj[contadorDigito];
-    digitoAtual = (int) digito;
+     */
+    digitoAtual = cnpj[contadorDigito] - '0';
     //Segundo a regra os digitos da esquerda a direita deve ser multiplicados por uma variável 
     //que vai diminuindo até 2 e inicia uma nova variável apartir de 9 que será multiplicada adiante
     if(primeiroMultiplicador>=2){
@@ -183,40 +222,40 @@ int validarPrimeiroDigitoSubmetido(char cnpj[14]){
       soma +=resultado;
       segundoMultiplicador-=1;
     }
-
-    resto = soma%11;
-
+  }
+  resto = soma%11;
   if(resto<2){
     primeiroDigito = '0';
   }else{
     //Converte o inteiro em char
-    primeiroDigito = (char) 11-resto;
+    /*
+      Explicação:
+      char primeiroDigito = (11-resto) + 48; <=> Pega o valor da equação(11-resto) e soma com 48 que corresponde em inteiro
+                                                ao 0 na tabela ASCII, assim resultará em um inteiro que corresponde a algum
+                                                caracter entre 0 e 9 na tabela ASCII
+     */
+    primeiroDigito = (11-resto)+48;
   }
-
-  if(primeiroDigito = primeiroDigitoSubmetido){
+  if(primeiroDigito == primeiroDigitoSubmetido){
     return 1;
   }else{
     return 0;
   }
-
-  }
 }
 
-int validarSegundoDigitoSubmetido(char cnpj[14]){
+int testarSegundoDigitoCNPJSubmetido(char cnpj[]){
   int soma=0;
   int contadorDigito;
   int primeiroMultiplicador=6;
   int segundoMultiplicador=9;
-  int segundoDigitoSubmetido = cnpj[13];
+  char segundoDigitoSubmetido = cnpj[13];
   int resto;
-  for(contadorDigito=0;contadorDigito<12;contadorDigito++){
-    char digito;
+  char segundoDigito;
+  int resultado;
+  for(contadorDigito=0;contadorDigito<=12;contadorDigito++){
     int digitoAtual;
-    int resultado;
-    int segundoDigito;
-    
-    digito = cnpj[contadorDigito];
-    digitoAtual = (int) digito;
+  
+    digitoAtual = cnpj[contadorDigito] - '0';
     //Segundo a regra os digitos da esquerda a direita deve ser multiplicados por uma variável 
     //que vai diminuindo até 2 e inicia uma nova variável apartir de 9 que será multiplicada adiante
     if(primeiroMultiplicador>=2){
@@ -228,65 +267,48 @@ int validarSegundoDigitoSubmetido(char cnpj[14]){
       soma +=resultado;
       segundoMultiplicador-=1;
     }
-
-    resto = soma%11;
+  }
+  resto = soma%11;
 
   if(resto<2){
     segundoDigito = '0';
   }else{
     //Converte o inteiro em char
-    segundoDigito = (char) 11-resto;
+    segundoDigito = (11-resto)+48;
   }
   //Verifica se o digito submetido é igual ao que deveria
-  if(segundoDigito = segundoDigitoSubmetido){
+  if(segundoDigito == segundoDigitoSubmetido){
     return 1;
   }else{
     return 0;
   }
 
-  }
+  
 }
 
-int validarCNPJ(char cnpj[14]){
-  //Se o cnpj passado não foi um digito ele retorna 0
-  int isNumeric=1;
-  for(int contador=0;contador<14;contador++){
-    if(!isdigit(cnpj[contador])){
-      isNumeric = 0;
-      return 0;
-    }
-  }
-  //Verifica se o primeiro Digito de verificação é válido
-  if(!validarPrimeiroDigitoSubmetido(cnpj)){
-    return 0;
-  }else{
-    //Verifica se o segundo Digito de verificação é válido
-    if(!validarSegundoDigitoSubmetido(cnpj)){
-      return 0;
-    }else{
-       return 1;
-    } 
-  }
-}
-
-int testarPrimeiroDigitoSubmetido(char cpf[11]){
+int testarPrimeiroDigitoCPFSubmetido(char cpf[]){
   int soma = 0;
   int contadorDigito;
   int contador=10;
   int resto;
   char primeiroDigito;
   char primeiroDigitoSubmetido = cpf[9];
-
+  int resultado;
   //O primeiro passo é calcular o primeiro dígito verificador, e para isso, separamos os 
   //primeiros 9 dígitos do CPF (111.444.777) e multiplicamos cada um dos números, da esquerda 
   //para a direita por números descrecente até o número 2
-  for(contadorDigito=0;contadorDigito<8;contadorDigito++){
-    char digito;
+  for(contadorDigito=0;contadorDigito<=8;contadorDigito++){
     int numeroAtual;
-    int resultado;
-    //Converte o string em inteiro
-    digito = cpf[contadorDigito];
-    numeroAtual = (int) digito;
+    //Converte de caracter para inteiro
+    /*
+      Explicação:
+      int numeroAtual = cpf[contadorDigito]-'0';
+      <=>
+      digitoAtual = (int)digito - (int) '0' => Pegando a correspondência inteira do digito na tabela ASCII e subtraindo da
+                                    correspondência inteira do caracter 0(48) na tabela
+    
+     */
+    numeroAtual = cpf[contadorDigito]-'0';
     resultado = contador * numeroAtual;
     soma+=resultado;
     contador-=1;
@@ -297,34 +319,39 @@ int testarPrimeiroDigitoSubmetido(char cpf[11]){
     primeiroDigito = '0';
   }else{
     //Converte o inteiro em char
-    primeiroDigito = (char) 11-resto;
+    /*
+      Explicação:
+      char primeiroDigito = (11-resto) + 48; <=> Pega o valor da equação(11-resto) e soma com 48 que corresponde em inteiro
+                                                ao 0 na tabela ASCII, assim resultará em um inteiro que corresponde a algum
+                                                caracter entre 0 e 9 na tabela ASCII
+     *///Converte o inteiro em char
+    primeiroDigito = (11-resto)+48;
   }
 
-  if(primeiroDigito = primeiroDigitoSubmetido){
+  if(primeiroDigito == primeiroDigitoSubmetido){
     return 1;
   }else{
     return 0;
   }
 }
 
-int testarSegundoDigitoSubmetido(char cpf[11]){
+int testarSegundoDigitoCPFSubmetido(char cpf[]){
   int soma = 0;
   int contadorDigito;
   int contador=11;
   int resto;
   char segundoDigito;
   char segundoDigitoSubmetido = cpf[10];
-
+  int resultado;
   //O primeiro passo é calcular o primeiro dígito verificador, e para isso, separamos os 
   //primeiros 9 dígitos do CPF (111.444.777) e multiplicamos cada um dos números, da esquerda 
   //para a direita por números descrecente até o número 2
-  for(contadorDigito=0;contadorDigito<9;contadorDigito++){
-    char digito;
+  for(contadorDigito=0;contadorDigito<=9;contadorDigito++){
+    
     int numeroAtual;
-    int resultado;
+    
     //Converte o string em inteiro
-    digito = cpf[contadorDigito];
-    numeroAtual = (int) digito;
+    numeroAtual = cpf[contadorDigito]-'0';
     resultado = contador * numeroAtual;
     soma+=resultado;
     contador-=1;
@@ -334,30 +361,30 @@ int testarSegundoDigitoSubmetido(char cpf[11]){
     segundoDigito = '0';
   }else{
     //Converte o inteiro em char
-    segundoDigito = (char) 11-resto;
+    segundoDigito = (11-resto)+48;
   }
 
-  if(segundoDigito = segundoDigitoSubmetido){
+  if(segundoDigito == segundoDigitoSubmetido){
     return 1;
   }else{
     return 0;
   }
 }
 
-int validarCPF(char cpf[11]){
-  //Se o cpf passado não foi um digito ele retorna 0
-  int isNumeric=1;
-  for(int contador=0;contador<11;contador++){
-    if(!isdigit(cpf[contador])){
-      isNumeric = 0;
-      return 0;
-    }
+int validarCPF(char cpf[]){
+  int tamanhoCPF = strlen(cpf);
+  if(tamanhoCPF != 11){
+    return 0;
   }
+  if(!verificarDigitos(cpf,tamanhoCPF)){
+    return 0;
+  }
+  
   //Verifica se o primeiro Digito de verificação é válido
-  if(!testarPrimeiroDigitoSubmetido(cpf)){
+  if(!testarPrimeiroDigitoCPFSubmetido(cpf)){
     return 0;
   }else{
-    if(!testarSegundoDigitoSubmetido(cpf)){
+    if(!testarSegundoDigitoCPFSubmetido(cpf)){
       return 0;
     }else{
       return 1;
