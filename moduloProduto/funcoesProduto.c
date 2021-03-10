@@ -80,6 +80,7 @@ void telaCadastroProduto(void){
   getchar();
   printf("                  Validade:   ");
   scanf("%s",validade);
+  getchar();
   int retorno = 0;
   retorno = validaData(validade);
   while (retorno != 1){
@@ -87,7 +88,6 @@ void telaCadastroProduto(void){
     scanf("%s", validade);
     retorno = validaData(validade);
   }
-  getchar();
   printf("                  Preço da Unidade:   ");
   scanf("%f",&preco);
   getchar();
