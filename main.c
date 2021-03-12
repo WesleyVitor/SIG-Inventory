@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "moduloProduto/funcoesProduto.h"
-#include "moduloCliente/funcoesCliente.h"
-#include "moduloValidacao/validacoes.h"
-#include "moduloRetirada/retirada.h"
+#include "Produto/funcoesProduto.h"
+#include "Cliente/funcoesCliente.h"
+#include "Validacao/validacoes.h"
+#include "Retirada/retirada.h"
 
 void menuSobre(void);
 char menuPrincipal(void);
