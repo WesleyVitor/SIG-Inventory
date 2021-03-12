@@ -4,6 +4,7 @@
 #include "Cliente/funcoesCliente.h"
 #include "Validacao/validacoes.h"
 #include "Retirada/retirada.h"
+#include "Relatorios/relatorios.h"
 
 void menuSobre(void);
 char menuPrincipal(void);
@@ -24,6 +25,9 @@ int main(void) {
         break;
       case '3':
         navegacaoMenuRetirada();
+        break;
+      case '4':
+        navegacaoMenuRelatorios();
         break;
     }
   }while(opcao!='0');
@@ -78,6 +82,7 @@ char menuPrincipal(void){
   printf("///               1. Módulo de Produto                                      ///\n");
   printf("///               2. Módulo de Cliente                                      ///\n");
   printf("///               3. Módulo de Retirada                                     ///\n");
+  printf("///               4. Módulo de Relatórios                                   ///\n");
   printf("///               0. Sair do programa                                       ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
