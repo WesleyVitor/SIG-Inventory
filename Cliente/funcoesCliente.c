@@ -37,6 +37,7 @@ char menuCliente(void){
   return opcao;
 }
 
+
 void tratarValidacaoCNPJ(void){
   system("clear");
   printf("\n");
@@ -164,8 +165,13 @@ void telaCadastroClientePF(void){
   scanf("%[A-Z a-záéíóúÁÉÍÓÚ]",nome);
   getchar();
   printf("                   Data de Nascimento:   ");
-  scanf("%[0-9/]",dataDeNascimento);
+  scanf("%s",dataDeNascimento);
   getchar();
+  while (!validaData(dataDeNascimento)){
+    tratarData();
+    scanf("%s",dataDeNascimento);
+    getchar();
+  }
   printf("                   Rua:   ");
   scanf("%[A-Z a-z0-9]",rua);
   getchar();
