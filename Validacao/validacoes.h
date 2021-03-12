@@ -10,3 +10,5 @@ int testarPrimeiroDigitoCPFSubmetido(char[]);
 int testarSegundoDigitoCPFSubmetido(char[]);
 int validarCPF(char[]);
 int verificarDigitos(char [],int);
+int validaData(char[11]);
+int bissexto(int);
