@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../moduloValidacao/validacoes.h"
+#include "../Validacao/validacoes.h"
 #include "./funcoesCliente.h"
 
 
@@ -36,6 +36,7 @@ char menuCliente(void){
   getchar();
   return opcao;
 }
+
 
 void tratarValidacaoCNPJ(void){
   system("clear");
@@ -164,8 +165,13 @@ void telaCadastroClientePF(void){
   scanf("%[A-Z a-záéíóúÁÉÍÓÚ]",nome);
   getchar();
   printf("                   Data de Nascimento:   ");
-  scanf("%[0-9/]",dataDeNascimento);
+  scanf("%s",dataDeNascimento);
   getchar();
+  while (!validaData(dataDeNascimento)){
+    tratarData();
+    scanf("%s",dataDeNascimento);
+    getchar();
+  }
   printf("                   Rua:   ");
   scanf("%[A-Z a-z0-9]",rua);
   getchar();
