@@ -92,19 +92,36 @@ void telaRelatorioProdutos(void){
 }
 
 void telaRelatorioRetiradasTrimestrais(void){
+  int codigo = 244059;
+  char produto[] = "Arroz";
+  int quantidade = 500;
+  char cpf[] = "015.231.561-76";
+  float preco = 499.99;
   system("clear");
-  printf("\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             = Relatórios de Retiradas Trimestrais =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///                                                                         ///\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("\n");
+  for (int i = 0; i<10; i++){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+    printf("///             =                                     =                     ///\n");
+    printf("///             = Relatórios de Retiradas Trimestrais =                     ///\n");
+    printf("                                 nº %d\n", i+1);
+    printf("///             =                                     =                     ///\n");
+    printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Código: %d                                               ///\n", codigo);
+    printf("///            Produto: %s                                               ///\n", produto);
+    printf("///            Quantidade: %d                                              ///\n", quantidade);
+    printf("///            CPF: %s                                          ///\n", cpf);
+    printf("///            Preço (R$): %.2f                                           ///\n", preco);
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+  }
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
 }
