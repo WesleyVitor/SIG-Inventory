@@ -297,16 +297,23 @@ void telaCadastroClientePF(void){
   printf("///               Entre com as informações abaixo:                          ///\n");
   printf("///                                                                         ///\n");
   printf("                   Cpf:   ");
-  scanf("%s",cpf);
+  scanf("%[^\n]",cpf);
   getchar();
   while(!validarCPF(cpf)){
     tratarValidacaoCPF();
-    scanf("%s",cpf);
+    scanf("%[^\n]",cpf);
     getchar();
   }
+
   printf("                   Nome:   ");
-  scanf("%[A-Z a-záéíóúÁÉÍÓÚ]",nome);
+  scanf("%[^\n]",nome);
   getchar();
+  while(!validacaoString(nome)){
+    tratarValidacaoNome();
+    scanf("%[^\n]",nome);
+    getchar();
+  }
+
   printf("                   Data de Nascimento:   ");
   scanf("%s",dataDeNascimento);
   getchar();
@@ -315,18 +322,43 @@ void telaCadastroClientePF(void){
     scanf("%s",dataDeNascimento);
     getchar();
   }
+
   printf("                   Rua:   ");
-  scanf("%[A-Z a-z0-9]",rua);
+  scanf("%[^\n]",rua);
   getchar();
+  while(!validacaoString(rua)){
+    tratarValidacaoRua();
+    scanf("%[^\n]",rua);
+    getchar();
+  }
+
   printf("                   Bairro:   ");
-  scanf("%[A-Z a-z0-9]",bairro);
+  scanf("%[^\n]",bairro);
   getchar();
+  while(!validacaoString(bairro)){
+    tratarValidacaoBairro();
+    scanf("%[^\n]",bairro);
+    getchar();
+  }
+
   printf("                   Número:   ");
-  scanf("%[0-9]",numero);
+  scanf("%[^\n]",numero);
   getchar();
+  while(!verificarDigitos(numero)){
+    tratarValidacaoNumero();
+    scanf("%[^\n]",numero);
+    getchar();
+  }
+
   printf("                   Complemento:   ");
-  scanf("%[A-Z a-z]",complemento);
+  scanf("%[^\n]",complemento);
   getchar();
+  while(!validacaoString(complemento)){
+    tratarValidacaoComplemento();
+    scanf("%[^\n]",complemento);
+    getchar();
+  }
+
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
