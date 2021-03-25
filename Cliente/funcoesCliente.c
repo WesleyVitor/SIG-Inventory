@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../Validacao/validacoes.h"
 #include "./funcoesCliente.h"
-
+#include <ctype.h>
 
 char menuCliente(void){
   char opcao;
@@ -74,6 +74,113 @@ void tratarValidacaoCPF(void){
   
 }
 
+void tratarValidacaoNome(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Digite apenas Letras          =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                   Adicione um nome válido: ");
+  
+  
+}
+
+void tratarValidacaoRamo(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Digite apenas Letras          =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                   Adicione um ramo válido: ");
+  
+  
+}
+
+void tratarValidacaoRua(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Digite apenas Letras          =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                   Adicione uma rua válido: ");
+  
+}
+
+void tratarValidacaoBairro(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Digite apenas Letras          =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                   Adicione um bairro válido: ");
+  
+  
+}
+
+void tratarValidacaoComplemento(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Digite apenas Letras          =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                   Adicione um complemento válido: ");
+  
+  
+}
+
+void tratarValidacaoNumero(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Digite apenas Número          =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                   Adicione um número válido: ");
+  
+  
+}
+
 void telaCadastroClientePJ(void){
   char cnpj[14];
   char nome[45];
@@ -97,31 +204,67 @@ void telaCadastroClientePJ(void){
   printf("///               Entre com as informações abaixo:                          ///\n");
   printf("///                                                                         ///\n");
   printf("                   CNPJ(Apenas Números):   ");
-  scanf("%s",cnpj);
+  scanf("%[^\n]",cnpj);
   getchar();
   while(!validarCNPJ(cnpj)){
     tratarValidacaoCNPJ();
     scanf("%s",cnpj);
     getchar();
   }
+
   printf("                   Nome:   ");
-  scanf("%[A-Z a-zzáéíóúÁÉÍÓÚ]",nome);
+  scanf("%[^\n]",nome);
   getchar();
+  while(!validacaoString(nome)){
+    tratarValidacaoNome();
+    scanf("%[^\n]",nome);
+    getchar();
+  }
+
   printf("                   Ramo:   ");
-  scanf("%[A-Z a-z/]",ramo);
+  scanf("%[^\n]",ramo);
   getchar();
+  while(!validacaoString(ramo)){
+    tratarValidacaoRamo();
+    scanf("%[^\n]",ramo);
+    getchar();
+  }
+
   printf("                   Rua:   ");
-  scanf("%[A-Z a-z0-9]",rua);
+  scanf("%[^\n]",rua);
   getchar();
+  while(!validacaoString(rua)){
+    tratarValidacaoRua();
+    scanf("%[^\n]",rua);
+    getchar();
+  }
+
   printf("                   Bairro:   ");
-  scanf("%[A-Z a-z0-9]",bairro);
+  scanf("%[^\n]",bairro);
   getchar();
+  while(!validacaoString(bairro)){
+    tratarValidacaoBairro();
+    scanf("%[^\n]",bairro);
+    getchar();
+  }
+
   printf("                   Número:   ");
-  scanf("%[0-9.]",numero);
+  scanf("%[^\n]",numero);
   getchar();
+  while(!verificarDigitos(numero)){
+    tratarValidacaoNumero();
+    scanf("%[^\n]",numero);
+    getchar();
+  }
+
   printf("                   Complemento:   ");
-  scanf("%[A-Z a-z]",complemento);
+  scanf("%[^\n]",complemento);
   getchar();
+  while(!validacaoString(complemento)){
+    tratarValidacaoComplemento();
+    scanf("%[^\n]",complemento);
+    getchar();
+  }
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
