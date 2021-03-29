@@ -1,6 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../Validacao/validacoes.h"
+#include <ctype.h>
+void tratarValidacaoCodigo(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Digite apenas números         =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                   Adicione um código válido: ");
+  
+}
+
+void tratarValidacaoNomeProduto(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Digite apenas letras          =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                   Adicione um nome válido: ");
+  
+}
+
 
 
 char menuProduto(void){
@@ -55,7 +90,7 @@ void telaCadastroProduto(void){
   char nome[25];
   char validade[11];
   int quantidade;
-  float preco;
+  double preco;
   char descricao[50];
   system("clear");
   printf("\n");
@@ -70,14 +105,27 @@ void telaCadastroProduto(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("                  Código:   ");
-  scanf("%[0-9]",codigo);
+  scanf("%[^\n]",codigo);
   getchar();
+  while(!verificarDigitos(codigo)){
+    tratarValidacaoCodigo();
+    scanf("%[^\n]",codigo);
+    getchar();
+  }
+
   printf("                  Nome:   ");
-  scanf("%[A-Z a-zÁÉÍÓÚÃáéíóúã]",nome);
+  scanf("%[^\n]",nome);
   getchar();
+  while(!validacaoString(nome)){
+    tratarValidacaoNomeProduto();
+    scanf("%[^\n]",nome);
+    getchar();
+  }
+
   printf("                  Quantidade:   ");
   scanf("%d",&quantidade);
   getchar();
+
   printf("                  Validade:   ");
   scanf("%s",validade);
   getchar();
@@ -86,11 +134,13 @@ void telaCadastroProduto(void){
     scanf("%s", validade);
     getchar();
   }
+
   printf("                  Preço da Unidade:   ");
-  scanf("%f",&preco);
+  scanf("%lf",&preco);
   getchar();
+
   printf("                  Descrição:   ");
-  scanf("%[A-Z a-z0-9]",descricao);
+  scanf("%[^\n]",descricao);
   getchar();
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -122,6 +172,11 @@ void telaPesquisarProduto(void){
   printf("                    Código:   ");
   scanf("%[0-9]",codigo);
   getchar();
+  while(!verificarDigitos(codigo)){
+    tratarValidacaoCodigo();
+    scanf("%[^\n]",codigo);
+    getchar();
+  }
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -152,6 +207,11 @@ void telaApagarProduto(void){
   printf("                    Código:   ");
   scanf("%[0-9]",codigo);
   getchar();
+  while(!verificarDigitos(codigo)){
+    tratarValidacaoCodigo();
+    scanf("%[^\n]",codigo);
+    getchar();
+  }
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");

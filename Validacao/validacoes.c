@@ -157,11 +157,20 @@ void telaConfirmacao(void){
   getchar();
 }
 
-int verificarDigitos(char vetorCaracteres[],int quantidadeVetor){
+int ehDigito(char caracter){
+  if((caracter>='0') && (caracter<='9')){
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+int verificarDigitos(char vetorCaracteres[]){
   int contador;
+  int quantidadeVetor = strlen(vetorCaracteres);
   //Se o cnpj passado não foi um digito ele retorna 0
   for(contador=0;contador<quantidadeVetor;contador++){
-    if(!isdigit(vetorCaracteres[contador])){
+    if(!ehDigito(vetorCaracteres[contador])){
       return 0;
     }
   }
@@ -173,7 +182,7 @@ int validarCNPJ(char cnpj[]){
   if(tamanhoCNPJ!=14){
     return 0;
   }
-  if(!verificarDigitos(cnpj,tamanhoCNPJ)){
+  if(!verificarDigitos(cnpj)){
     return 0;
   }
   //Verifica se o primeiro Digito de verificação é válido
@@ -376,7 +385,7 @@ int validarCPF(char cpf[]){
   if(tamanhoCPF != 11){
     return 0;
   }
-  if(!verificarDigitos(cpf,tamanhoCPF)){
+  if(!verificarDigitos(cpf)){
     return 0;
   }
   
@@ -445,6 +454,38 @@ int validaData(char data[11]){
   // do mês informado
   int maxDia = listaDias[mes-1];
   if (dia < 1 || dia > maxDia ){
+    return 0;
+  }
+  return 1;
+}
+
+//Função que verifica se um determinado caracter passado como parâmetro é uma letra
+int ehLetra(char caracter){
+  if((caracter>='a') && (caracter<='z')){
+    return 1;
+  }else if((caracter>='A') && (caracter<='Z')){
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+//Função que verifica se os caracteres de uma string são letras
+//Com apoio da função ehLetra()
+int validacaoString(char *string){
+  int tamanho;
+  tamanho = strlen(string);
+  if(tamanho!=0){
+    for(int i=0;i<tamanho;i++){
+      //Vericar se o valor é um espaço
+      if(string[i]==32){
+        continue;
+      }
+      if(!ehLetra(string[i])){
+        return 0;
+      }
+    }
+  }else{
     return 0;
   }
   return 1;
