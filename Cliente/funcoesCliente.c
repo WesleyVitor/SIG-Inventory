@@ -4,6 +4,18 @@
 #include "./funcoesCliente.h"
 #include <ctype.h>
 
+typedef struct cliente Cliente;
+
+struct cliente{
+  char cnpj_cpf[14];
+  char nome[51];
+  char rua[51];
+  char bairro[51];
+  char numero[7];
+  char complemento[20];
+
+};
+
 char menuCliente(void){
   char opcao;
   system("clear");
@@ -148,12 +160,8 @@ void tratarValidacaoNumero(void){
 }
 
 void CadastroCliente(void){
-  char cnpj_cpf[14];
-  char nome[45];
-  char rua[30];
-  char bairro[30];
-  char numero[7];
-  char complemento[10];
+  Cliente *cliente;
+  cliente = (Cliente*) malloc(sizeof(Cliente));
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -169,57 +177,57 @@ void CadastroCliente(void){
   printf("///               Entre com as informações abaixo:                          ///\n");
   printf("///                                                                         ///\n");
   printf("                   CNPJ/CPF(Apenas Números):   ");
-  scanf("%[^\n]",cnpj_cpf);
+  scanf("%[^\n]",cliente->cnpj_cpf);
   getchar();
   //Chamar função para validar cnpj ou cpf
-  while(!validarCNPJ_CPF(cnpj_cpf)){
+  while(!validarCNPJ_CPF(cliente->cnpj_cpf)){
     tratarValidacaoCNPJCPF();
-    scanf("%[^\n]",cnpj_cpf);
+    scanf("%[^\n]",cliente->cnpj_cpf);
     getchar();
   }
 
   printf("                   Nome:   ");
-  scanf("%[^\n]",nome);
+  scanf("%[^\n]",cliente->nome);
   getchar();
-  while(!validacaoString(nome)){
+  while(!validacaoString(cliente->nome)){
     tratarValidacaoNome();
-    scanf("%[^\n]",nome);
+    scanf("%[^\n]",cliente->nome);
     getchar();
   }
 
   printf("                   Rua:   ");
-  scanf("%[^\n]",rua);
+  scanf("%[^\n]",cliente->rua);
   getchar();
-  while(!validacaoString(rua)){
+  while(!validacaoString(cliente->rua)){
     tratarValidacaoRua();
-    scanf("%[^\n]",rua);
+    scanf("%[^\n]",cliente->rua);
     getchar();
   }
 
   printf("                   Bairro:   ");
-  scanf("%[^\n]",bairro);
+  scanf("%[^\n]",cliente->bairro);
   getchar();
-  while(!validacaoString(bairro)){
+  while(!validacaoString(cliente->bairro)){
     tratarValidacaoBairro();
-    scanf("%[^\n]",bairro);
+    scanf("%[^\n]",cliente->bairro);
     getchar();
   }
 
   printf("                   Número:   ");
-  scanf("%[^\n]",numero);
+  scanf("%[^\n]",cliente->numero);
   getchar();
-  while(!verificarDigitos(numero)){
+  while(!verificarDigitos(cliente->numero)){
     tratarValidacaoNumero();
-    scanf("%[^\n]",numero);
+    scanf("%[^\n]",cliente->numero);
     getchar();
   }
 
   printf("                   Complemento:   ");
-  scanf("%[^\n]",complemento);
+  scanf("%[^\n]",cliente->complemento);
   getchar();
-  while(!validacaoString(complemento)){
+  while(!validacaoString(cliente->complemento)){
     tratarValidacaoComplemento();
-    scanf("%[^\n]",complemento);
+    scanf("%[^\n]",cliente->complemento);
     getchar();
   }
   printf("\n///                                                                         ///\n");
@@ -230,7 +238,6 @@ void CadastroCliente(void){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
 }
-
 
 void PesquisarCliente(void){
   char cnpj_cpf[14];
@@ -266,7 +273,6 @@ void PesquisarCliente(void){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
 }
-
 
 
 void ApagarCliente(void){
@@ -305,7 +311,6 @@ void ApagarCliente(void){
 }
 
 
-
 char AtualizarCliente(void){
   char opcao;
   system("clear");
@@ -342,10 +347,6 @@ char AtualizarCliente(void){
   getchar();
   return opcao;
 }
-
-
-
-
 
 void navegacaoMenuCliente(void){
 
