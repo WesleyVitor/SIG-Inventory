@@ -1,8 +1,8 @@
 char menuProduto(void);
-void telaCadastroProduto(void);
-void telaPesquisarProduto(void);
-void telaApagarProduto(void);
-char telaAtualizarProduto(void);
+void CadastroProduto(void);
+void PesquisarProduto(void);
+void ApagarProduto(void);
+char AtualizarProduto(void);
 void navegacaoMenuProduto(void);
 void tratarData(void);
 void tratarValidacaoCodigo(void);

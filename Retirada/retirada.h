@@ -7,3 +7,4 @@ void telaCodigoRetirada(void);
 char telaAtualizarRetirada(void);
 void tratarValidacaoCodigoRetirada(void);
 void tratarValidacaoProdutoRetirada(void);
+void tratarValidacaoCNPJCPF(void);

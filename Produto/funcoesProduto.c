@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "../Validacao/validacoes.h"
 #include <ctype.h>
+
+
 void tratarValidacaoCodigo(void){
   system("clear");
   printf("\n");
@@ -85,13 +87,12 @@ void tratarData(void){
   printf("                  Nova data (dd/mm/aaaa): ");
 }
 
-void telaCadastroProduto(void){
-  char codigo[15];
-  char nome[25];
-  char validade[11];
-  int quantidade;
-  double preco;
-  char descricao[50];
+void CadastroProduto(void){
+  char codigoProd[15];
+  char nomeProd[25];
+  int quantidadeProd;
+  double precoUnitarioProd;
+  char descricaoProd[100];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -104,43 +105,40 @@ void telaCadastroProduto(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("                  Código:   ");
-  scanf("%[^\n]",codigo);
+  printf("                  Código do Produto:   ");
+  scanf("%[^\n]",codigoProd);
   getchar();
-  while(!verificarDigitos(codigo)){
+  while(!verificarDigitos(codigoProd)){
     tratarValidacaoCodigo();
-    scanf("%[^\n]",codigo);
+    scanf("%[^\n]",codigoProd);
     getchar();
   }
 
-  printf("                  Nome:   ");
-  scanf("%[^\n]",nome);
+  printf("                  Nome do Produto:   ");
+  scanf("%[^\n]",nomeProd);
   getchar();
-  while(!validacaoString(nome)){
+  while(!validacaoString(nomeProd)){
     tratarValidacaoNomeProduto();
-    scanf("%[^\n]",nome);
+    scanf("%[^\n]",nomeProd);
     getchar();
   }
 
-  printf("                  Quantidade:   ");
-  scanf("%d",&quantidade);
+  printf("                  Quantidade do Produto:   ");
+  scanf("%d",&quantidadeProd);
+  getchar();
+  // Criar uma função de validação de inteiro
+  // while(!validacaoString(quantidadeProd+48)){
+  //   tratarValidacaoCodigo();
+  //   scanf("%d",&quantidadeProd);
+  //   getchar();
+  // }
+
+  printf("                  Preço da Unidade do Produto:   ");
+  scanf("%lf",&precoUnitarioProd);
   getchar();
 
-  printf("                  Validade:   ");
-  scanf("%s",validade);
-  getchar();
-  while (!validaData(validade)){
-    tratarData();
-    scanf("%s", validade);
-    getchar();
-  }
-
-  printf("                  Preço da Unidade:   ");
-  scanf("%lf",&preco);
-  getchar();
-
-  printf("                  Descrição:   ");
-  scanf("%[^\n]",descricao);
+  printf("                  Descrição do Produto:   ");
+  scanf("%[^\n]",descricaoProd);
   getchar();
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -151,8 +149,8 @@ void telaCadastroProduto(void){
   getchar();
 }
 
-void telaPesquisarProduto(void){
-  char codigo[15];
+void PesquisarProduto(void){
+  char codigoProd[15];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -170,11 +168,11 @@ void telaPesquisarProduto(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    Código:   ");
-  scanf("%[0-9]",codigo);
+  scanf("%[^\n]",codigoProd);
   getchar();
-  while(!verificarDigitos(codigo)){
+  while(!verificarDigitos(codigoProd)){
     tratarValidacaoCodigo();
-    scanf("%[^\n]",codigo);
+    scanf("%[^\n]",codigoProd);
     getchar();
   }
   printf("\n///                                                                         ///\n");
@@ -186,8 +184,8 @@ void telaPesquisarProduto(void){
   getchar();
 }
 
-void telaApagarProduto(void){
-  char codigo[15];
+void ApagarProduto(void){
+  char codigoProd[15];
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -205,11 +203,11 @@ void telaApagarProduto(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    Código:   ");
-  scanf("%[0-9]",codigo);
+  scanf("%[^\n]",codigoProd);
   getchar();
-  while(!verificarDigitos(codigo)){
+  while(!verificarDigitos(codigoProd)){
     tratarValidacaoCodigo();
-    scanf("%[^\n]",codigo);
+    scanf("%[^\n]",codigoProd);
     getchar();
   }
   printf("\n///                                                                         ///\n");
@@ -221,7 +219,45 @@ void telaApagarProduto(void){
   getchar();
 }
 
-char telaAtualizarProduto(void){
+// menu de Produto: informar código
+// de produto para editar
+void telaCodigoProduto(void){
+  char codigoProd[15];
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             =    Atualizar Produto no Sistema    =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o Código da produto a ser editada               ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("                  Código:   ");
+  scanf("%[^\n]", codigoProd);
+  getchar();
+  while(!verificarDigitos(codigoProd)){
+    tratarValidacaoCodigo();
+    scanf("%[^\n]", codigoProd);
+    getchar();
+  }
+  //Criar função para verificar se produto existe na base de dados
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+char AtualizarProduto(void){
   char opcao;
   system("clear");
   printf("\n");
@@ -240,13 +276,12 @@ char telaAtualizarProduto(void){
   printf("///                                                                         ///\n");
   printf("///                a. Atualizar Nome                                        ///\n");
   printf("///                b. Atualizar Quantidade                                  ///\n");
-  printf("///                c. Atualizar Validade                                    ///\n");
-  printf("///                d. Atualizar Preço da Unidade                            ///\n");
-  printf("///                e. Atualizar Descrição                                   ///\n");
+  printf("///                c. Atualizar Preço da Unidade                            ///\n");
+  printf("///                d. Atualizar Descrição                                   ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                  Entre com uma opção desejada de atualização:   ");
-  scanf("%[a-e]",&opcao);
+  scanf("%[a-d]",&opcao);
   getchar();
   printf("\n///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
@@ -258,25 +293,33 @@ char telaAtualizarProduto(void){
 }
 
 void navegacaoMenuProduto(void){
-  char opcao;
+  char opcao,tipoAtt;
   do{
     opcao = menuProduto();
     switch(opcao){
       case '1':
-        telaCadastroProduto();
+        CadastroProduto();
         telaConfirmacao();
         break;
       case '2':
-        telaPesquisarProduto();
+        PesquisarProduto();
         break;
       case '3':
-        telaApagarProduto();
+        ApagarProduto();
         telaConfirmacao();
         break;
       case '4':
-        telaAtualizarProduto();
+        telaCodigoProduto();
+        AtualizarProduto();
         //Cuidado com o tipo da variável
-        telaAddValor();
+        tipoAtt = AtualizarProduto();
+        if ((tipoAtt == 'a' || tipoAtt == 'A') || (tipoAtt == 'd' || tipoAtt == 'D')){
+          addValorString();
+        } else if (tipoAtt == 'b' || tipoAtt == 'B'){
+          addValorInt();
+        } else if (tipoAtt == 'c' || tipoAtt == 'C' ){
+          addValorFloat();
+        }
         telaConfirmacao();
         break;
     }

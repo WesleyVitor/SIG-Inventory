@@ -68,6 +68,43 @@ void tratarValidacaoCNPJCPF(void){
   
 }
 
+// menu de Cliente: informar código
+// de cliente para editar
+void telaCodigoCliente(void){
+  char cnpj_cpf[14];
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               =      Atualizar Cliente do Sistema   =                   ///\n");
+  printf("///               =                                     =                   ///\n");
+  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Entre com o CNPJ/CPF do Cliente a ser atualizado                ///\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("                    CNPJ/CPF:   ");
+  scanf("%s",cnpj_cpf);
+  getchar();
+  while(!validarCNPJ_CPF(cnpj_cpf)){
+    tratarValidacaoCNPJCPF();
+    scanf("%s",cnpj_cpf);
+    getchar();
+  }
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
 
 void tratarValidacaoNome(void){
   system("clear");
@@ -254,10 +291,10 @@ void PesquisarCliente(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///              Entre com o CPF do Cliente a ser pesquisado                ///\n");
+  printf("///              Entre com o CNPJ/CPF do Cliente a ser pesquisado                ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("                    CPF:   ");
+  printf("                    CNPJ/CPF:   ");
   scanf("%s",cnpj_cpf);
   getchar();
   while(!validarCNPJ_CPF(cnpj_cpf)){
@@ -290,10 +327,10 @@ void ApagarCliente(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///              Entre com o CPF do Cliente a ser apagado                   ///\n");
+  printf("///              Entre com o CNPJ/CPF do Cliente a ser apagado              ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("                    CPF:   ");
+  printf("                    CNPJ/CPF:   ");
   scanf("%s",cnpj_cpf);
   getchar();
   while(!validarCNPJ_CPF(cnpj_cpf)){
@@ -364,6 +401,7 @@ void navegacaoMenuCliente(void){
         ApagarCliente();
         break;
       case '4':
+        telaCodigoCliente();
         AtualizarCliente();
         break;
     }
