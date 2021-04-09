@@ -38,6 +38,23 @@ void tratarValidacaoNomeProduto(void){
   
 }
 
+void tratarValidacaoMarcaProduto(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Digite apenas letras          =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                   Adicione um marca válido: ");
+  
+}
+
 
 
 char menuProduto(void){
@@ -91,6 +108,7 @@ void CadastroProduto(void){
   char codigoProd[15];
   char nomeProd[25];
   int quantidadeProd;
+  char marcaProd[20];
   double precoUnitarioProd;
   char descricaoProd[100];
   system("clear");
@@ -120,6 +138,15 @@ void CadastroProduto(void){
   while(!validacaoString(nomeProd)){
     tratarValidacaoNomeProduto();
     scanf("%[^\n]",nomeProd);
+    getchar();
+  }
+
+  printf("                  Marca do Produto:   ");
+  scanf("%[^\n]",marcaProd);
+  getchar();
+  while(!validacaoString(marcaProd)){
+    tratarValidacaoMarcaProduto();
+    scanf("%[^\n]",marcaProd);
     getchar();
   }
 
