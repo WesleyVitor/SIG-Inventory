@@ -4,17 +4,7 @@
 #include "./funcoesCliente.h"
 #include <ctype.h>
 
-typedef struct cliente Cliente;
 
-struct cliente{
-  char cnpj_cpf[14];
-  char nome[51];
-  char rua[51];
-  char bairro[51];
-  char numero[7];
-  char complemento[20];
-
-};
 
 char menuCliente(void){
   char opcao;
@@ -196,8 +186,22 @@ void tratarValidacaoNumero(void){
   
 }
 
+//Função que irá cadastrar os clientes em arquivos binários.
+int gravarDadosCliente(Cliente* cliente){
+  FILE *arquivo;
+  arquivo = fopen("Dados/Clientes.dat","ab");
+  if(arquivo == NULL){
+    return 0;
+  }
+  fwrite(cliente, sizeof(Cliente),1, arquivo);
+  fclose(arquivo);
+  free(cliente);
+  return 1;
+}
+
 void CadastroCliente(void){
   Cliente *cliente;
+  int statusGravacaoArquivoCliente;
   cliente = (Cliente*) malloc(sizeof(Cliente));
   system("clear");
   printf("\n");
@@ -267,6 +271,12 @@ void CadastroCliente(void){
     scanf("%[^\n]",cliente->complemento);
     getchar();
   }
+  statusGravacaoArquivoCliente = gravarDadosCliente(cliente);
+  if(!statusGravacaoArquivoCliente){
+    printf("            **** Ocorreu Algum Erro ao Gravar no Arquivo ****                  \n");
+  }else{
+    printf("                 **** Dados Gravados Com sucesso ****                          \n");
+  }
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
@@ -274,6 +284,7 @@ void CadastroCliente(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  
 }
 
 void PesquisarCliente(void){
