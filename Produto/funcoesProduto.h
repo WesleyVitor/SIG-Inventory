@@ -5,5 +5,5 @@ void ApagarProduto(void);
 char AtualizarProduto(void);
 void navegacaoMenuProduto(void);
 void tratarData(void);
-void tratarValidacaoCodigo(void);
+void tratarValidacaoNumeros(void);
 void tratarValidacaoNome(void);

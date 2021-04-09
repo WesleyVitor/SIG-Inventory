@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 
-void tratarValidacaoCodigo(void){
+void tratarValidacaoNumeros(void){
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -17,9 +17,10 @@ void tratarValidacaoCodigo(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///                   Adicione um código válido: ");
+  printf("///                   Adicione um valor válido: ");
   
 }
+
 
 void tratarValidacaoNomeProduto(void){
   system("clear");
@@ -111,6 +112,10 @@ void CadastroProduto(void){
   char marcaProd[20];
   double precoUnitarioProd;
   char descricaoProd[100];
+
+  //Variáveis de validação
+  int statusScanfQuantidade;
+  int statusScanfPreco;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -127,7 +132,7 @@ void CadastroProduto(void){
   scanf("%[^\n]",codigoProd);
   getchar();
   while(!verificarDigitos(codigoProd)){
-    tratarValidacaoCodigo();
+    tratarValidacaoNumeros();
     scanf("%[^\n]",codigoProd);
     getchar();
   }
@@ -151,18 +156,23 @@ void CadastroProduto(void){
   }
 
   printf("                  Quantidade do Produto:   ");
-  scanf("%d",&quantidadeProd);
+  statusScanfQuantidade = scanf("%d",&quantidadeProd);
   getchar();
-  // Criar uma função de validação de inteiro
-  // while(!validacaoString(quantidadeProd+48)){
-  //   tratarValidacaoCodigo();
-  //   scanf("%d",&quantidadeProd);
-  //   getchar();
-  // }
+  //Criar uma função de validação de inteiro
+  while(statusScanfQuantidade==0){
+    tratarValidacaoNumeros();
+    statusScanfQuantidade = scanf("%d",&quantidadeProd);
+    getchar();
+  }
 
   printf("                  Preço da Unidade do Produto:   ");
-  scanf("%lf",&precoUnitarioProd);
+  statusScanfPreco = scanf("%lf",&precoUnitarioProd);
   getchar();
+  while(statusScanfPreco==0){
+    tratarValidacaoNumeros();
+    statusScanfPreco = scanf("%lf",&precoUnitarioProd);
+    getchar();
+  }
 
   printf("                  Descrição do Produto:   ");
   scanf("%[^\n]",descricaoProd);
@@ -198,7 +208,7 @@ void PesquisarProduto(void){
   scanf("%[^\n]",codigoProd);
   getchar();
   while(!verificarDigitos(codigoProd)){
-    tratarValidacaoCodigo();
+    tratarValidacaoNumeros();
     scanf("%[^\n]",codigoProd);
     getchar();
   }
@@ -233,7 +243,7 @@ void ApagarProduto(void){
   scanf("%[^\n]",codigoProd);
   getchar();
   while(!verificarDigitos(codigoProd)){
-    tratarValidacaoCodigo();
+    tratarValidacaoNumeros();
     scanf("%[^\n]",codigoProd);
     getchar();
   }
@@ -271,7 +281,7 @@ void telaCodigoProduto(void){
   scanf("%[^\n]", codigoProd);
   getchar();
   while(!verificarDigitos(codigoProd)){
-    tratarValidacaoCodigo();
+    tratarValidacaoNumeros();
     scanf("%[^\n]", codigoProd);
     getchar();
   }
