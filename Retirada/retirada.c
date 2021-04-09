@@ -189,6 +189,7 @@ void telaCadastroRetirada(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  free(retirada);
 }
 
 // menu de Retirada: submenu Pesquisar
