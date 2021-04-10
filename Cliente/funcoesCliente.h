@@ -7,6 +7,7 @@ struct cliente{
   char bairro[51];
   char numero[7];
   char complemento[20];
+  char status;
 
 };
 
@@ -24,3 +25,5 @@ void tratarValidacaoBairro(void);
 void tratarValidacaoComplemento(void);
 void tratarValidacaoNumero(void);
 int gravarDadosCliente(Cliente*);
+Cliente* lerDadosCliente(char *);
+void exibirCliente(Cliente *);
