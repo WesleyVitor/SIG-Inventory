@@ -221,7 +221,7 @@ Cliente* lerDadosCliente(char cnpj_cpf[]){
   return NULL;
 
 }
-//Cuidado cnpj_cpf e nome estão sendo jutados na variável cnpj_cpf quando é colocado o cnpj
+
 void CadastroCliente(void){
   Cliente *cliente;
   int statusGravacaoArquivoCliente;

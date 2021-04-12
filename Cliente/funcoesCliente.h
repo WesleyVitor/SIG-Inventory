@@ -1,7 +1,7 @@
 typedef struct cliente Cliente;
 
 struct cliente{
-  char cnpj_cpf[14];
+  char cnpj_cpf[21];
   char nome[51];
   char rua[51];
   char bairro[51];
