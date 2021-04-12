@@ -176,6 +176,19 @@ int verificarDigitos(char vetorCaracteres[]){
   }
   return 1;
 }
+//Função que verifica o tipo de código para o seu respectiva validação em relação ao tamanho
+int validarCNPJ_CPF(char *cpf_cnpj){
+  int tamanho = strlen(cpf_cnpj);
+  int status;
+  if(tamanho == 14){
+    status = validarCNPJ(cpf_cnpj);
+  }else if(tamanho ==11){
+    status = validarCPF(cpf_cnpj);
+  }else{
+    status = 0;
+  }
+  return status;
+}
 
 int validarCNPJ(char cnpj[]){
   int tamanhoCNPJ = strlen(cnpj);
@@ -489,4 +502,9 @@ int validacaoString(char *string){
     return 0;
   }
   return 1;
+}
+
+//Adaptado de @flaviusgorgonio
+void limparTela(void){
+  if(system("clear") || system("cls"));
 }

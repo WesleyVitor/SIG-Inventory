@@ -5,5 +5,6 @@ void telaPesquisarRetirada(void);
 void telaApagarRetirada(void);
 void telaCodigoRetirada(void);
 char telaAtualizarRetirada(void);
-void tratarValidacaoCodigoRetirada(void);
+void tratarValidacaoNumerosRetirada(void);
 void tratarValidacaoProdutoRetirada(void);
+void tratarValidacaoCNPJCPF(void);

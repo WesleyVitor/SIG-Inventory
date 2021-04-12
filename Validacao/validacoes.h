@@ -14,3 +14,5 @@ int validaData(char[11]);
 int bissexto(int);
 int ehLetra(char);
 int validacaoString(char *);
+int validarCNPJ_CPF(char *);
+void limparTela(void);

@@ -1,23 +1,31 @@
+typedef struct cliente Cliente;
+
+struct cliente{
+  char cnpj_cpf[21];
+  char nome[51];
+  char rua[51];
+  char bairro[51];
+  char numero[7];
+  char complemento[20];
+  char status;
+
+};
+
 char menuCliente(void);
-void telaCadastroClientePJ(void);
-void telaCadastroClientePF(void);
-char telaEscolhaTipoCliente(void);
-void telaPesquisarClientePF(void);
-void telaPesquisarClientePJ(void);
-void telaApagarClientePF(void);
-void telaApagarClientePJ(void);
-char telaAtualizarClientePF(void);
-char telaAtualizarClientePJ(void);
+Cliente* telaCadastroCliente(void);
+char* telaPesquisarCliente(void);
+void CadastrarCliente(void);
+void PesquisarCliente(void);
+void ApagarCliente(void);
+char AtualizarCliente(void);
 void navegacaoMenuCliente(void);
-void navegacaoCadastroCliente(void);
-void navegacaoPesquisaCliente(void);
-void navegacaoApagarCliente(void);
-void navegacaoAtualizarCliente(void);
-void tratarValidacaoCNPJ(void);
+void tratarValidacaoCNPJCPF(void);
 void tratarData(void);
 void tratarValidacaoNome(void);
-void tratarValidacaoRamo(void);
 void tratarValidacaoRua(void);
 void tratarValidacaoBairro(void);
 void tratarValidacaoComplemento(void);
 void tratarValidacaoNumero(void);
+int gravarDadosCliente(Cliente*);
+Cliente* buscarCliente(char *);
+void exibirCliente(Cliente *);
