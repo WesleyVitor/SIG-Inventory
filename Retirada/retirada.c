@@ -3,25 +3,27 @@
 #include "retirada.h"
 #include "../Validacao/validacoes.h"
 
-typedef struct retirada Retirada;
-
-struct retirada{
-  char codigoRet[15];
-  char codigoProd[25];
-  int quantidadeProd;
-  char cnpjCpfCliente[19];
-  float precoUnitario;
-};
 
 //funcao navegacaoMenuRetirada
 void navegacaoMenuRetirada(void){
   char opcao;
   char tipoAtt;
+  int status;
+  Retirada *retirada;
   do{
     opcao = menuRetirada();
     switch(opcao){
       case '1':
-        telaCadastroRetirada();
+        retirada = telaCadastroRetirada();
+
+        // gravar os dados em arq. binário
+        status = gravarDadosRetirada(retirada);
+        if (!status){
+          printf("\t\t\t>>> Erro ao salvar retirada. Tente novamente.");
+        }else{
+          printf("\t\t\t>>> Retirada salva com sucesso!");
+        }
+        free(retirada);
         break;
       case '2':
         telaPesquisarRetirada();
@@ -89,13 +91,14 @@ void tratarValidacaoProdutoRetirada(void){
   printf("///                                                                         ///\n");
   printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///              =                                     =                    ///\n");
-  printf("///              =       Digite apenas letras          =                    ///\n");
+  printf("///              =       Digite apenas o código        =                    ///\n");
+  printf("///              =            do produto               =                    ///\n");
   printf("///              =                                     =                    ///\n");
   printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///                   Adicione um Produto válido: ");
+  printf("///                   Adicione um Código de Produto válido: ");
   
 }
 
@@ -134,7 +137,7 @@ char menuRetirada(void){
 }
 
 // menu de Retirada: submenu Cadastrar
-void telaCadastroRetirada(void){
+Retirada* telaCadastroRetirada(void){
   Retirada *retirada;
   retirada = (Retirada*) malloc(sizeof(Retirada));
   system("clear");
@@ -189,7 +192,7 @@ void telaCadastroRetirada(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
-  free(retirada);
+  return retirada;
 }
 
 // menu de Retirada: submenu Pesquisar
@@ -337,4 +340,15 @@ char telaAtualizarRetirada(){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
   return opcao;
+}
+
+int gravarDadosRetirada(Retirada *retirada){
+  FILE *arq;
+  arq = fopen("retiradas.dat", "ab");
+  if (arq == NULL){
+    return 0;
+  }
+  fwrite(retirada, sizeof(Retirada), 1, arq);
+  fclose(arq);
+  return 1;
 }
