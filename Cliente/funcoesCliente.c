@@ -3,6 +3,7 @@
 #include "../Validacao/validacoes.h"
 #include "./funcoesCliente.h"
 #include <ctype.h>
+#include <string.h>
 
 
 
@@ -200,27 +201,27 @@ int gravarDadosCliente(Cliente* cliente){
 }
 //Adaptado de @flaviusgorgonio
 //link: https://replit.com/@flaviusgorgonio/AplicacaoComArquivoBinarioc#main.c
-// Cliente* lerDadosCliente(char cnpj_cpf[]){
-//   FILE *arquivo;
-//   Cliente *cliente;
-//   arquivo = fopen("Dados/Clientes.dat","rb");
-//   if(arquivo==NULL){
-//     return NULL;
-//   }
-//   cliente = (Cliente*) malloc(sizeof(Cliente));
-//   while(!feof(arquivo)){
-//     fread(cliente, sizeof(Cliente),1,arquivo);
-//     if((cliente->cnpj_cpf==cnpj_cpf) && (cliente->status=='1')){
-//       fclose(arquivo);
-//       return cliente;
-//     }
-//   }
-//   fclose(arquivo);
-//   free(cliente);
-//   return NULL;
+Cliente* lerDadosCliente(char cnpj_cpf[]){
+  FILE *arquivo;
+  Cliente *cliente;
+  arquivo = fopen("Dados/Clientes.dat","rb");
+  if(arquivo==NULL){
+    return NULL;
+  }
+  cliente = (Cliente*) malloc(sizeof(Cliente));
+  while(!feof(arquivo)){
+    fread(cliente, sizeof(Cliente),1,arquivo);
+    if((strcmp(cliente->cnpj_cpf,cnpj_cpf)==0) && (cliente->status=='1')){
+      fclose(arquivo);
+      return cliente;
+    }
+  }
+  fclose(arquivo);
+  free(cliente);
+  return NULL;
 
-// }
-
+}
+//Cuidado cnpj_cpf e nome estão sendo jutados na variável cnpj_cpf quando é colocado o cnpj
 void CadastroCliente(void){
   Cliente *cliente;
   int statusGravacaoArquivoCliente;
@@ -295,6 +296,7 @@ void CadastroCliente(void){
   }
   // Adicionar status como ativado(1)
   cliente->status= '1';
+  printf("CPF:%s",cliente->cnpj_cpf);
   statusGravacaoArquivoCliente = gravarDadosCliente(cliente);
   if(!statusGravacaoArquivoCliente){
     printf("            **** Ocorreu Algum Erro ao Gravar no Arquivo ****                  \n");
@@ -312,21 +314,20 @@ void CadastroCliente(void){
 }
 
 
-// void exibirCliente(Cliente *cliente){
-//   printf("****  CPF:%s",cliente->cnpj_cpf);
-//   printf("///                                                                         ///\n");
-//   printf("///                                                                         ///\n");
-//   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
-//   printf("///////////////////////////////////////////////////////////////////////////////\n");
-//   printf("\n");
-//   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-//   getchar();
-// }
+void exibirCliente(Cliente *cliente){
+  printf("****  CPF:%s\n",cliente->cnpj_cpf);
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
 
 void PesquisarCliente(void){
   char cnpj_cpf[14];
-  // Cliente *cliente;
-  // cliente = (Cliente*) malloc(sizeof(Cliente));
+  Cliente *cliente;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -351,7 +352,7 @@ void PesquisarCliente(void){
     scanf("%s",cnpj_cpf);
     getchar();
   }
-  //cliente = lerDadosCliente(cnpj_cpf);
+  cliente = lerDadosCliente(cnpj_cpf);
   
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -360,21 +361,21 @@ void PesquisarCliente(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
-  // if(cliente==NULL){
-  //   printf("            **** Ocorreu Algum Erro ao ler o   Arquivo ****                  \n");
-  //   printf("///                                                                         ///\n");
-  //   printf("///                                                                         ///\n");
-  //   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
-  //   printf("///////////////////////////////////////////////////////////////////////////////\n");
-  //   printf("\n");
-  //   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  //   getchar();
-  // }else{
-  //   printf("                 **** Dados lidos Com sucesso ****                           \n");
-  //   exibirCliente(cliente);
-  // }
+  if(cliente==NULL){
+    printf("            **** Ocorreu Algum Erro ao ler o   Arquivo ****                  \n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+  }else{
+    printf("                 **** Dados lidos Com sucesso ****                           \n");
+    exibirCliente(cliente);
+  }
   
-  // free(cliente);
+  free(cliente);
 }
 
 
