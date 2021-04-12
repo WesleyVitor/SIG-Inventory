@@ -12,7 +12,9 @@ struct cliente{
 };
 
 char menuCliente(void);
-void CadastroCliente(void);
+Cliente* telaCadastroCliente(void);
+char* telaPesquisarCliente(void);
+void CadastrarCliente(void);
 void PesquisarCliente(void);
 void ApagarCliente(void);
 char AtualizarCliente(void);
@@ -25,5 +27,5 @@ void tratarValidacaoBairro(void);
 void tratarValidacaoComplemento(void);
 void tratarValidacaoNumero(void);
 int gravarDadosCliente(Cliente*);
-Cliente* lerDadosCliente(char *);
+Cliente* buscarCliente(char *);
 void exibirCliente(Cliente *);

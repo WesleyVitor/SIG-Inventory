@@ -4,7 +4,7 @@
 #include "./funcoesCliente.h"
 #include <ctype.h>
 #include <string.h>
-
+#include "../TelasUteis/telas.h"
 
 
 char menuCliente(void){
@@ -199,9 +199,10 @@ int gravarDadosCliente(Cliente* cliente){
   free(cliente);
   return 1;
 }
+
 //Adaptado de @flaviusgorgonio
 //link: https://replit.com/@flaviusgorgonio/AplicacaoComArquivoBinarioc#main.c
-Cliente* lerDadosCliente(char cnpj_cpf[]){
+Cliente* buscarCliente(char *cnpj_cpf){
   FILE *arquivo;
   Cliente *cliente;
   arquivo = fopen("Dados/Clientes.dat","rb");
@@ -222,9 +223,8 @@ Cliente* lerDadosCliente(char cnpj_cpf[]){
 
 }
 
-void CadastroCliente(void){
+Cliente* telaCadastroCliente(void){
   Cliente *cliente;
-  int statusGravacaoArquivoCliente;
   cliente = (Cliente*) malloc(sizeof(Cliente));
   system("clear");
   printf("\n");
@@ -296,13 +296,6 @@ void CadastroCliente(void){
   }
   // Adicionar status como ativado(1)
   cliente->status= '1';
-  printf("CPF:%s",cliente->cnpj_cpf);
-  statusGravacaoArquivoCliente = gravarDadosCliente(cliente);
-  if(!statusGravacaoArquivoCliente){
-    printf("            **** Ocorreu Algum Erro ao Gravar no Arquivo ****                  \n");
-  }else{
-    printf("                 **** Dados Gravados Com sucesso ****                          \n");
-  }
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
@@ -310,8 +303,28 @@ void CadastroCliente(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return cliente;
   
 }
+
+void CadastrarCliente(void){
+  Cliente* cliente;
+  int ocorreuGravacao;
+  //Recebe um ponteiro com os dados de cliente.
+  cliente = telaCadastroCliente();
+
+  //Gravar dados do cliente em arquivo.
+  ocorreuGravacao = gravarDadosCliente(cliente);
+  if(!ocorreuGravacao){
+    telaErroGravacaoArquivo();
+  }else{
+    telaConfirmarGravacaoArquivo();
+  }
+
+  
+}
+
+
 
 
 void exibirCliente(Cliente *cliente){
@@ -325,9 +338,10 @@ void exibirCliente(Cliente *cliente){
   getchar();
 }
 
-void PesquisarCliente(void){
-  char cnpj_cpf[14];
-  Cliente *cliente;
+char* telaPesquisarCliente(void){
+  char *cnpj_cpf;
+  //Alocando memória de 18 bytes para armazenar o cpf/cnpj.
+  cnpj_cpf = (char*) malloc(18*sizeof(cnpj_cpf));
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -341,18 +355,17 @@ void PesquisarCliente(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///              Entre com o CNPJ/CPF do Cliente a ser pesquisado                ///\n");
+  printf("///              Entre com o CNPJ/CPF do Cliente a ser pesquisado           ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    CNPJ/CPF:   ");
-  scanf("%s",cnpj_cpf);
+  scanf("%[^\n]",cnpj_cpf);
   getchar();
   while(!validarCNPJ_CPF(cnpj_cpf)){
     tratarValidacaoCNPJCPF();
-    scanf("%s",cnpj_cpf);
+    scanf("%[^\n]",cnpj_cpf);
     getchar();
   }
-  cliente = lerDadosCliente(cnpj_cpf);
   
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -361,23 +374,33 @@ void PesquisarCliente(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
-  if(cliente==NULL){
-    printf("            **** Ocorreu Algum Erro ao ler o   Arquivo ****                  \n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-  }else{
-    printf("                 **** Dados lidos Com sucesso ****                           \n");
-    exibirCliente(cliente);
-  }
-  
-  free(cliente);
+  return cnpj_cpf;
+
 }
 
+void PesquisarCliente(void){
+  Cliente* cliente;
+  char* cnpj_cpf;
+  //Receber o cnpj ou cpf digitado pelo cliente à ser procurado.
+  cnpj_cpf = telaPesquisarCliente();
+
+  // Pegar o cliente que tem esse dado cadastrado.
+  cliente = buscarCliente(cnpj_cpf);
+  
+  if(cliente == NULL){
+    telaFalhaBuscaDadoArquivo();
+  }else{
+    telaConfirmarBuscaDadoArquivo();
+  }
+
+  //Exibir o cliente selecionado.
+  exibirCliente(cliente);
+  
+  //Desalocar memória.
+  free(cliente);
+  free(cnpj_cpf);
+
+}
 
 void ApagarCliente(void){
   char cnpj_cpf[14];
@@ -461,7 +484,7 @@ void navegacaoMenuCliente(void){
     opcao = menuCliente();
     switch(opcao){
       case '1':
-        CadastroCliente();
+        CadastrarCliente();
         break;
       case '2':
         PesquisarCliente();
