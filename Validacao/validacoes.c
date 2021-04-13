@@ -5,8 +5,9 @@
 #include "validacoes.h"
 #include <string.h>
 
-void telaAddValor(void){
-  char valor[50];
+char* telaAddValor(void){
+  char* valor;
+  
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -24,8 +25,7 @@ void telaAddValor(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                       Valor:   ");
-  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ0-9.,]", valor);
-  getchar();
+  valor = input();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -33,6 +33,7 @@ void telaAddValor(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return valor;
 }
 
 void addValorString(void){
@@ -507,4 +508,22 @@ int validacaoString(char *string){
 //Adaptado de @flaviusgorgonio
 void limparTela(void){
   if(system("clear") || system("cls"));
+}
+
+char* input(void){
+  char auxiliar[251];
+  char* valorAlocadoDinamicamente;
+  int tamanhoString;
+  scanf("%[^\n]",auxiliar);
+  getchar();
+  tamanhoString = strlen(auxiliar);
+  valorAlocadoDinamicamente = alocarMemoria(tamanhoString);
+  strcpy(valorAlocadoDinamicamente, auxiliar);
+  return valorAlocadoDinamicamente;
+}
+
+char* alocarMemoria(int tamanho){
+  char* valorAlocacao;
+  valorAlocacao = (char*) malloc(tamanho*sizeof(char)+1);
+  return valorAlocacao;
 }

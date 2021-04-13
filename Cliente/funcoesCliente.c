@@ -328,7 +328,7 @@ void CadastrarCliente(void){
 
 
 void exibirCliente(Cliente *cliente){
-  printf("****  CPF:%s\n",cliente->cnpj_cpf);
+  printf("****  CPF:%s\n",cliente->nome);
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -338,7 +338,7 @@ void exibirCliente(Cliente *cliente){
   getchar();
 }
 
-char* telaPesquisarCliente(void){
+char* telaProcurarCliente(void){
   char *cnpj_cpf;
   //Alocando memória de 18 bytes para armazenar o cpf/cnpj.
   cnpj_cpf = (char*) malloc(18*sizeof(cnpj_cpf));
@@ -348,7 +348,7 @@ char* telaPesquisarCliente(void){
   printf("///                                                                         ///\n");
   printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
   printf("///               =                                     =                   ///\n");
-  printf("///               =    Pesquisar Cliente no Sistema     =                   ///\n");
+  printf("///               =    Procurar Cliente no Sistema      =                   ///\n");
   printf("///               =                                     =                   ///\n");
   printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
   printf("///                                                                         ///\n");
@@ -382,7 +382,7 @@ void PesquisarCliente(void){
   Cliente* cliente;
   char* cnpj_cpf;
   //Receber o cnpj ou cpf digitado pelo cliente à ser procurado.
-  cnpj_cpf = telaPesquisarCliente();
+  cnpj_cpf = telaProcurarCliente();
 
   // Pegar o cliente que tem esse dado cadastrado.
   cliente = buscarCliente(cnpj_cpf);
@@ -391,10 +391,11 @@ void PesquisarCliente(void){
     telaFalhaBuscaDadoArquivo();
   }else{
     telaConfirmarBuscaDadoArquivo();
+    //Exibir o cliente selecionado.
+    exibirCliente(cliente);
   }
 
-  //Exibir o cliente selecionado.
-  exibirCliente(cliente);
+  
   
   //Desalocar memória.
   free(cliente);
@@ -439,8 +440,76 @@ void ApagarCliente(void){
   getchar();
 }
 
+int AtualizarCliente(void){
+  Cliente* cliente;
+  char* cnpj_cpf;
+  char opcaoAtualizar;
+  char* valorRecente;
+  FILE* arquivo;
+  int achouCliente = 0;
+  //Pegar o cnpj/cpf do cliente específico para atualizar
+  cnpj_cpf = telaProcurarCliente();
 
-char AtualizarCliente(void){
+  //Pegar o campo a ser atualizado.
+  opcaoAtualizar = telaMenuAtualizarCliente();
+  //Pegar o valor do campo.
+  valorRecente = telaAddValor();
+
+  //Procurar Cliente.
+  arquivo = fopen("Dados/Clientes.dat","r+b");
+  if(arquivo == NULL){
+    //Fazer tratamento
+    fclose(arquivo);
+    return 0;
+  }
+  cliente = (Cliente*) malloc(sizeof(Cliente));
+  while((!feof(arquivo) || achouCliente==0)){
+    fread(cliente, sizeof(Cliente),1,arquivo);
+    if((strcmp(cliente->cnpj_cpf, cnpj_cpf)==0) && (cliente->status=='1')){
+      achouCliente = 1;
+      switch(opcaoAtualizar){
+        case 'a':
+          strcpy(cliente->nome,valorRecente);
+        case 'b':
+          strcpy(cliente->rua,valorRecente);
+          
+        case 'c':
+          strcpy(cliente->bairro,valorRecente);
+        case 'd':
+          strcpy(cliente->numero,valorRecente);
+        case 'e':
+          strcpy(cliente->complemento,valorRecente);       
+      }
+      fseek(arquivo,-1*sizeof(Cliente),SEEK_CUR);
+      fwrite(cliente, sizeof(Cliente),1,arquivo);
+      
+    }
+  }
+
+
+  //Desalocar Memória
+  free(valorRecente);
+  free(cnpj_cpf);
+
+  //Fechar Arquivo
+  fclose(arquivo);
+
+  //------------------------------------//
+  //Problema de finalização desta função//
+  //------------------------------------//
+
+
+
+  if(achouCliente == 1){
+    telaConfirmarAtualizarDadosArquivo();
+    return 1;
+  }else{
+    telaErroAtualizarDadosArquivo();
+    return 0;
+  }
+}
+
+char telaMenuAtualizarCliente(void){
   char opcao;
   system("clear");
   printf("\n");
@@ -458,15 +527,14 @@ char AtualizarCliente(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///                a. Atualizar Nome                                        ///\n");
-  printf("///                b. Atualizar Data de Nascimento                          ///\n");
-  printf("///                c. Atualizar Rua                                         ///\n");
-  printf("///                d. Atualizar Bairro                                      ///\n");
-  printf("///                e. Atualizar Número                                      ///\n");
-  printf("///                f. Atualizar Complemento                                 ///\n");
+  printf("///                b. Atualizar Rua                                         ///\n");
+  printf("///                c. Atualizar Bairro                                      ///\n");
+  printf("///                d. Atualizar Número                                      ///\n");
+  printf("///                e. Atualizar Complemento                                 ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                  Entre com uma opção desejada:   ");
-  scanf("%[a-f]",&opcao);
+  scanf("%c",&opcao);
   getchar();
   printf("///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
@@ -493,7 +561,7 @@ void navegacaoMenuCliente(void){
         ApagarCliente();
         break;
       case '4':
-        telaCodigoCliente();
+        
         AtualizarCliente();
         break;
     }
