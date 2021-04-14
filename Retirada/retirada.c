@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "retirada.h"
 #include "../Validacao/validacoes.h"
+#include "../TelasUteis/telas.h"
 
 
 //funcao navegacaoMenuRetirada
@@ -19,9 +20,9 @@ void navegacaoMenuRetirada(void){
         // gravar os dados em arq. binário
         status = gravarDadosRetirada(retirada);
         if (!status){
-          printf("\t\t\t>>> Erro ao salvar retirada. Tente novamente.");
+          telaErroGravacaoArquivo();
         }else{
-          printf("\t\t\t>>> Retirada salva com sucesso!");
+          telaConfirmarGravacaoArquivo();
         }
         free(retirada);
         break;
