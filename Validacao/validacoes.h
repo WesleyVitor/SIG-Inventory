@@ -3,6 +3,7 @@ void addValorString(void);
 void addValorInt(void);
 void addValorFloat(void);
 void telaConfirmacao(void);
+int validarCodRetirada(char []);
 int validarCNPJ(char []);
 int testarPrimeiroDigitoCNPJSubmetido(char []);
 int testarSegundoDigitoCNPJSubmetido(char []);

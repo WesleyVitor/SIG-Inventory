@@ -176,6 +176,18 @@ int verificarDigitos(char vetorCaracteres[]){
   }
   return 1;
 }
+
+int validarCodRetirada(char retirada[]){
+  int tamanho = strlen(retirada);
+  if(tamanho!=6){
+    return 0;
+  }
+  if(!verificarDigitos(retirada)){
+    return 0;
+  }
+  return 1;
+}
+
 //Função que verifica o tipo de código para o seu respectiva validação em relação ao tamanho
 int validarCNPJ_CPF(char *cpf_cnpj){
   int tamanho = strlen(cpf_cnpj);
