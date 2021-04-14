@@ -180,16 +180,10 @@ Retirada* telaCadastroRetirada(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("                  Código da Retirada (6 dígitos):   ");
+  printf("                  Código da Retirada (9 dígitos):   ");
   scanf("%[^\n]", retirada->codigoRet);
   getchar();
-  //verifica se eh digito
-  while(!verificarDigitos(retirada->codigoRet)){
-    tratarValidacaoNumerosRetirada();
-    scanf("%[^\n]", retirada->codigoRet);
-    getchar();
-  }
-  //verifica se tem 6 digitos
+  //verifica se tem 9 digitos
   while (!validarCodRetirada(retirada->codigoRet)){
     tratarValidacaoCodRetirada();
     scanf("%[^\n]", retirada->codigoRet);
@@ -242,7 +236,7 @@ Retirada* telaCadastroRetirada(void){
 // menu de Retirada: submenu Pesquisar
 char* telaPesquisarRetirada(void){
   char *codigoRet;
-  codigoRet = (char*) malloc(6*sizeof(codigoRet));
+  codigoRet = (char*) malloc(10*sizeof(codigoRet));
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
