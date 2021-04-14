@@ -328,7 +328,7 @@ void CadastrarCliente(void){
 
 
 void exibirCliente(Cliente *cliente){
-  printf("****  CPF:%s\n",cliente->nome);
+  printf("****  Nome:%s\n",cliente->nome);
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -445,8 +445,7 @@ int AtualizarCliente(void){
   char* cnpj_cpf;
   char opcaoAtualizar;
   char* valorRecente;
-  FILE* arquivo;
-  int achouCliente = 0;
+  int atualizado = 0;
   //Pegar o cnpj/cpf do cliente específico para atualizar
   cnpj_cpf = telaProcurarCliente();
 
@@ -456,57 +455,73 @@ int AtualizarCliente(void){
   valorRecente = telaAddValor();
 
   //Procurar Cliente.
-  arquivo = fopen("Dados/Clientes.dat","r+b");
-  if(arquivo == NULL){
-    //Fazer tratamento
-    fclose(arquivo);
+  cliente = buscarCliente(cnpj_cpf);
+  if(cliente !=NULL){
+    atualizado = regravarDados(cliente, opcaoAtualizar, valorRecente);
+  }else{
+    free(valorRecente);
+    free(cnpj_cpf);
+    telaErroAtualizarDadosArquivo();
     return 0;
   }
-  cliente = (Cliente*) malloc(sizeof(Cliente));
-  while((!feof(arquivo) || achouCliente==0)){
-    fread(cliente, sizeof(Cliente),1,arquivo);
-    if((strcmp(cliente->cnpj_cpf, cnpj_cpf)==0) && (cliente->status=='1')){
-      achouCliente = 1;
-      switch(opcaoAtualizar){
-        case 'a':
-          strcpy(cliente->nome,valorRecente);
-        case 'b':
-          strcpy(cliente->rua,valorRecente);
-          
-        case 'c':
-          strcpy(cliente->bairro,valorRecente);
-        case 'd':
-          strcpy(cliente->numero,valorRecente);
-        case 'e':
-          strcpy(cliente->complemento,valorRecente);       
-      }
-      fseek(arquivo,-1*sizeof(Cliente),SEEK_CUR);
-      fwrite(cliente, sizeof(Cliente),1,arquivo);
-      
-    }
-  }
-
 
   //Desalocar Memória
   free(valorRecente);
   free(cnpj_cpf);
 
-  //Fechar Arquivo
-  fclose(arquivo);
-
-  //------------------------------------//
-  //Problema de finalização desta função//
-  //------------------------------------//
 
 
 
-  if(achouCliente == 1){
+  if(atualizado == 1){
     telaConfirmarAtualizarDadosArquivo();
     return 1;
   }else{
     telaErroAtualizarDadosArquivo();
     return 0;
   }
+}
+
+int regravarDados(Cliente* cliente, char opcaoAtualizar, char* valorRecente){
+  FILE* arquivo;
+  Cliente* clienteLido;
+  int achou=0;
+  arquivo = fopen("Dados/Clientes.dat","r+b");
+  if(arquivo == NULL){
+    //Fazer tratamento
+    fclose(arquivo);
+    return 0;
+  }
+  clienteLido = (Cliente*) malloc(sizeof(Cliente));
+  while(!feof(arquivo)){
+    fread(clienteLido, sizeof(Cliente),1,arquivo);
+    if((strcmp(cliente->cnpj_cpf, clienteLido->cnpj_cpf)==0) && (clienteLido->status=='1')){ 
+      achou =1;
+      switch(opcaoAtualizar){
+        case 'a':
+          strcpy(clienteLido->nome,valorRecente);
+        case 'b':
+          strcpy(clienteLido->rua,valorRecente);
+          
+        case 'c':
+          strcpy(clienteLido->bairro,valorRecente);
+        case 'd':
+          strcpy(clienteLido->numero,valorRecente);
+        case 'e':
+          strcpy(clienteLido->complemento,valorRecente);       
+      }
+      fseek(arquivo,-1*sizeof(Cliente),SEEK_CUR);
+      fwrite(clienteLido, sizeof(Cliente),1,arquivo);
+      break;
+    }
+  }
+  fclose(arquivo);
+  free(clienteLido);
+  if(!achou){
+    return 0;
+  }else{
+    return 1;
+  }
+
 }
 
 char telaMenuAtualizarCliente(void){

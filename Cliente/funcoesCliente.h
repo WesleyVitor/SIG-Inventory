@@ -30,3 +30,4 @@ int gravarDadosCliente(Cliente*);
 Cliente* buscarCliente(char *);
 void exibirCliente(Cliente *);
 int AtualizarCliente(void);
+int regravarDados(Cliente* , char, char*);
