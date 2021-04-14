@@ -1,6 +1,6 @@
 typedef struct retirada Retirada;
 struct retirada{
-  char codigoRet[6];
+  char codigoRet[10];
   char codigoProd[25];
   int quantidadeProd;
   char cnpjCpfCliente[19];
