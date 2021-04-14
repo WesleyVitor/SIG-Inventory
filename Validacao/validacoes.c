@@ -179,7 +179,7 @@ int verificarDigitos(char vetorCaracteres[]){
 
 int validarCodRetirada(char retirada[]){
   int tamanho = strlen(retirada);
-  if(tamanho!=6){
+  if(tamanho!=9){
     return 0;
   }
   if(!verificarDigitos(retirada)){
