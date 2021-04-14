@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 #include "retirada.h"
 #include "../Validacao/validacoes.h"
 #include "../TelasUteis/telas.h"
@@ -10,6 +12,7 @@ void navegacaoMenuRetirada(void){
   char opcao;
   char tipoAtt;
   int status;
+  char* codRetirada;
   Retirada *retirada;
   do{
     opcao = menuRetirada();
@@ -27,7 +30,10 @@ void navegacaoMenuRetirada(void){
         free(retirada);
         break;
       case '2':
-        telaPesquisarRetirada();
+        codRetirada = telaPesquisarRetirada();
+        retirada = pesquisarDadosRetirada(codRetirada);
+        printf("Preço Unitario: %lf", retirada->precoUnitario);
+        free(retirada);
         break;
       case '3':
         telaApagarRetirada();
@@ -103,6 +109,23 @@ void tratarValidacaoNumerosRetirada(void){
   
 }
 
+void tratarValidacaoCodRetirada(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =    Digite um código de 6 dígitos    =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///               Adicione um valor válido: ");
+}
+
+
 // menu de Retirada
 char menuRetirada(void){
   char opcao;
@@ -157,11 +180,18 @@ Retirada* telaCadastroRetirada(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("                  Código da Retirada:   ");
+  printf("                  Código da Retirada (6 dígitos):   ");
   scanf("%[^\n]", retirada->codigoRet);
   getchar();
+  //verifica se eh digito
   while(!verificarDigitos(retirada->codigoRet)){
     tratarValidacaoNumerosRetirada();
+    scanf("%[^\n]", retirada->codigoRet);
+    getchar();
+  }
+  //verifica se tem 6 digitos
+  while (!validarCodRetirada(retirada->codigoRet)){
+    tratarValidacaoCodRetirada();
     scanf("%[^\n]", retirada->codigoRet);
     getchar();
   }
@@ -198,7 +228,8 @@ Retirada* telaCadastroRetirada(void){
     getchar();
   }
   //Preço total da compra
-  retirada->precoUnitario = retirada->precoUnitario*retirada->quantidadeProd;
+  retirada->precoTotal = retirada->precoUnitario*retirada->quantidadeProd;
+  retirada->status= '1';
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -209,8 +240,9 @@ Retirada* telaCadastroRetirada(void){
 }
 
 // menu de Retirada: submenu Pesquisar
-void telaPesquisarRetirada(void){
-  char codigoRet[15];
+char* telaPesquisarRetirada(void){
+  char *codigoRet;
+  codigoRet = (char*) malloc(6*sizeof(codigoRet));
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -231,8 +263,8 @@ void telaPesquisarRetirada(void){
   printf("                  Código:   ");
   scanf("%[^\n]", codigoRet);
   getchar();
-  while(!verificarDigitos(codigoRet)){
-    tratarValidacaoNumerosRetirada();
+  while(!validarCodRetirada(codigoRet)){
+    tratarValidacaoCodRetirada();
     scanf("%[^\n]", codigoRet);
     getchar();
   }
@@ -242,6 +274,7 @@ void telaPesquisarRetirada(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return codigoRet;
 }
 
 // menu de Retirada: submenu Apagar
@@ -364,4 +397,23 @@ int gravarDadosRetirada(Retirada *retirada){
   fwrite(retirada, sizeof(Retirada), 1, arq);
   fclose(arq);
   return 1;
+}
+
+Retirada* pesquisarDadosRetirada(char *codigo_retirada){
+  FILE *arq;
+  Retirada *retirada;
+  arq = fopen("retiradas.dat","rb");
+  if(arq==NULL){
+    return NULL;
+  }
+  retirada = (Retirada*) malloc(sizeof(Retirada));
+  while(!feof(arq)){
+    fread(retirada, sizeof(Retirada),1,arq);
+    if((strcmp(retirada->codigoRet,codigo_retirada)==0) && (retirada->status=='1')){
+      fclose(arq);
+      return retirada;
+    }
+  }
+  fclose(arq);
+  return NULL;
 }
