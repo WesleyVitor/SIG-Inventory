@@ -67,23 +67,6 @@ void tratarValidacaoCNPJCPFRetirada(void){
 
 }
 
-void tratarValidacaoCodigoRetirada(void){
-  system("clear");
-  printf("\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
-  printf("///              =                                     =                    ///\n");
-  printf("///              =       Digite apenas números         =                    ///\n");
-  printf("///              =                                     =                    ///\n");
-  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
-  printf("///                                                                         ///\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("///                   Adicione um código válido: ");
-  
-}
-
 void tratarValidacaoProdutoRetirada(void){
   system("clear");
   printf("\n");
@@ -99,6 +82,23 @@ void tratarValidacaoProdutoRetirada(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///                   Adicione um Código de Produto válido: ");
+  
+}
+
+void tratarValidacaoNumerosRetirada(void){
+  system("clear");
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =       Digite apenas números         =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                   Adicione um valor válido: ");
   
 }
 
@@ -140,6 +140,10 @@ char menuRetirada(void){
 Retirada* telaCadastroRetirada(void){
   Retirada *retirada;
   retirada = (Retirada*) malloc(sizeof(Retirada));
+
+  //Variáveis de validação
+  int statusScanfQuantidade;
+  int statusScanfPreco;
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -156,11 +160,10 @@ Retirada* telaCadastroRetirada(void){
   scanf("%[^\n]", retirada->codigoRet);
   getchar();
   while(!verificarDigitos(retirada->codigoRet)){
-    tratarValidacaoCodigoRetirada();
+    tratarValidacaoNumerosRetirada();
     scanf("%[^\n]", retirada->codigoRet);
     getchar();
   }
-
   printf("                  Código do Produto:   ");
   scanf("%[^\n]", retirada->codigoProd);
   getchar();
@@ -169,10 +172,14 @@ Retirada* telaCadastroRetirada(void){
     scanf("%[^\n]", retirada->codigoProd);
     getchar();
   }
-
   printf("                  Quantidade do Produto:   ");
-  scanf("%d", &retirada->quantidadeProd);
+  statusScanfQuantidade = scanf("%d", &retirada->quantidadeProd);
   getchar();
+  while(statusScanfQuantidade==0){
+    tratarValidacaoNumerosRetirada();
+    statusScanfQuantidade = scanf("%d", &retirada->quantidadeProd);
+    getchar();
+  }
   printf("                  CPF/CNPJ do Cliente:   ");
   scanf("%[^\n]", retirada->cnpjCpfCliente);
   getchar();
@@ -182,8 +189,13 @@ Retirada* telaCadastroRetirada(void){
     getchar();
   }
   printf("                  Preço Unitário do Produto (R$):   ");
-  scanf("%f", &retirada->precoUnitario);
+  statusScanfPreco = scanf("%lf", &retirada->precoUnitario);
   getchar();
+  while(statusScanfPreco==0){
+    tratarValidacaoNumerosRetirada();
+    statusScanfPreco = scanf("%lf", &retirada->precoUnitario);
+    getchar();
+  }
   //Preço total da compra
   retirada->precoUnitario = retirada->precoUnitario*retirada->quantidadeProd;
   printf("///                                                                         ///\n");
@@ -219,7 +231,7 @@ void telaPesquisarRetirada(void){
   scanf("%[^\n]", codigoRet);
   getchar();
   while(!verificarDigitos(codigoRet)){
-    tratarValidacaoCodigoRetirada();
+    tratarValidacaoNumerosRetirada();
     scanf("%[^\n]", codigoRet);
     getchar();
   }
@@ -255,7 +267,7 @@ void telaApagarRetirada(void){
   scanf("%[^\n]", codigoRet);
   getchar();
   while(!verificarDigitos(codigoRet)){
-    tratarValidacaoCodigoRetirada();
+    tratarValidacaoNumerosRetirada();
     scanf("%[^\n]", codigoRet);
     getchar();
   }
@@ -292,7 +304,7 @@ void telaCodigoRetirada(void){
   scanf("%[^\n]", codigoRet);
   getchar();
   while(!verificarDigitos(codigoRet)){
-    tratarValidacaoCodigoRetirada();
+    tratarValidacaoNumerosRetirada();
     scanf("%[^\n]", codigoRet);
     getchar();
   }

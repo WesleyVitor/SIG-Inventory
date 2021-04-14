@@ -3,18 +3,9 @@
 #include "../Validacao/validacoes.h"
 #include "./funcoesCliente.h"
 #include <ctype.h>
+#include <string.h>
+#include "../TelasUteis/telas.h"
 
-typedef struct cliente Cliente;
-
-struct cliente{
-  char cnpj_cpf[14];
-  char nome[51];
-  char rua[51];
-  char bairro[51];
-  char numero[7];
-  char complemento[20];
-
-};
 
 char menuCliente(void){
   char opcao;
@@ -196,7 +187,43 @@ void tratarValidacaoNumero(void){
   
 }
 
-void CadastroCliente(void){
+//Função que irá cadastrar os clientes em arquivos binários.
+int gravarDadosCliente(Cliente* cliente){
+  FILE *arquivo;
+  arquivo = fopen("Dados/Clientes.dat","ab");
+  if(arquivo == NULL){
+    return 0;
+  }
+  fwrite(cliente, sizeof(Cliente),1, arquivo);
+  fclose(arquivo);
+  free(cliente);
+  return 1;
+}
+
+//Adaptado de @flaviusgorgonio
+//link: https://replit.com/@flaviusgorgonio/AplicacaoComArquivoBinarioc#main.c
+Cliente* buscarCliente(char *cnpj_cpf){
+  FILE *arquivo;
+  Cliente *cliente;
+  arquivo = fopen("Dados/Clientes.dat","rb");
+  if(arquivo==NULL){
+    return NULL;
+  }
+  cliente = (Cliente*) malloc(sizeof(Cliente));
+  while(!feof(arquivo)){
+    fread(cliente, sizeof(Cliente),1,arquivo);
+    if((strcmp(cliente->cnpj_cpf,cnpj_cpf)==0) && (cliente->status=='1')){
+      fclose(arquivo);
+      return cliente;
+    }
+  }
+  fclose(arquivo);
+  free(cliente);
+  return NULL;
+
+}
+
+Cliente* telaCadastroCliente(void){
   Cliente *cliente;
   cliente = (Cliente*) malloc(sizeof(Cliente));
   system("clear");
@@ -267,6 +294,8 @@ void CadastroCliente(void){
     scanf("%[^\n]",cliente->complemento);
     getchar();
   }
+  // Adicionar status como ativado(1)
+  cliente->status= '1';
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");
@@ -274,10 +303,45 @@ void CadastroCliente(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return cliente;
+  
 }
 
-void PesquisarCliente(void){
-  char cnpj_cpf[14];
+void CadastrarCliente(void){
+  Cliente* cliente;
+  int ocorreuGravacao;
+  //Recebe um ponteiro com os dados de cliente.
+  cliente = telaCadastroCliente();
+
+  //Gravar dados do cliente em arquivo.
+  ocorreuGravacao = gravarDadosCliente(cliente);
+  if(!ocorreuGravacao){
+    telaErroGravacaoArquivo();
+  }else{
+    telaConfirmarGravacaoArquivo();
+  }
+
+  
+}
+
+
+
+
+void exibirCliente(Cliente *cliente){
+  printf("****  CPF:%s\n",cliente->cnpj_cpf);
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+}
+
+char* telaPesquisarCliente(void){
+  char *cnpj_cpf;
+  //Alocando memória de 18 bytes para armazenar o cpf/cnpj.
+  cnpj_cpf = (char*) malloc(18*sizeof(cnpj_cpf));
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -291,17 +355,18 @@ void PesquisarCliente(void){
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///              Entre com o CNPJ/CPF do Cliente a ser pesquisado                ///\n");
+  printf("///              Entre com o CNPJ/CPF do Cliente a ser pesquisado           ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    CNPJ/CPF:   ");
-  scanf("%s",cnpj_cpf);
+  scanf("%[^\n]",cnpj_cpf);
   getchar();
   while(!validarCNPJ_CPF(cnpj_cpf)){
     tratarValidacaoCNPJCPF();
-    scanf("%s",cnpj_cpf);
+    scanf("%[^\n]",cnpj_cpf);
     getchar();
   }
+  
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -309,11 +374,37 @@ void PesquisarCliente(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return cnpj_cpf;
+
 }
 
+void PesquisarCliente(void){
+  Cliente* cliente;
+  char* cnpj_cpf;
+  //Receber o cnpj ou cpf digitado pelo cliente à ser procurado.
+  cnpj_cpf = telaPesquisarCliente();
+
+  // Pegar o cliente que tem esse dado cadastrado.
+  cliente = buscarCliente(cnpj_cpf);
+  
+  if(cliente == NULL){
+    telaFalhaBuscaDadoArquivo();
+  }else{
+    telaConfirmarBuscaDadoArquivo();
+  }
+
+  //Exibir o cliente selecionado.
+  exibirCliente(cliente);
+  
+  //Desalocar memória.
+  free(cliente);
+  free(cnpj_cpf);
+
+}
 
 void ApagarCliente(void){
   char cnpj_cpf[14];
+  
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -338,6 +429,7 @@ void ApagarCliente(void){
     scanf("%s",cnpj_cpf);
     getchar();
   }
+  
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -392,7 +484,7 @@ void navegacaoMenuCliente(void){
     opcao = menuCliente();
     switch(opcao){
       case '1':
-        CadastroCliente();
+        CadastrarCliente();
         break;
       case '2':
         PesquisarCliente();

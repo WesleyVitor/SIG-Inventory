@@ -4,7 +4,7 @@ struct retirada{
   char codigoProd[25];
   int quantidadeProd;
   char cnpjCpfCliente[19];
-  float precoUnitario;
+  double precoUnitario;
 };
 
 //struct e arquivos
@@ -20,6 +20,6 @@ void telaCodigoRetirada(void);
 char telaAtualizarRetirada(void);
 
 //tratamento
-void tratarValidacaoCodigoRetirada(void);
+void tratarValidacaoNumerosRetirada(void);
 void tratarValidacaoProdutoRetirada(void);
 void tratarValidacaoCNPJCPF(void);

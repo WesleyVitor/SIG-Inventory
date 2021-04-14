@@ -503,3 +503,8 @@ int validacaoString(char *string){
   }
   return 1;
 }
+
+//Adaptado de @flaviusgorgonio
+void limparTela(void){
+  if(system("clear") || system("cls"));
+}
