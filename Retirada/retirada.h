@@ -11,6 +11,7 @@ struct retirada{
 
 //struct e arquivos
 Retirada* telaCadastroRetirada(void);
+void verificaCadastroRetirada(Retirada *);
 int gravarDadosRetirada(Retirada*);
 Retirada* pesquisarDadosRetirada(char *);
 

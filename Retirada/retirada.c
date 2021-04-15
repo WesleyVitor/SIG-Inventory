@@ -11,7 +11,6 @@
 void navegacaoMenuRetirada(void){
   char opcao;
   char tipoAtt;
-  int status;
   char* codRetirada;
   Retirada *retirada;
   do{
@@ -19,14 +18,7 @@ void navegacaoMenuRetirada(void){
     switch(opcao){
       case '1':
         retirada = telaCadastroRetirada();
-
-        // gravar os dados em arq. binário
-        status = gravarDadosRetirada(retirada);
-        if (!status){
-          telaErroGravacaoArquivo();
-        }else{
-          telaConfirmarGravacaoArquivo();
-        }
+        verificaCadastroRetirada(retirada);
         free(retirada);
         break;
       case '2':
@@ -116,7 +108,7 @@ void tratarValidacaoCodRetirada(void){
   printf("///                                                                         ///\n");
   printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///              =                                     =                    ///\n");
-  printf("///              =    Digite um código de 6 dígitos    =                    ///\n");
+  printf("///              =    Digite um código de 9 dígitos    =                    ///\n");
   printf("///              =                                     =                    ///\n");
   printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///                                                                         ///\n");
@@ -158,6 +150,17 @@ char menuRetirada(void){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
   return opcao;
+}
+
+//chama a funcao gravarDadosRetirada()
+//retorna tela dependendo do status retornado
+void verificaCadastroRetirada(Retirada *retirada){
+  int status = gravarDadosRetirada(retirada);
+  if (!status){
+    telaErroGravacaoArquivo();
+  }else{
+    telaConfirmarGravacaoArquivo();
+  }
 }
 
 // menu de Retirada: submenu Cadastrar
