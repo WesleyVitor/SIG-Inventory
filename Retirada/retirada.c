@@ -447,5 +447,6 @@ Retirada* pesquisarDadosArqRetirada(char *codigo_retirada){
     }
   }
   fclose(arq);
+  free(retirada);
   return NULL;
 }
