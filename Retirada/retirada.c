@@ -11,8 +11,6 @@
 void navegacaoMenuRetirada(void){
   char opcao;
   char tipoAtt;
-  //
-  //Retirada *retirada;
   do{
     opcao = menuRetirada();
     switch(opcao){
@@ -21,10 +19,6 @@ void navegacaoMenuRetirada(void){
         break;
       case '2':
         telaPesquisarRetirada();
-        //codRetirada = telaPesquisarRetirada();
-        //retirada = pesquisarDadosArqRetirada(codRetirada);
-        //printf("Preço Unitario: %lf", retirada->precoUnitario);
-        //free(retirada);
         break;
       case '3':
         telaApagarRetirada();
@@ -49,7 +43,7 @@ void navegacaoMenuRetirada(void){
 }
 
 void tratarValidacaoCNPJCPFRetirada(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -66,7 +60,7 @@ void tratarValidacaoCNPJCPFRetirada(void){
 }
 
 void tratarValidacaoProdutoRetirada(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -84,7 +78,7 @@ void tratarValidacaoProdutoRetirada(void){
 }
 
 void tratarValidacaoNumerosRetirada(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -101,7 +95,7 @@ void tratarValidacaoNumerosRetirada(void){
 }
 
 void tratarValidacaoCodRetirada(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -120,7 +114,7 @@ void tratarValidacaoCodRetirada(void){
 // menu de Retirada
 char menuRetirada(void){
   char opcao;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -172,7 +166,7 @@ Retirada* telaCadastroRetirada(void){
   //Variáveis de validação
   int statusScanfQuantidade;
   int statusScanfPreco;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -242,7 +236,7 @@ void telaPesquisarRetirada(void){
   Retirada *retirada;
   char *codigoRet;
   codigoRet = (char*) malloc(10*sizeof(codigoRet));
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -278,7 +272,6 @@ void telaPesquisarRetirada(void){
   retirada = pesquisarDadosArqRetirada(codigoRet);
   if(retirada == NULL){
     telaFalhaBuscaDadoArquivo();
-    limparTela();
     printf("\t\t\t>>> Não existe nenhuma retirada com esse código!\n");
     getchar();
   }else{
@@ -296,18 +289,18 @@ void exibeDadosRetirada(Retirada *retirada){
     printf("///                                                                         ///\n");
     printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
     printf("///             =                                     =                     ///\n");
-    printf("                          Retirada nº%s                                        \n", retirada->codigoRet);
+    printf("                          Retirada nº %s                                        \n", retirada->codigoRet);
     printf("///             =                                     =                     ///\n");
     printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Código Produto:    %s\n", retirada->codigoProd);
-    printf("///              Quantidade:        %d\n", retirada->quantidadeProd);
-    printf("///              CPF/CNPJ:          %s\n", retirada->cnpjCpfCliente);
-    printf("///              Preço Unitário:    %.2lf\n", retirada->precoUnitario);
-    printf("///              Preço Total:       %.2lf\n", retirada->precoTotal);
+    printf("///              Código Produto:         %s\n", retirada->codigoProd);
+    printf("///              Quantidade:             %d\n", retirada->quantidadeProd);
+    printf("///              CPF/CNPJ:               %s\n", retirada->cnpjCpfCliente);
+    printf("///              Preço Unitário (R$):    %.2lf\n", retirada->precoUnitario);
+    printf("///              Preço Total (R$):       %.2lf\n", retirada->precoTotal);
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -319,7 +312,7 @@ void exibeDadosRetirada(Retirada *retirada){
 // menu de Retirada: submenu Apagar
 void telaApagarRetirada(void){
   char codigoRet[15];
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -356,7 +349,7 @@ void telaApagarRetirada(void){
 // de retirada para editar
 void telaCodigoRetirada(void){
   char codigoRet[15];
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -392,7 +385,7 @@ void telaCodigoRetirada(void){
 // menu de Retirada: submenu Editar -> Novos dados
 char telaAtualizarRetirada(){
   char opcao;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
