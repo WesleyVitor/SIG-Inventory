@@ -329,6 +329,7 @@ void CadastrarCliente(void){
 
 void exibirCliente(Cliente *cliente){
   printf("****  Nome:%s\n",cliente->nome);
+  printf("****  Status:%c\n",cliente->status);
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -341,7 +342,7 @@ void exibirCliente(Cliente *cliente){
 char* telaProcurarCliente(void){
   char *cnpj_cpf;
   //Alocando memória de 18 bytes para armazenar o cpf/cnpj.
-  cnpj_cpf = (char*) malloc(18*sizeof(cnpj_cpf));
+  cnpj_cpf = (char*) malloc(21*sizeof(cnpj_cpf));
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -403,9 +404,10 @@ void PesquisarCliente(void){
 
 }
 
-void ApagarCliente(void){
-  char cnpj_cpf[14];
-  
+char* telaApagarCliente(void){
+  char* cnpj_cpf;
+  //Alocando memória de 21 bytes para armazenar o cpf/cnpj.
+  cnpj_cpf = (char*) malloc(21*sizeof(cnpj_cpf));
   system("clear");
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -423,11 +425,11 @@ void ApagarCliente(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    CNPJ/CPF:   ");
-  scanf("%s",cnpj_cpf);
+  scanf("%[^\n]",cnpj_cpf);
   getchar();
   while(!validarCNPJ_CPF(cnpj_cpf)){
     tratarValidacaoCNPJCPF();
-    scanf("%s",cnpj_cpf);
+    scanf("%[^\n]",cnpj_cpf);
     getchar();
   }
   
@@ -438,7 +440,43 @@ void ApagarCliente(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return cnpj_cpf;
 }
+
+int ApagarCliente(void){
+  Cliente* cliente;
+  char* cnpj_cpf;
+  int apagado;
+  //Pegar o cnpj/cpf do cliente específico para atualizar
+  cnpj_cpf = telaProcurarCliente();
+
+  //Procurar Cliente.
+  cliente = buscarCliente(cnpj_cpf);
+
+  if(cliente !=NULL){
+
+    cliente->status = '0';
+    //Mandar Regravar os dados do cliente no arquivo.
+    apagado = regravarDados(cliente);
+  }else{
+    
+    free(cnpj_cpf);
+    telaErroAtualizarDadosArquivo();
+    return 0;
+  }
+
+  //Desalocar Memória
+  
+  free(cnpj_cpf);
+  if(apagado == 1){
+    telaConfirmarDeletarDadosArquivo();
+    return 1;
+  }else{
+    telaErroDeletarDadosArquivo();
+    return 0;
+  }
+}
+
 
 int AtualizarCliente(void){
   Cliente* cliente;
@@ -514,7 +552,6 @@ int regravarDados(Cliente* cliente){
   arquivo = fopen("Dados/Clientes.dat","r+b");
   if(arquivo == NULL){
     //Fazer tratamento
-    free(clienteLido);
     fclose(arquivo);
     return 0;
   }
