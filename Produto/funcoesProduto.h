@@ -10,11 +10,15 @@ struct produto{
 };
 
 char menuProduto(void);
+Produto* telaCadastroProduto(void);
 void CadastroProduto(void);
+char* telaPesquisarProduto(void);
 void PesquisarProduto(void);
-void ApagarProduto(void);
+int ApagarProduto(void);
 char AtualizarProduto(void);
 void navegacaoMenuProduto(void);
 void tratarData(void);
 void tratarValidacaoNumeros(void);
 void tratarValidacaoNome(void);
+void exibirProduto(Produto*);
+Produto* buscarProduto(char*);

@@ -321,7 +321,6 @@ void CadastrarCliente(void){
     telaConfirmarGravacaoArquivo();
   }
 
-  
 }
 
 
@@ -461,7 +460,7 @@ int ApagarCliente(void){
   }else{
     
     free(cnpj_cpf);
-    telaErroAtualizarDadosArquivo();
+    telaErroDeletarDadosArquivo();
     return 0;
   }
 

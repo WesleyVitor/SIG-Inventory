@@ -3,7 +3,8 @@
 #include "../Validacao/validacoes.h"
 #include <ctype.h>
 #include "./funcoesProduto.h"
-
+#include "../TelasUteis/telas.h"
+#include <string.h>
 void tratarValidacaoNumeros(void){
   limparTela();
   printf("\n");
@@ -105,7 +106,20 @@ void tratarData(void){
   printf("                  Nova data (dd/mm/aaaa): ");
 }
 
-void CadastroProduto(void){
+//Função que irá cadastrar os clientes em arquivos binários.
+int gravarDadosProduto(Produto* produto){
+  FILE *arquivo;
+  arquivo = fopen("Dados/Produto.dat","ab");
+  if(arquivo == NULL){
+    return 0;
+  }
+  fwrite(produto, sizeof(Produto),1, arquivo);
+  fclose(arquivo);
+  free(produto);
+  return 1;
+}
+
+Produto* telaCadastroProduto(void){
   Produto* produto;
   produto = (Produto*) malloc(sizeof(Produto));
   //Variáveis de validação
@@ -180,17 +194,34 @@ void CadastroProduto(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return produto;
 }
 
-void PesquisarProduto(void){
-  char codigoProd[15];
+void CadastroProduto(void){
+  Produto* produto;
+  int ocorreuGravacao;
+  //Recebe um ponteiro com os dados de cliente.
+  produto = telaCadastroProduto();
+
+  //Gravar dados do cliente em arquivo.
+  ocorreuGravacao = gravarDadosProduto(produto);
+  if(!ocorreuGravacao){
+    telaErroGravacaoArquivo();
+  }else{
+    telaConfirmarGravacaoArquivo();
+  }
+
+}
+
+char* telaPesquisarProduto(void){
+  char* codigoProd;
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
   printf("///               =                                     =                   ///\n");
-  printf("///               =     Pesquisar Produto no Sistema    =                   ///\n");
+  printf("///               =     Procurar Produto no Sistema     =                   ///\n");
   printf("///               =                                     =                   ///\n");
   printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
   printf("///                                                                         ///\n");
@@ -201,55 +232,156 @@ void PesquisarProduto(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                    Código:   ");
-  scanf("%[^\n]",codigoProd);
-  getchar();
+  codigoProd = input();
   while(!verificarDigitos(codigoProd)){
     tratarValidacaoNumeros();
-    scanf("%[^\n]",codigoProd);
-    getchar();
+    codigoProd = input();
   }
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  getchar();
+  return codigoProd;
+}
+
+void exibirProduto(Produto *produto){
+  limparTela();
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("                          Produto nº %s                                        \n", produto->codigoProd);
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///                                                                         ///\n");
+  printf("///              Nome do Produto:       %s\n", produto->nomeProd);
+  printf("///              Quantidade:            %d\n", produto->quantidadeProd);
+  printf("///              Marca:                 %s\n", produto->marcaProd);
+  printf("///              Preço Unitário (R$):   %.2lf\n", produto->precoUnitarioProd);
+  printf("///              Descrição:             %s\n", produto->descricaoProd);
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
 }
 
-void ApagarProduto(void){
-  char codigoProd[15];
-  limparTela();
-  printf("\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
-  printf("///               =                                     =                   ///\n");
-  printf("///               =      Apagar Produto do Sistema      =                   ///\n");
-  printf("///               =                                     =                   ///\n");
-  printf("///               = = = = = = = = = = = = = = = = = = = =                   ///\n");
-  printf("///                                                                         ///\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("///                                                                         ///\n");
-  printf("///              Entre com o Código do produto a ser apagado                ///\n");
-  printf("///                                                                         ///\n");
-  printf("///                                                                         ///\n");
-  printf("                    Código:   ");
-  scanf("%[^\n]",codigoProd);
-  getchar();
-  while(!verificarDigitos(codigoProd)){
-    tratarValidacaoNumeros();
-    scanf("%[^\n]",codigoProd);
-    getchar();
+Produto* buscarProduto(char *codigoProd){
+  FILE *arquivo;
+  Produto *produto;
+  arquivo = fopen("Dados/Produto.dat","rb");
+  if(arquivo==NULL){
+    return NULL;
   }
-  printf("\n///                                                                         ///\n");
-  printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
+  produto = (Produto*) malloc(sizeof(Produto));
+  while(!feof(arquivo)){
+    fread(produto, sizeof(Produto),1,arquivo);
+    if((strcmp(produto->codigoProd,codigoProd)==0) && (produto->status=='1')){
+      fclose(arquivo);
+      return produto;
+    }
+  }
+  fclose(arquivo);
+  free(produto);
+  return NULL;
+
+}
+
+void PesquisarProduto(void){
+  Produto* produto;
+  char* codigoProd;
+  //Receber o código do produto digitado pelo cliente à ser procurado.
+  codigoProd = telaPesquisarProduto();
+
+  // Pegar o cliente que tem esse dado cadastrado.
+  produto = buscarProduto(codigoProd);
+  
+  if(produto == NULL){
+    telaFalhaBuscaDadoArquivo();
+  }else{
+    telaConfirmarBuscaDadoArquivo();
+    //Exibir o produto selecionado.
+    exibirProduto(produto);
+  }
+
+  
+  
+  //Desalocar memória.
+  free(produto);
+  free(codigoProd);
+}
+
+int regravarDadosProduto(Produto* produto){
+  FILE* arquivo;
+  Produto* produtoLido;
+  int achou=0;
+  arquivo = fopen("Dados/Produto.dat","r+b");
+  if(arquivo == NULL){
+    //Fazer tratamento
+    fclose(arquivo);
+    return 0;
+  }
+  produtoLido = (Produto*) malloc(sizeof(Produto));
+  while(!feof(arquivo)){
+    fread(produtoLido, sizeof(Produto),1,arquivo);
+    if((strcmp(produto->codigoProd, produtoLido->codigoProd)==0) && (produtoLido->status=='1')){ 
+      achou =1;
+      produtoLido = produto;
+      fseek(arquivo,-1*sizeof(Produto),SEEK_CUR);
+      fwrite(produtoLido, sizeof(Produto),1,arquivo);
+      break;
+    }
+  }
+  fclose(arquivo);
+  free(produtoLido);
+  if(!achou){
+    return 0;
+  }else{
+    return 1;
+  }
+
+}
+
+int ApagarProduto(void){
+  Produto* produto;
+  char* codigoProd;
+  int apagado;
+  //Pegar o cnpj/cpf do cliente específico para atualizar
+  codigoProd = telaPesquisarProduto();
+
+  //Procurar Cliente.
+  produto = buscarProduto(codigoProd);
+
+  if(produto !=NULL){
+
+    produto->status = '0';
+    //Mandar Regravar os dados do cliente no arquivo.
+    apagado = regravarDadosProduto(produto);
+  }else{
+    
+    free(codigoProd);
+    telaErroDeletarDadosArquivo();
+    return 0;
+  }
+
+  //Desalocar Memória
+  
+  free(codigoProd);
+  if(apagado == 1){
+    telaConfirmarDeletarDadosArquivo();
+    return 1;
+  }else{
+    telaErroDeletarDadosArquivo();
+    return 0;
+  }
 }
 
 // menu de Produto: informar código
@@ -332,19 +464,16 @@ void navegacaoMenuProduto(void){
     switch(opcao){
       case '1':
         CadastroProduto();
-        telaConfirmacao();
         break;
       case '2':
         PesquisarProduto();
         break;
       case '3':
         ApagarProduto();
-        telaConfirmacao();
         break;
       case '4':
         telaCodigoProduto();
         AtualizarProduto();
-        //Cuidado com o tipo da variável
         tipoAtt = AtualizarProduto();
         if ((tipoAtt == 'a' || tipoAtt == 'A') || (tipoAtt == 'd' || tipoAtt == 'D')){
           addValorString();

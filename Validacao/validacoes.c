@@ -55,7 +55,7 @@ void addValorString(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                       Valor:   ");
-  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ0-9.-]", valor);
+  scanf("%[^\n]", valor);
   getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -68,6 +68,7 @@ void addValorString(void){
 
 void addValorInt(void){
   int valor;
+  int statusScanfInt;
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -85,7 +86,11 @@ void addValorInt(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                       Quantidade:   ");
-  scanf("%d", &valor);
+  statusScanfInt = scanf("%d", &valor);
+  while(statusScanfInt==0){
+    statusScanfInt = scanf("%d", &valor);
+    getchar();
+  }
   getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -98,6 +103,7 @@ void addValorInt(void){
 
 void addValorFloat(void){
   float valor;
+  float statusScanfFloat;
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -115,7 +121,11 @@ void addValorFloat(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                       Valor:   ");
-  scanf("%f", &valor);
+  statusScanfFloat = scanf("%f", &valor);
+  while(statusScanfFloat==0){
+    statusScanfFloat = scanf("%f", &valor);
+    getchar();
+  }
   getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
