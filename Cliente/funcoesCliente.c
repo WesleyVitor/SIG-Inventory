@@ -9,7 +9,7 @@
 
 char menuCliente(void){
   char opcao;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -42,7 +42,7 @@ char menuCliente(void){
 
 
 void tratarValidacaoCNPJCPF(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -63,7 +63,7 @@ void tratarValidacaoCNPJCPF(void){
 // de cliente para editar
 void telaCodigoCliente(void){
   char cnpj_cpf[14];
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -98,7 +98,7 @@ void telaCodigoCliente(void){
 
 
 void tratarValidacaoNome(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -117,7 +117,7 @@ void tratarValidacaoNome(void){
 
 
 void tratarValidacaoRua(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -134,7 +134,7 @@ void tratarValidacaoRua(void){
 }
 
 void tratarValidacaoBairro(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -152,7 +152,7 @@ void tratarValidacaoBairro(void){
 }
 
 void tratarValidacaoComplemento(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -170,7 +170,7 @@ void tratarValidacaoComplemento(void){
 }
 
 void tratarValidacaoNumero(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -226,7 +226,7 @@ Cliente* buscarCliente(char *cnpj_cpf){
 Cliente* telaCadastroCliente(void){
   Cliente *cliente;
   cliente = (Cliente*) malloc(sizeof(Cliente));
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -343,7 +343,7 @@ char* telaProcurarCliente(void){
   char *cnpj_cpf;
   //Alocando memória de 18 bytes para armazenar o cpf/cnpj.
   cnpj_cpf = (char*) malloc(21*sizeof(cnpj_cpf));
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -408,7 +408,7 @@ char* telaApagarCliente(void){
   char* cnpj_cpf;
   //Alocando memória de 21 bytes para armazenar o cpf/cnpj.
   cnpj_cpf = (char*) malloc(21*sizeof(cnpj_cpf));
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -578,7 +578,7 @@ int regravarDados(Cliente* cliente){
 
 char telaMenuAtualizarCliente(void){
   char opcao;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");

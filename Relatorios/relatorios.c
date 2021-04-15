@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "./relatorios.h"
 #include <stdlib.h>
+#include "../Validacao/validacoes.h"
+#include "./relatorios.h"
 void navegacaoMenuRelatorios(void){
   char opcao;
   do{
@@ -24,7 +25,7 @@ void navegacaoMenuRelatorios(void){
 
 char menuRelatorios(void){
   char opcao;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -56,7 +57,7 @@ char menuRelatorios(void){
 }
 
 void telaRelatoriosClientes(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -74,7 +75,7 @@ void telaRelatoriosClientes(void){
 }
 
 void telaRelatorioProdutos(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -97,7 +98,7 @@ void telaRelatorioRetiradasTrimestrais(void){
   int quantidade = 500;
   char cpf[] = "015.231.561-76";
   float preco = 499.99;
-  system("clear");
+  limparTela();
   for (int i = 0; i<10; i++){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -127,7 +128,7 @@ void telaRelatorioRetiradasTrimestrais(void){
 }
 
 void telaRelatorioFinanceiro(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
