@@ -333,7 +333,7 @@ void exibirCliente(Cliente *cliente){
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
   printf("///             =                                     =                     ///\n");
-  printf("                          Cliente nº %s                                        \n", cliente->cnpj_cpf);
+  printf("                          Cliente %s                                        \n", cliente->cnpj_cpf);
   printf("///             =                                     =                     ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
   printf("///                                                                         ///\n");
