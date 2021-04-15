@@ -327,11 +327,26 @@ void CadastrarCliente(void){
 
 
 void exibirCliente(Cliente *cliente){
-  printf("****  Nome:%s\n",cliente->nome);
-  printf("****  Status:%c\n",cliente->status);
+  limparTela();
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///             =                                     =                     ///\n");
+  printf("                          Cliente nº %s                                        \n", cliente->cnpj_cpf);
+  printf("///             =                                     =                     ///\n");
+  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
+  printf("///              Nome do cliente:       %s\n", cliente->nome);
+  printf("///              Rua:                   %s\n", cliente->rua);
+  printf("///              Bairo:                 %s\n", cliente->bairro);
+  printf("///              Número:                %s\n", cliente->numero);
+  printf("///              Complemento:           %s\n", cliente->complemento);
+  printf("///                                                                         ///\n");
+  printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
