@@ -9,16 +9,19 @@ struct retirada{
   char status;
 };
 
-//struct e arquivos
+//cadastro e gravacao em arquivo
 Retirada* telaCadastroRetirada(void);
-void verificaCadastroRetirada(Retirada *);
+void verificaCadastroRetirada(void);
 int gravarDadosRetirada(Retirada*);
-Retirada* pesquisarDadosRetirada(char *);
+
+//pesquisa e exibicao de resultado
+Retirada* pesquisarDadosArqRetirada(char *);
+void exibeDadosRetirada(Retirada*);
 
 //telas de navegacao
 void navegacaoMenuRetirada(void);
 char menuRetirada(void);
-char* telaPesquisarRetirada(void);
+void telaPesquisarRetirada(void);
 void telaApagarRetirada(void);
 void telaCodigoRetirada(void);
 char telaAtualizarRetirada(void);

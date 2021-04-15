@@ -11,21 +11,20 @@
 void navegacaoMenuRetirada(void){
   char opcao;
   char tipoAtt;
-  char* codRetirada;
-  Retirada *retirada;
+  //
+  //Retirada *retirada;
   do{
     opcao = menuRetirada();
     switch(opcao){
       case '1':
-        retirada = telaCadastroRetirada();
-        verificaCadastroRetirada(retirada);
-        free(retirada);
+        verificaCadastroRetirada();
         break;
       case '2':
-        codRetirada = telaPesquisarRetirada();
-        retirada = pesquisarDadosRetirada(codRetirada);
-        printf("Preço Unitario: %lf", retirada->precoUnitario);
-        free(retirada);
+        telaPesquisarRetirada();
+        //codRetirada = telaPesquisarRetirada();
+        //retirada = pesquisarDadosArqRetirada(codRetirada);
+        //printf("Preço Unitario: %lf", retirada->precoUnitario);
+        //free(retirada);
         break;
       case '3':
         telaApagarRetirada();
@@ -154,13 +153,15 @@ char menuRetirada(void){
 
 //chama a funcao gravarDadosRetirada()
 //retorna tela dependendo do status retornado
-void verificaCadastroRetirada(Retirada *retirada){
-  int status = gravarDadosRetirada(retirada);
-  if (!status){
+void verificaCadastroRetirada(void){
+  Retirada *retirada;
+  retirada = telaCadastroRetirada();
+  if (!gravarDadosRetirada(retirada)){
     telaErroGravacaoArquivo();
   }else{
     telaConfirmarGravacaoArquivo();
   }
+  free(retirada);
 }
 
 // menu de Retirada: submenu Cadastrar
@@ -237,7 +238,8 @@ Retirada* telaCadastroRetirada(void){
 }
 
 // menu de Retirada: submenu Pesquisar
-char* telaPesquisarRetirada(void){
+void telaPesquisarRetirada(void){
+  Retirada *retirada;
   char *codigoRet;
   codigoRet = (char*) malloc(10*sizeof(codigoRet));
   system("clear");
@@ -271,7 +273,47 @@ char* telaPesquisarRetirada(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
-  return codigoRet;
+
+
+  retirada = pesquisarDadosArqRetirada(codigoRet);
+  if(retirada == NULL){
+    telaFalhaBuscaDadoArquivo();
+    limparTela();
+    printf("\t\t\t>>> Não existe nenhuma retirada com esse código!\n");
+    getchar();
+  }else{
+    telaConfirmarBuscaDadoArquivo();
+    limparTela();
+    exibeDadosRetirada(retirada);
+  }
+  free(retirada);
+}
+
+void exibeDadosRetirada(Retirada *retirada){
+    limparTela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+    printf("///             =                                     =                     ///\n");
+    printf("                          Retirada nº%s                                        \n", retirada->codigoRet);
+    printf("///             =                                     =                     ///\n");
+    printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///              Código Produto:    %s\n", retirada->codigoProd);
+    printf("///              Quantidade:        %d\n", retirada->quantidadeProd);
+    printf("///              CPF/CNPJ:          %s\n", retirada->cnpjCpfCliente);
+    printf("///              Preço Unitário:    %.2lf\n", retirada->precoUnitario);
+    printf("///              Preço Total:       %.2lf\n", retirada->precoTotal);
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = =                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
 }
 
 // menu de Retirada: submenu Apagar
@@ -396,7 +438,7 @@ int gravarDadosRetirada(Retirada *retirada){
   return 1;
 }
 
-Retirada* pesquisarDadosRetirada(char *codigo_retirada){
+Retirada* pesquisarDadosArqRetirada(char *codigo_retirada){
   FILE *arq;
   Retirada *retirada;
   arq = fopen("retiradas.dat","rb");
