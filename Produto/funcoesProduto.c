@@ -5,7 +5,7 @@
 #include "./funcoesProduto.h"
 
 void tratarValidacaoNumeros(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -23,7 +23,7 @@ void tratarValidacaoNumeros(void){
 
 
 void tratarValidacaoNomeProduto(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -40,7 +40,7 @@ void tratarValidacaoNomeProduto(void){
 }
 
 void tratarValidacaoMarcaProduto(void){
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -60,7 +60,7 @@ void tratarValidacaoMarcaProduto(void){
 
 char menuProduto(void){
   char opcao;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -111,7 +111,7 @@ void CadastroProduto(void){
   //Variáveis de validação
   int statusScanfQuantidade;
   int statusScanfPreco;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -184,7 +184,7 @@ void CadastroProduto(void){
 
 void PesquisarProduto(void){
   char codigoProd[15];
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -219,7 +219,7 @@ void PesquisarProduto(void){
 
 void ApagarProduto(void){
   char codigoProd[15];
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -256,7 +256,7 @@ void ApagarProduto(void){
 // de produto para editar
 void telaCodigoProduto(void){
   char codigoProd[15];
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -292,7 +292,7 @@ void telaCodigoProduto(void){
 
 char AtualizarProduto(void){
   char opcao;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
