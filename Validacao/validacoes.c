@@ -7,7 +7,7 @@
 
 void telaAddValor(void){
   char valor[50];
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -37,7 +37,7 @@ void telaAddValor(void){
 
 void addValorString(void){
   char valor[50];
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -67,7 +67,7 @@ void addValorString(void){
 
 void addValorInt(void){
   int valor;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -97,7 +97,7 @@ void addValorInt(void){
 
 void addValorFloat(void){
   float valor;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -127,7 +127,7 @@ void addValorFloat(void){
 
 void telaConfirmacao(void){
   char opcao;
-  system("clear");
+  limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
@@ -176,6 +176,18 @@ int verificarDigitos(char vetorCaracteres[]){
   }
   return 1;
 }
+
+int validarCodRetirada(char retirada[]){
+  int tamanho = strlen(retirada);
+  if(tamanho!=9){
+    return 0;
+  }
+  if(!verificarDigitos(retirada)){
+    return 0;
+  }
+  return 1;
+}
+
 //Função que verifica o tipo de código para o seu respectiva validação em relação ao tamanho
 int validarCNPJ_CPF(char *cpf_cnpj){
   int tamanho = strlen(cpf_cnpj);
@@ -506,5 +518,5 @@ int validacaoString(char *string){
 
 //Adaptado de @flaviusgorgonio
 void limparTela(void){
-  if(system("clear") || system("cls"));
+  system("clear || cls");
 }
