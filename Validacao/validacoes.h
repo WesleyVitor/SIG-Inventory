@@ -1,7 +1,6 @@
 char* telaAddValor(void);
-void addValorString(void);
-void addValorInt(void);
-void addValorFloat(void);
+int addValorInt(void);
+float addValorFloat(void);
 void telaConfirmacao(void);
 int validarCodRetirada(char []);
 int validarCNPJ(char []);

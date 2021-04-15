@@ -422,7 +422,7 @@ void telaCodigoProduto(void){
   getchar();
 }
 
-char AtualizarProduto(void){
+char telaMenuAtualizarProduto(void){
   char opcao;
   limparTela();
   printf("\n");
@@ -457,8 +457,68 @@ char AtualizarProduto(void){
   return opcao;
 }
 
+int AtualizarProduto(void){
+  Produto* produto;
+  char* codigoProd;
+  char opcaoAtualizar;
+  //Opções de atualização
+  char* nomeProd;
+  char* descricaoProd;
+  int quantidadeProd;
+  float precoProd;
+
+  int atualizado = 0;
+  //Pegar o cnpj/cpf do cliente específico para atualizar
+  codigoProd = telaPesquisarProduto();
+
+  
+
+  //Procurar Cliente.
+  produto = buscarProduto(codigoProd);
+
+  if(produto !=NULL){
+    //Pegar o campo a ser atualizado.
+    opcaoAtualizar = telaMenuAtualizarProduto();
+    //Pegar o valor do campo.
+    if ((opcaoAtualizar == 'a' || opcaoAtualizar == 'A')){
+      nomeProd =telaAddValor();
+      strcpy(produto->nomeProd,nomeProd);
+    } else if (opcaoAtualizar == 'b' || opcaoAtualizar == 'B'){
+      quantidadeProd =addValorInt();
+      produto->quantidadeProd = quantidadeProd;
+    } else if (opcaoAtualizar == 'c' || opcaoAtualizar == 'C' ){
+      precoProd =addValorFloat();
+      produto->precoUnitarioProd = precoProd;
+    } else if((opcaoAtualizar == 'd' || opcaoAtualizar == 'D')){
+      descricaoProd =telaAddValor();
+      strcpy(produto->descricaoProd,descricaoProd);
+    }
+    
+    //Mandar Regravar os dados do cliente no arquivo.
+    atualizado = regravarDadosProduto(produto);
+  }else{
+    free(codigoProd);
+    telaErroAtualizarDadosArquivo();
+    return 0;
+  }
+
+  //Desalocar Memória
+  free(codigoProd);
+
+
+
+
+  if(atualizado == 1){
+    telaConfirmarAtualizarDadosArquivo();
+    return 1;
+  }else{
+    telaErroAtualizarDadosArquivo();
+    return 0;
+  }
+}
+
 void navegacaoMenuProduto(void){
-  char opcao,tipoAtt;
+  char opcao;
   do{
     opcao = menuProduto();
     switch(opcao){
@@ -472,17 +532,8 @@ void navegacaoMenuProduto(void){
         ApagarProduto();
         break;
       case '4':
-        telaCodigoProduto();
         AtualizarProduto();
-        tipoAtt = AtualizarProduto();
-        if ((tipoAtt == 'a' || tipoAtt == 'A') || (tipoAtt == 'd' || tipoAtt == 'D')){
-          addValorString();
-        } else if (tipoAtt == 'b' || tipoAtt == 'B'){
-          addValorInt();
-        } else if (tipoAtt == 'c' || tipoAtt == 'C' ){
-          addValorFloat();
-        }
-        telaConfirmacao();
+        
         break;
     }
   }while(opcao!='0');

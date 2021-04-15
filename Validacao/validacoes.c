@@ -36,8 +36,9 @@ char* telaAddValor(void){
   return valor;
 }
 
-void addValorString(void){
-  char valor[50];
+char* addValorString(void){
+  char* valor;
+  valor = (char*) malloc(50*sizeof(char));
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -64,9 +65,10 @@ void addValorString(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return valor;
 }
 
-void addValorInt(void){
+int addValorInt(void){
   int valor;
   int statusScanfInt;
   limparTela();
@@ -99,9 +101,10 @@ void addValorInt(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return valor;
 }
 
-void addValorFloat(void){
+float addValorFloat(void){
   float valor;
   float statusScanfFloat;
   limparTela();
@@ -134,6 +137,7 @@ void addValorFloat(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return valor;
 }
 
 void telaConfirmacao(void){
