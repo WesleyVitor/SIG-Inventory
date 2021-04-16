@@ -533,7 +533,7 @@ int validacaoString(char *string){
 
 //Adaptado de @flaviusgorgonio
 void limparTela(void){
-  if(system("clear") || system("cls"));
+  system("clear || cls");
 }
 
 char* input(void){
@@ -552,5 +552,4 @@ char* alocarMemoria(int tamanho){
   char* valorAlocacao;
   valorAlocacao = (char*) malloc(tamanho*sizeof(char)+1);
   return valorAlocacao;
-  system("clear || cls");
 }
