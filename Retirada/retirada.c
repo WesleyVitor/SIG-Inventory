@@ -22,7 +22,6 @@ void navegacaoMenuRetirada(void){
         break;
       case '3':
         apagarRetirada();
-        //telaConfirmacao();
         break;
       case '4':
         telaCodigoRetirada();
@@ -187,7 +186,7 @@ Retirada* telaCadastroRetirada(void){
     scanf("%[^\n]", retirada->codigoRet);
     getchar();
   }
-  printf("                  Código do Produto:   ");
+  printf("                  Código do Produto:                ");
   scanf("%[^\n]", retirada->codigoProd);
   getchar();
   while(!verificarDigitos(retirada->codigoProd)){
@@ -195,7 +194,7 @@ Retirada* telaCadastroRetirada(void){
     scanf("%[^\n]", retirada->codigoProd);
     getchar();
   }
-  printf("                  Quantidade do Produto:   ");
+  printf("                  Quantidade do Produto:            ");
   statusScanfQuantidade = scanf("%d", &retirada->quantidadeProd);
   getchar();
   while(statusScanfQuantidade==0){
@@ -203,7 +202,7 @@ Retirada* telaCadastroRetirada(void){
     statusScanfQuantidade = scanf("%d", &retirada->quantidadeProd);
     getchar();
   }
-  printf("                  CPF/CNPJ do Cliente:   ");
+  printf("                  CPF/CNPJ do Cliente:              ");
   scanf("%[^\n]", retirada->cnpjCpfCliente);
   getchar();
   while(!validarCNPJ_CPF(retirada->cnpjCpfCliente)){
@@ -357,24 +356,32 @@ char* telaApagarRetirada(void){
 void apagarRetirada(void){
   Retirada *retirada;
   char* codigoRet;
+  int apagou = 0;
   int confirma = 0;
 
   codigoRet = telaApagarRetirada();
+  //tela de confirmaçao
+  confirma = telaConfirmacao();
+  if(confirma == 1){
+    //pesquisa a retirada no arquivo
+    retirada = pesquisarDadosRetirada(codigoRet);
+    if (retirada == NULL){
+      telaErroDeletarDadosArquivo();
+    }else{
+      retirada->status='0';
+      apagou = regravarDadosRetirada(retirada);
+      if(apagou){
+        telaConfirmarDeletarDadosArquivo();
+      }else{
+        telaErroDeletarDadosArquivo();
+      }
+    }
 
-  //pesquisa a retirada no arquivo
-  retirada = pesquisarDadosRetirada(codigoRet);
-  if (retirada == NULL){
-    telaErroDeletarDadosArquivo();
-  }else{
-    retirada->status='0';
-    confirma = regravarDadosRetirada(retirada);
+    free(codigoRet);
+
+
   }
 
-  free(codigoRet);
-
-  if(confirma){
-    telaConfirmarDeletarDadosArquivo();
-  }
 }
 
 // menu de Retirada: informar código

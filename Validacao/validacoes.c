@@ -140,8 +140,8 @@ float addValorFloat(void){
   return valor;
 }
 
-void telaConfirmacao(void){
-  char opcao;
+int telaConfirmacao(void){
+  int opcao;
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -162,7 +162,7 @@ void telaConfirmacao(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                   Entre com uma opção desejada:   ");
-  scanf("%[1-2]",&opcao);
+  scanf("%d",&opcao);
   getchar();
   printf("\n///                                                                         ///\n");
   printf("///            = = = = = = = = = = = = = = = = = = = = = = =                ///\n");
@@ -170,6 +170,7 @@ void telaConfirmacao(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return opcao;
 }
 
 int ehDigito(char caracter){
