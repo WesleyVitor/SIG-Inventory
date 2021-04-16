@@ -13,17 +13,21 @@ struct retirada{
 Retirada* telaCadastroRetirada(void);
 void verificaCadastroRetirada(void);
 int gravarDadosRetirada(Retirada*);
+int regravarDadosRetirada(Retirada*);
 
 //pesquisa e exibicao de resultado
 Retirada* pesquisarDadosRetirada(char *);
-void pesquisarRetirada (void);
+void pesquisarRetirada(void);
 void exibeDadosRetirada(Retirada*);
+
+//apagar retirada
+void apagarRetirada(void);
 
 //telas de navegacao
 void navegacaoMenuRetirada(void);
 char menuRetirada(void);
 char* telaPesquisarRetirada(void);
-void telaApagarRetirada(void);
+char* telaApagarRetirada(void);
 void telaCodigoRetirada(void);
 char telaAtualizarRetirada(void);
 

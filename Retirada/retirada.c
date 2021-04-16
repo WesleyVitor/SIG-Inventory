@@ -21,8 +21,8 @@ void navegacaoMenuRetirada(void){
         pesquisarRetirada();
         break;
       case '3':
-        telaApagarRetirada();
-        telaConfirmacao();
+        apagarRetirada();
+        //telaConfirmacao();
         break;
       case '4':
         telaCodigoRetirada();
@@ -275,6 +275,7 @@ void pesquisarRetirada(void){
   char* codigoRet;
 
   codigoRet = telaPesquisarRetirada();
+  //pesquisa a retirada no arquivo
   retirada = pesquisarDadosRetirada(codigoRet);
   
   if(retirada == NULL){
@@ -316,8 +317,9 @@ void exibeDadosRetirada(Retirada *retirada){
 }
 
 // menu de Retirada: submenu Apagar
-void telaApagarRetirada(void){
-  char codigoRet[15];
+char* telaApagarRetirada(void){
+  char *codigoRet;
+  codigoRet = (char*) malloc(10*sizeof(codigoRet));
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -338,8 +340,8 @@ void telaApagarRetirada(void){
   printf("                  Código:   ");
   scanf("%[^\n]", codigoRet);
   getchar();
-  while(!verificarDigitos(codigoRet)){
-    tratarValidacaoNumerosRetirada();
+  while(!validarCodRetirada(codigoRet)){
+    tratarValidacaoCodRetirada();
     scanf("%[^\n]", codigoRet);
     getchar();
   }
@@ -349,6 +351,30 @@ void telaApagarRetirada(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return codigoRet;
+}
+
+void apagarRetirada(void){
+  Retirada *retirada;
+  char* codigoRet;
+  int confirma = 0;
+
+  codigoRet = telaApagarRetirada();
+
+  //pesquisa a retirada no arquivo
+  retirada = pesquisarDadosRetirada(codigoRet);
+  if (retirada == NULL){
+    telaErroDeletarDadosArquivo();
+  }else{
+    retirada->status='0';
+    confirma = regravarDadosRetirada(retirada);
+  }
+
+  free(codigoRet);
+
+  if(confirma){
+    telaConfirmarDeletarDadosArquivo();
+  }
 }
 
 // menu de Retirada: informar código
@@ -453,6 +479,36 @@ Retirada* pesquisarDadosRetirada(char *codigo_retirada){
     }
   }
   fclose(arq);
-  free(retirada);
   return NULL;
+}
+
+int regravarDadosRetirada(Retirada* retirada){
+  FILE* arq;
+  Retirada* retiradaLida;
+  int achou=0;
+  arq = fopen("retiradas.dat","r+b");
+  if(arq == NULL){
+    fclose(arq);
+    return 0;
+  }
+  retiradaLida = (Retirada*) malloc(sizeof(Retirada));
+  while(!feof(arq)){
+    fread(retiradaLida, sizeof(Retirada),1,arq);
+    if((strcmp(retirada->codigoRet, retiradaLida->codigoRet)==0) && (retiradaLida->status=='1')){ 
+      achou = 1;
+      //retirada lida recebe a retirada
+      //com status 0 (apagada)
+      retiradaLida = retirada;
+      fseek(arq,-1*sizeof(Retirada),SEEK_CUR);
+      fwrite(retiradaLida, sizeof(Retirada),1,arq);
+      break;
+    }
+  }
+  fclose(arq);
+  free(retiradaLida);
+  if(!achou){
+    return 0;
+  }else{
+    return 1;
+  }
 }
