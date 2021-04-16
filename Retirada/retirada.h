@@ -23,13 +23,16 @@ void exibeDadosRetirada(Retirada*);
 //apagar retirada
 void apagarRetirada(void);
 
+//editar retirada
+void editarRetirada(void);
+char tipoAttRetirada(void);
+
 //telas de navegacao
 void navegacaoMenuRetirada(void);
 char menuRetirada(void);
 char* telaPesquisarRetirada(void);
 char* telaApagarRetirada(void);
-void telaCodigoRetirada(void);
-char telaAtualizarRetirada(void);
+char* telaCodigoRetirada(void);
 
 //tratamento
 void tratarValidacaoNumerosRetirada(void);

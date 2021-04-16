@@ -25,7 +25,7 @@ void navegacaoMenuRetirada(void){
         break;
       case '4':
         telaCodigoRetirada();
-        tipoAtt = telaAtualizarRetirada();
+        tipoAtt = tipoAttRetirada();
         if (tipoAtt == 'b' || tipoAtt == 'B'){
           addValorInt();
         } else if (tipoAtt == 'd' || tipoAtt == 'D'){
@@ -376,18 +376,15 @@ void apagarRetirada(void){
         telaErroDeletarDadosArquivo();
       }
     }
-
-    free(codigoRet);
-
-
   }
-
+  free(codigoRet);
 }
 
 // menu de Retirada: informar código
 // de retirada para editar
-void telaCodigoRetirada(void){
-  char codigoRet[15];
+char* telaCodigoRetirada(void){
+  char *codigoRet;
+  codigoRet = (char*) malloc(10*sizeof(codigoRet));
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -402,14 +399,15 @@ void telaCodigoRetirada(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///              Entre com o Código da Retirada a ser editada               ///\n");
-  printf("///                                                                         ///\n");
+  printf("///                             (9 dígitos)                                 ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                  Código:   ");
   scanf("%[^\n]", codigoRet);
   getchar();
-  while(!verificarDigitos(codigoRet)){
-    tratarValidacaoNumerosRetirada();
+  //verifica se tem 9 digitos
+  while(!validarCodRetirada(codigoRet)){
+    tratarValidacaoCodRetirada();
     scanf("%[^\n]", codigoRet);
     getchar();
   }
@@ -419,10 +417,11 @@ void telaCodigoRetirada(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return codigoRet;
 }
 
-// menu de Retirada: submenu Editar -> Novos dados
-char telaAtualizarRetirada(){
+// menu de Retirada: submenu Editar
+char tipoAttRetirada(void){
   char opcao;
   limparTela();
   printf("\n");
@@ -439,10 +438,10 @@ char telaAtualizarRetirada(){
   printf("///               Opções de Atualização Disponíveis:                        ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///               a. Atualizar Produto                                      ///\n");
-  printf("///               b. Atualizar Quantidade                                   ///\n");
+  printf("///               a. Atualizar Código do Produto                            ///\n");
+  printf("///               b. Atualizar Quantidade do Produto                        ///\n");
   printf("///               c. Atualizar CPF do Cliente                               ///\n");
-  printf("///               d. Atualizar Preço                                        ///\n");
+  printf("///               d. Atualizar Preço Unitário                               ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                  Entre com a opção desejada de atualização:    ");
@@ -457,6 +456,37 @@ char telaAtualizarRetirada(){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
   return opcao;
+}
+
+void editarRetirada(void){
+  char *codigoRet;
+  char tipo;
+  Retirada *retirada;
+
+  codigoRet = telaCodigoRetirada();
+  retirada = pesquisarDadosRetirada(codigoRet);
+  if (retirada == NULL){
+    telaFalhaBuscaDadoArquivo();
+  }else{
+    telaConfirmarBuscaDadoArquivo();
+    //escolher o tipo de atualizacao
+    tipo = tipoAttRetirada();
+    switch(tipo){
+      case 'a':
+        //
+        break;
+      case 'b':
+        //
+        break;
+      case 'c':
+        //
+        break;
+      case 'd':
+        //
+        break;
+    }
+  }
+  free (codigoRet);
 }
 
 int gravarDadosRetirada(Retirada *retirada){
