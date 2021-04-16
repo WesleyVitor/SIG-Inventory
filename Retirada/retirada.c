@@ -18,7 +18,7 @@ void navegacaoMenuRetirada(void){
         verificaCadastroRetirada();
         break;
       case '2':
-        telaPesquisarRetirada();
+        pesquisarRetirada();
         break;
       case '3':
         telaApagarRetirada();
@@ -34,7 +34,7 @@ void navegacaoMenuRetirada(void){
         } else if (tipoAtt == 'a' || tipoAtt == 'A' ||
                    tipoAtt == 'c' || tipoAtt == 'C')
         {
-          addValorString();
+          //addValorString();
         }
         telaConfirmacao();
         break;
@@ -232,8 +232,7 @@ Retirada* telaCadastroRetirada(void){
 }
 
 // menu de Retirada: submenu Pesquisar
-void telaPesquisarRetirada(void){
-  Retirada *retirada;
+char* telaPesquisarRetirada(void){
   char *codigoRet;
   codigoRet = (char*) malloc(10*sizeof(codigoRet));
   limparTela();
@@ -268,18 +267,25 @@ void telaPesquisarRetirada(void){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
 
+  return codigoRet;
+}
 
-  retirada = pesquisarDadosArqRetirada(codigoRet);
+void pesquisarRetirada(void){
+  Retirada* retirada;
+  char* codigoRet;
+
+  codigoRet = telaPesquisarRetirada();
+  retirada = pesquisarDadosRetirada(codigoRet);
+  
   if(retirada == NULL){
     telaFalhaBuscaDadoArquivo();
-    printf("\t\t\t>>> Não existe nenhuma retirada com esse código!\n");
-    getchar();
   }else{
     telaConfirmarBuscaDadoArquivo();
-    limparTela();
     exibeDadosRetirada(retirada);
   }
+ 
   free(retirada);
+  free(codigoRet);
 }
 
 void exibeDadosRetirada(Retirada *retirada){
@@ -431,7 +437,7 @@ int gravarDadosRetirada(Retirada *retirada){
   return 1;
 }
 
-Retirada* pesquisarDadosArqRetirada(char *codigo_retirada){
+Retirada* pesquisarDadosRetirada(char *codigo_retirada){
   FILE *arq;
   Retirada *retirada;
   arq = fopen("retiradas.dat","rb");

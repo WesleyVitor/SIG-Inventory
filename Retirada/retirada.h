@@ -15,13 +15,14 @@ void verificaCadastroRetirada(void);
 int gravarDadosRetirada(Retirada*);
 
 //pesquisa e exibicao de resultado
-Retirada* pesquisarDadosArqRetirada(char *);
+Retirada* pesquisarDadosRetirada(char *);
+void pesquisarRetirada (void);
 void exibeDadosRetirada(Retirada*);
 
 //telas de navegacao
 void navegacaoMenuRetirada(void);
 char menuRetirada(void);
-void telaPesquisarRetirada(void);
+char* telaPesquisarRetirada(void);
 void telaApagarRetirada(void);
 void telaCodigoRetirada(void);
 char telaAtualizarRetirada(void);
