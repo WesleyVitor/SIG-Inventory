@@ -1,7 +1,6 @@
-void telaAddValor(void);
-void addValorString(void);
-void addValorInt(void);
-void addValorFloat(void);
+char* telaAddValor(void);
+int addValorInt(void);
+float addValorFloat(void);
 void telaConfirmacao(void);
 int validarCodRetirada(char []);
 int validarCNPJ(char []);
@@ -17,3 +16,5 @@ int ehLetra(char);
 int validacaoString(char *);
 int validarCNPJ_CPF(char *);
 void limparTela(void);
+char* input(void);
+char* alocarMemoria(int);

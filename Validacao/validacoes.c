@@ -5,8 +5,9 @@
 #include "validacoes.h"
 #include <string.h>
 
-void telaAddValor(void){
-  char valor[50];
+char* telaAddValor(void){
+  char* valor;
+  
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -24,8 +25,7 @@ void telaAddValor(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                       Valor:   ");
-  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ0-9.,]", valor);
-  getchar();
+  valor = input();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = = = =               ///\n");
@@ -33,10 +33,12 @@ void telaAddValor(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return valor;
 }
 
-void addValorString(void){
-  char valor[50];
+char* addValorString(void){
+  char* valor;
+  valor = (char*) malloc(50*sizeof(char));
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -54,7 +56,7 @@ void addValorString(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                       Valor:   ");
-  scanf("%[a-z A-ZáéíóúàâãõçÁÉÍÓÚÂÀÃÕ0-9.-]", valor);
+  scanf("%[^\n]", valor);
   getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -63,10 +65,12 @@ void addValorString(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return valor;
 }
 
-void addValorInt(void){
+int addValorInt(void){
   int valor;
+  int statusScanfInt;
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -84,7 +88,11 @@ void addValorInt(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                       Quantidade:   ");
-  scanf("%d", &valor);
+  statusScanfInt = scanf("%d", &valor);
+  while(statusScanfInt==0){
+    statusScanfInt = scanf("%d", &valor);
+    getchar();
+  }
   getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -93,10 +101,12 @@ void addValorInt(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return valor;
 }
 
-void addValorFloat(void){
+float addValorFloat(void){
   float valor;
+  float statusScanfFloat;
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -114,7 +124,11 @@ void addValorFloat(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                       Valor:   ");
-  scanf("%f", &valor);
+  statusScanfFloat = scanf("%f", &valor);
+  while(statusScanfFloat==0){
+    statusScanfFloat = scanf("%f", &valor);
+    getchar();
+  }
   getchar();
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -123,6 +137,7 @@ void addValorFloat(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return valor;
 }
 
 void telaConfirmacao(void){
@@ -518,5 +533,24 @@ int validacaoString(char *string){
 
 //Adaptado de @flaviusgorgonio
 void limparTela(void){
+  if(system("clear") || system("cls"));
+}
+
+char* input(void){
+  char auxiliar[251];
+  char* valorAlocadoDinamicamente;
+  int tamanhoString;
+  scanf("%[^\n]",auxiliar);
+  getchar();
+  tamanhoString = strlen(auxiliar);
+  valorAlocadoDinamicamente = alocarMemoria(tamanhoString);
+  strcpy(valorAlocadoDinamicamente, auxiliar);
+  return valorAlocadoDinamicamente;
+}
+
+char* alocarMemoria(int tamanho){
+  char* valorAlocacao;
+  valorAlocacao = (char*) malloc(tamanho*sizeof(char)+1);
+  return valorAlocacao;
   system("clear || cls");
 }

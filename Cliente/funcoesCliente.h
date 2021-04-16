@@ -13,11 +13,11 @@ struct cliente{
 
 char menuCliente(void);
 Cliente* telaCadastroCliente(void);
-char* telaPesquisarCliente(void);
+char* telaProcurarCliente(void);
 void CadastrarCliente(void);
 void PesquisarCliente(void);
-void ApagarCliente(void);
-char AtualizarCliente(void);
+char* telaApagarCliente(void);
+char telaMenuAtualizarCliente(void);
 void navegacaoMenuCliente(void);
 void tratarValidacaoCNPJCPF(void);
 void tratarData(void);
@@ -29,3 +29,7 @@ void tratarValidacaoNumero(void);
 int gravarDadosCliente(Cliente*);
 Cliente* buscarCliente(char *);
 void exibirCliente(Cliente *);
+int AtualizarCliente(void);
+int regravarDados(Cliente*);
+Cliente* editarCliente(Cliente*, char, char*);
+int ApagarCliente(void);
