@@ -13,21 +13,31 @@ struct retirada{
 Retirada* telaCadastroRetirada(void);
 void verificaCadastroRetirada(void);
 int gravarDadosRetirada(Retirada*);
+int regravarDadosRetirada(Retirada*);
 
 //pesquisa e exibicao de resultado
-Retirada* pesquisarDadosArqRetirada(char *);
+Retirada* pesquisarDadosRetirada(char *);
+void pesquisarRetirada(void);
 void exibeDadosRetirada(Retirada*);
 
+//apagar retirada
+void apagarRetirada(void);
+
+//editar retirada
+void editarRetirada(void);
+char tipoAttRetirada(void);
+Retirada* atualizarRetirada(Retirada*, char);
 //telas de navegacao
 void navegacaoMenuRetirada(void);
 char menuRetirada(void);
-void telaPesquisarRetirada(void);
-void telaApagarRetirada(void);
-void telaCodigoRetirada(void);
-char telaAtualizarRetirada(void);
+char* telaPesquisarRetirada(void);
+char* telaApagarRetirada(void);
+char* telaCodigoRetirada(void);
 
 //tratamento
 void tratarValidacaoNumerosRetirada(void);
 void tratarValidacaoProdutoRetirada(void);
 void tratarValidacaoCNPJCPF(void);
 void tratarValidacaoCodRetirada(void);
+double tratarValidacaoPrecoRetirada(void);
+int tratarValidacaoQuantRetirada(void);

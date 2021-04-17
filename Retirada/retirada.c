@@ -10,7 +10,6 @@
 //funcao navegacaoMenuRetirada
 void navegacaoMenuRetirada(void){
   char opcao;
-  char tipoAtt;
   do{
     opcao = menuRetirada();
     switch(opcao){
@@ -18,25 +17,13 @@ void navegacaoMenuRetirada(void){
         verificaCadastroRetirada();
         break;
       case '2':
-        telaPesquisarRetirada();
+        pesquisarRetirada();
         break;
       case '3':
-        telaApagarRetirada();
-        telaConfirmacao();
+        apagarRetirada();
         break;
       case '4':
-        telaCodigoRetirada();
-        tipoAtt = telaAtualizarRetirada();
-        if (tipoAtt == 'b' || tipoAtt == 'B'){
-          addValorInt();
-        } else if (tipoAtt == 'd' || tipoAtt == 'D'){
-          addValorFloat();
-        } else if (tipoAtt == 'a' || tipoAtt == 'A' ||
-                   tipoAtt == 'c' || tipoAtt == 'C')
-        {
-          addValorString();
-        }
-        telaConfirmacao();
+        editarRetirada();
         break;
     }
   }while(opcao!='0');
@@ -49,7 +36,7 @@ void tratarValidacaoCNPJCPFRetirada(void){
   printf("///                                                                         ///\n");
   printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///              =                                     =                    ///\n");
-  printf("///              =     Seu CNPJ/CPF está incorreto     =                    ///\n");
+  printf("///              =     Adicione um CNPJ/CPF válido     =                    ///\n");
   printf("///              =                                     =                    ///\n");
   printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
   printf("///                                                                         ///\n");
@@ -57,6 +44,58 @@ void tratarValidacaoCNPJCPFRetirada(void){
   printf("///                                                                         ///\n");
   printf("///                   Adicione um CNPJ/CPF válido: ");
 
+}
+
+double tratarValidacaoPrecoRetirada(void){
+  int statusScanfPreco;
+  double precoUnitario;
+  limparTela();
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =      Adicione um preço válido       =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("                   Novo preço (R$): ");
+  statusScanfPreco = scanf("%lf", &precoUnitario);
+  getchar();
+  while(statusScanfPreco==0){
+    tratarValidacaoNumerosRetirada();
+    statusScanfPreco = scanf("%lf", &precoUnitario);
+    getchar();
+  }
+  return precoUnitario;
+}
+
+int tratarValidacaoQuantRetirada(void){
+  int statusScanfQuantidade;
+  int quantidadeProd;
+  limparTela();
+  printf("\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///              =                                     =                    ///\n");
+  printf("///              =    Adicione uma nova quantidade     =                    ///\n");
+  printf("///              =              válida                 =                    ///\n");
+  printf("///              = = = = = = = = = = = = = = = = = = = =                    ///\n");
+  printf("///                                                                         ///\n");
+  printf("///////////////////////////////////////////////////////////////////////////////\n");
+  printf("///                                                                         ///\n");
+  printf("                  Quantidade do Produto:            ");
+  statusScanfQuantidade = scanf("%d", &quantidadeProd);
+  getchar();
+  while(statusScanfQuantidade==0){
+    tratarValidacaoNumerosRetirada();
+    statusScanfQuantidade = scanf("%d", &quantidadeProd);
+    getchar();
+  }
+  return quantidadeProd;
 }
 
 void tratarValidacaoProdutoRetirada(void){
@@ -73,7 +112,7 @@ void tratarValidacaoProdutoRetirada(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("///                   Adicione um Código de Produto válido: ");
+  printf("///              Adicione um Código de Produto válido: ");
   
 }
 
@@ -187,7 +226,7 @@ Retirada* telaCadastroRetirada(void){
     scanf("%[^\n]", retirada->codigoRet);
     getchar();
   }
-  printf("                  Código do Produto:   ");
+  printf("                  Código do Produto:                ");
   scanf("%[^\n]", retirada->codigoProd);
   getchar();
   while(!verificarDigitos(retirada->codigoProd)){
@@ -195,7 +234,7 @@ Retirada* telaCadastroRetirada(void){
     scanf("%[^\n]", retirada->codigoProd);
     getchar();
   }
-  printf("                  Quantidade do Produto:   ");
+  printf("                  Quantidade do Produto:            ");
   statusScanfQuantidade = scanf("%d", &retirada->quantidadeProd);
   getchar();
   while(statusScanfQuantidade==0){
@@ -203,7 +242,7 @@ Retirada* telaCadastroRetirada(void){
     statusScanfQuantidade = scanf("%d", &retirada->quantidadeProd);
     getchar();
   }
-  printf("                  CPF/CNPJ do Cliente:   ");
+  printf("                  CPF/CNPJ do Cliente:              ");
   scanf("%[^\n]", retirada->cnpjCpfCliente);
   getchar();
   while(!validarCNPJ_CPF(retirada->cnpjCpfCliente)){
@@ -232,8 +271,7 @@ Retirada* telaCadastroRetirada(void){
 }
 
 // menu de Retirada: submenu Pesquisar
-void telaPesquisarRetirada(void){
-  Retirada *retirada;
+char* telaPesquisarRetirada(void){
   char *codigoRet;
   codigoRet = (char*) malloc(10*sizeof(codigoRet));
   limparTela();
@@ -268,18 +306,26 @@ void telaPesquisarRetirada(void){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
 
+  return codigoRet;
+}
 
-  retirada = pesquisarDadosArqRetirada(codigoRet);
+void pesquisarRetirada(void){
+  Retirada* retirada;
+  char* codigoRet;
+
+  codigoRet = telaPesquisarRetirada();
+  //pesquisa a retirada no arquivo
+  retirada = pesquisarDadosRetirada(codigoRet);
+  
   if(retirada == NULL){
     telaFalhaBuscaDadoArquivo();
-    printf("\t\t\t>>> Não existe nenhuma retirada com esse código!\n");
-    getchar();
   }else{
     telaConfirmarBuscaDadoArquivo();
-    limparTela();
     exibeDadosRetirada(retirada);
   }
+ 
   free(retirada);
+  free(codigoRet);
 }
 
 void exibeDadosRetirada(Retirada *retirada){
@@ -310,8 +356,9 @@ void exibeDadosRetirada(Retirada *retirada){
 }
 
 // menu de Retirada: submenu Apagar
-void telaApagarRetirada(void){
-  char codigoRet[15];
+char* telaApagarRetirada(void){
+  char *codigoRet;
+  codigoRet = (char*) malloc(10*sizeof(codigoRet));
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -332,8 +379,8 @@ void telaApagarRetirada(void){
   printf("                  Código:   ");
   scanf("%[^\n]", codigoRet);
   getchar();
-  while(!verificarDigitos(codigoRet)){
-    tratarValidacaoNumerosRetirada();
+  while(!validarCodRetirada(codigoRet)){
+    tratarValidacaoCodRetirada();
     scanf("%[^\n]", codigoRet);
     getchar();
   }
@@ -343,12 +390,41 @@ void telaApagarRetirada(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return codigoRet;
+}
+
+void apagarRetirada(void){
+  Retirada *retirada;
+  char* codigoRet;
+  int apagou = 0;
+  int confirma = 0;
+
+  codigoRet = telaApagarRetirada();
+  //tela de confirmaçao
+  confirma = telaConfirmacao();
+  if(confirma == 1){
+    //pesquisa a retirada no arquivo
+    retirada = pesquisarDadosRetirada(codigoRet);
+    if (retirada == NULL){
+      telaErroDeletarDadosArquivo();
+    }else{
+      retirada->status='0';
+      apagou = regravarDadosRetirada(retirada);
+      if(apagou){
+        telaConfirmarDeletarDadosArquivo();
+      }else{
+        telaErroDeletarDadosArquivo();
+      }
+    }
+  }
+  free(codigoRet);
 }
 
 // menu de Retirada: informar código
 // de retirada para editar
-void telaCodigoRetirada(void){
-  char codigoRet[15];
+char* telaCodigoRetirada(void){
+  char *codigoRet;
+  codigoRet = (char*) malloc(10*sizeof(codigoRet));
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -363,14 +439,15 @@ void telaCodigoRetirada(void){
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///              Entre com o Código da Retirada a ser editada               ///\n");
-  printf("///                                                                         ///\n");
+  printf("///                             (9 dígitos)                                 ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                  Código:   ");
   scanf("%[^\n]", codigoRet);
   getchar();
-  while(!verificarDigitos(codigoRet)){
-    tratarValidacaoNumerosRetirada();
+  //verifica se tem 9 digitos
+  while(!validarCodRetirada(codigoRet)){
+    tratarValidacaoCodRetirada();
     scanf("%[^\n]", codigoRet);
     getchar();
   }
@@ -380,10 +457,11 @@ void telaCodigoRetirada(void){
   printf("\n");
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+  return codigoRet;
 }
 
-// menu de Retirada: submenu Editar -> Novos dados
-char telaAtualizarRetirada(){
+// menu de Retirada: submenu Editar
+char tipoAttRetirada(void){
   char opcao;
   limparTela();
   printf("\n");
@@ -400,10 +478,10 @@ char telaAtualizarRetirada(){
   printf("///               Opções de Atualização Disponíveis:                        ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
-  printf("///               a. Atualizar Produto                                      ///\n");
-  printf("///               b. Atualizar Quantidade                                   ///\n");
+  printf("///               a. Atualizar Código do Produto                            ///\n");
+  printf("///               b. Atualizar Quantidade do Produto                        ///\n");
   printf("///               c. Atualizar CPF do Cliente                               ///\n");
-  printf("///               d. Atualizar Preço                                        ///\n");
+  printf("///               d. Atualizar Preço Unitário                               ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("                  Entre com a opção desejada de atualização:    ");
@@ -420,6 +498,64 @@ char telaAtualizarRetirada(){
   return opcao;
 }
 
+void editarRetirada(void){
+  char *codigoRet;
+  char tipo;
+  int confirma;
+  Retirada *retirada;
+
+  codigoRet = telaCodigoRetirada();
+  retirada = pesquisarDadosRetirada(codigoRet);
+  if (retirada == NULL){
+    telaFalhaBuscaDadoArquivo();
+  }else{
+    telaConfirmarBuscaDadoArquivo();
+    //escolher o tipo de atualizacao
+    tipo = tipoAttRetirada();
+    retirada = atualizarRetirada(retirada, tipo);
+    confirma = regravarDadosRetirada(retirada);
+  }
+  if(confirma==1){
+    telaConfirmarAtualizarDadosArquivo();
+  }else{
+    telaErroAtualizarDadosArquivo();
+  }
+  free(codigoRet);
+}
+
+Retirada* atualizarRetirada(Retirada* retirada, char tipo){
+  switch(tipo){
+    //codigo produto
+    case 'a':
+      strcpy(retirada->codigoProd,"a");
+      while(!verificarDigitos(retirada->codigoProd)){
+        tratarValidacaoProdutoRetirada();
+        scanf("%[^\n]", retirada->codigoProd);
+        getchar();
+      }
+      break;
+    //quantidade produto
+    case 'b':
+      retirada->quantidadeProd = tratarValidacaoQuantRetirada();
+      break;
+    //cpf produto
+    case 'c':
+      strcpy(retirada->cnpjCpfCliente,"c");
+      while(!validarCNPJ_CPF(retirada->cnpjCpfCliente)){
+        tratarValidacaoCNPJCPFRetirada();
+        scanf("%[^\n]", retirada->cnpjCpfCliente);
+        getchar();
+      }
+      break;
+    //preco unitario
+    case 'd':
+      retirada->precoUnitario = tratarValidacaoPrecoRetirada();
+      retirada->precoTotal = retirada->precoUnitario * retirada->quantidadeProd;
+      break;
+  }
+  return retirada;
+}
+
 int gravarDadosRetirada(Retirada *retirada){
   FILE *arq;
   arq = fopen("retiradas.dat", "ab");
@@ -431,7 +567,7 @@ int gravarDadosRetirada(Retirada *retirada){
   return 1;
 }
 
-Retirada* pesquisarDadosArqRetirada(char *codigo_retirada){
+Retirada* pesquisarDadosRetirada(char *codigo_retirada){
   FILE *arq;
   Retirada *retirada;
   arq = fopen("retiradas.dat","rb");
@@ -447,6 +583,36 @@ Retirada* pesquisarDadosArqRetirada(char *codigo_retirada){
     }
   }
   fclose(arq);
-  free(retirada);
   return NULL;
+}
+
+int regravarDadosRetirada(Retirada* retirada){
+  FILE* arq;
+  Retirada* retiradaLida;
+  int achou=0;
+  arq = fopen("retiradas.dat","r+b");
+  if(arq == NULL){
+    fclose(arq);
+    return 0;
+  }
+  retiradaLida = (Retirada*) malloc(sizeof(Retirada));
+  while(!feof(arq)){
+    fread(retiradaLida, sizeof(Retirada),1,arq);
+    if((strcmp(retirada->codigoRet, retiradaLida->codigoRet)==0) && (retiradaLida->status=='1')){ 
+      achou = 1;
+      //retirada lida recebe a retirada
+      //com status 0 (apagada)
+      retiradaLida = retirada;
+      fseek(arq,-1*sizeof(Retirada),SEEK_CUR);
+      fwrite(retiradaLida, sizeof(Retirada),1,arq);
+      break;
+    }
+  }
+  fclose(arq);
+  free(retiradaLida);
+  if(!achou){
+    return 0;
+  }else{
+    return 1;
+  }
 }
