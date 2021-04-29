@@ -296,6 +296,7 @@ Cliente* telaCadastroCliente(void){
   }
   // Adicionar status como ativado(1)
   cliente->status= '1';
+  cliente->prox = NULL;
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");

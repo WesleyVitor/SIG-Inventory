@@ -8,6 +8,7 @@ struct cliente{
   char numero[7];
   char complemento[20];
   char status;
+  Cliente* prox;
 
 };
 
