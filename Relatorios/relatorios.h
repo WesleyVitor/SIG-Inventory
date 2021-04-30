@@ -25,12 +25,9 @@ struct produtoLista{
 void navegacaoMenuRelatorios(void);
 char menuRelatorios(void);
 void telaRelatoriosClientes(void);
-void telaRelatorioProdutos(void);
 void relatorioProduto(void);
 ProdutoLista* gerarRelatProd(void);
 void exibirProdutos(ProdutoLista*);
-void telaRelatorioRetiradasTrimestrais(void);
-void telaRelatorioFinanceiro(void);
 ClienteLista* gerarRelatorioCliente(void);
 void relatorioCliente(void);
 void exibirLista(ClienteLista*);

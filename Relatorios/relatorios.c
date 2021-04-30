@@ -15,12 +15,6 @@ void navegacaoMenuRelatorios(void){
       case '2':
         relatorioProduto();
         break;
-      case '3':
-        telaRelatorioRetiradasTrimestrais();
-        break;
-      case '4':
-        telaRelatorioFinanceiro();
-        break;
     }
   }while(opcao!='0');
 }
@@ -41,8 +35,6 @@ char menuRelatorios(void){
   printf("///                                                                         ///\n");
   printf("///               1. Relatórios de Clientes Cadastrados Alfabeticamente     ///\n");
   printf("///               2. Relatórios de Produtos Cadastrados                     ///\n");
-  printf("///               3. Relatórios de Retiradas Trimestrais                    ///\n");
-  printf("///               4. Relatórios Financeiros                                 ///\n");
   printf("///               0. Voltar para tela anterior                              ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -56,24 +48,6 @@ char menuRelatorios(void){
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
   return opcao;
-}
-
-void telaRelatoriosClientes(void){
-  limparTela();
-  printf("\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             =  Relatórios de Clientes Cadastrados =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///                                                                         ///\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
 }
 
 void exibirProdutos(ProdutoLista* prod){
@@ -137,59 +111,6 @@ ProdutoLista* gerarRelatProd(void){
   }
   free(produto);
   fclose(fp);
-}
-
-void telaRelatorioRetiradasTrimestrais(void){
-  int codigo = 244059;
-  char produto[] = "Arroz";
-  int quantidade = 500;
-  char cpf[] = "015.231.561-76";
-  float preco = 499.99;
-  limparTela();
-  for (int i = 0; i<10; i++){
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-    printf("///             =                                     =                     ///\n");
-    printf("///             = Relatórios de Retiradas Trimestrais =                     ///\n");
-    printf("                                 nº %d\n", i+1);
-    printf("///             =                                     =                     ///\n");
-    printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///            Código: %d                                               ///\n", codigo);
-    printf("///            Produto: %s                                               ///\n", produto);
-    printf("///            Quantidade: %d                                              ///\n", quantidade);
-    printf("///            CPF: %s                                          ///\n", cpf);
-    printf("///            Preço (R$): %.2f                                           ///\n", preco);
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-  }
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
-}
-
-void telaRelatorioFinanceiro(void){
-  limparTela();
-  printf("\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             =        Relatórios Financeiros       =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///                                                                         ///\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
 }
 
 ClienteLista* gerarRelatorioCliente(){
