@@ -13,13 +13,7 @@ void navegacaoMenuRelatorios(void){
         relatorioCliente();
         break;
       case '2':
-        telaRelatorioProdutos();
-        break;
-      case '3':
-        telaRelatorioRetiradasTrimestrais();
-        break;
-      case '4':
-        telaRelatorioFinanceiro();
+        relatorioProduto();
         break;
     }
   }while(opcao!='0');
@@ -41,8 +35,6 @@ char menuRelatorios(void){
   printf("///                                                                         ///\n");
   printf("///               1. Relatórios de Clientes Cadastrados Alfabeticamente     ///\n");
   printf("///               2. Relatórios de Produtos Cadastrados                     ///\n");
-  printf("///               3. Relatórios de Retiradas Trimestrais                    ///\n");
-  printf("///               4. Relatórios Financeiros                                 ///\n");
   printf("///               0. Voltar para tela anterior                              ///\n");
   printf("///                                                                         ///\n");
   printf("///                                                                         ///\n");
@@ -58,25 +50,7 @@ char menuRelatorios(void){
   return opcao;
 }
 
-void telaRelatoriosClientes(void){
-  limparTela();
-  printf("\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             =  Relatórios de Clientes Cadastrados =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///                                                                         ///\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
-}
-
-void telaRelatorioProdutos(void){
+void exibirProdutos(ProdutoLista* prod){
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -89,62 +63,56 @@ void telaRelatorioProdutos(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
-}
-
-void telaRelatorioRetiradasTrimestrais(void){
-  int codigo = 244059;
-  char produto[] = "Arroz";
-  int quantidade = 500;
-  char cpf[] = "015.231.561-76";
-  float preco = 499.99;
-  limparTela();
-  for (int i = 0; i<10; i++){
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-    printf("///             =                                     =                     ///\n");
-    printf("///             = Relatórios de Retiradas Trimestrais =                     ///\n");
-    printf("                                 nº %d\n", i+1);
-    printf("///             =                                     =                     ///\n");
-    printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///            Código: %d                                               ///\n", codigo);
-    printf("///            Produto: %s                                               ///\n", produto);
-    printf("///            Quantidade: %d                                              ///\n", quantidade);
-    printf("///            CPF: %s                                          ///\n", cpf);
-    printf("///            Preço (R$): %.2f                                           ///\n", preco);
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+  while (prod != NULL){
+    printf("    Código do produto:              %s\n", prod->codigoProd);
+    printf("    Nome do produto:                %s\n", prod->nomeProd);
+    printf("    Quantidade do produto:          %d\n", prod->quantidadeProd);
+    printf("    Marca do produto:               %s\n", prod->marcaProd);
+    printf("    Preço unitário (R$):            %.2lf\n", prod->precoUnitarioProd);
+    printf("    Descrição do produto:           %s\n", prod->descricaoProd);
+    printf("\n\n");
+    prod = prod->prox;
   }
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
 }
 
-void telaRelatorioFinanceiro(void){
-  limparTela();
-  printf("\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             =        Relatórios Financeiros       =                     ///\n");
-  printf("///             =                                     =                     ///\n");
-  printf("///             = = = = = = = = = = = = = = = = = = = =                     ///\n");
-  printf("///                                                                         ///\n");
-  printf("///////////////////////////////////////////////////////////////////////////////\n");
-  printf("///                                                                         ///\n");
-  printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
+void relatorioProduto(void){
+  ProdutoLista* lista;
+  lista = gerarRelatProd();
+  exibirProdutos(lista);
+}
+
+//gera relatorio na ordem direta
+ProdutoLista* gerarRelatProd(void){
+  FILE* fp;
+  ProdutoLista* produto;
+  ProdutoLista* lista;
+  ProdutoLista* anterior;
+  lista = NULL;
+
+  fp = fopen("Dados/Produto.dat", "rb");
+  if (fp == NULL){
+   printf("Erro na abertura do arquivo... \n");
+   return NULL;
+  }else{
+    produto = (ProdutoLista*) malloc(sizeof(ProdutoLista));
+    while (fread(produto, sizeof(ProdutoLista), 1, fp)){
+      if (produto->status != '0'){
+        if (lista == NULL){
+          lista = produto;
+          anterior = produto;
+        }else{
+          anterior->prox = produto;
+          anterior = produto;
+        }
+      }
+      produto = (ProdutoLista*) malloc(sizeof(ProdutoLista));
+    }
+    return lista;
+  }
+  free(produto);
+  fclose(fp);
 }
 
 ClienteLista* gerarRelatorioCliente(){
@@ -161,19 +129,22 @@ ClienteLista* gerarRelatorioCliente(){
     else{
    	 cliente = (ClienteLista *) malloc(sizeof(ClienteLista));
    	 while (fread(cliente, sizeof(Cliente), 1, fp)){
-        if ((lista == NULL) || (strcmp(cliente->nome, (lista)->nome) < 0)) {
+        if(cliente->status!='0'){
+          if ((lista == NULL) || (strcmp(cliente->nome, (lista)->nome) < 0)) {
           cliente->prox = lista;
           lista = cliente;
-        } else  {
-          ClienteLista* ant = lista;
-          ClienteLista* atu = (lista)->prox;
-          while ((atu != NULL) && (strcmp(atu->nome, cliente->nome) < 0)) {
-            ant = atu;
-            atu = atu->prox;
+          } else  {
+            ClienteLista* ant = lista;
+            ClienteLista* atu = (lista)->prox;
+            while ((atu != NULL) && (strcmp(atu->nome, cliente->nome) < 0)) {
+              ant = atu;
+              atu = atu->prox;
+            }
+            ant->prox = cliente;
+            cliente->prox = atu;
           }
-          ant->prox = cliente;
-          cliente->prox = atu;
         }
+        
         cliente = (ClienteLista *) malloc(sizeof(ClienteLista));
    	 }
    	 free(cliente);
@@ -193,6 +164,7 @@ void relatorioCliente(){
 }
 
 void exibirLista(ClienteLista *aux){
+  limparTela();
   printf("\n\n");
   printf("****************************************\n");
 	printf("*** Relatório dos Clientes Cadastrados ***\n");
@@ -200,6 +172,7 @@ void exibirLista(ClienteLista *aux){
   printf("\n");
 	while (aux != NULL){
     	printf("Nome do cliente:       %s\n", aux->nome);
+      printf("CPF/CNPJ do cliente:   %s\n", aux->cnpj_cpf);
       printf("Rua:                   %s\n", aux->rua);
       printf("Bairo:                 %s\n", aux->bairro);
       printf("Número:                %s\n", aux->numero);

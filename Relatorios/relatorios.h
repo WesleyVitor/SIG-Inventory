@@ -10,12 +10,24 @@ struct clienteLista{
   ClienteLista* prox;
 };
 
+typedef struct produtoLista ProdutoLista;
+struct produtoLista{
+  char codigoProd[15];
+  char nomeProd[25];
+  int quantidadeProd;
+  char marcaProd[20];
+  double precoUnitarioProd;
+  char descricaoProd[100];
+  char status;
+  ProdutoLista* prox;
+};
+
 void navegacaoMenuRelatorios(void);
 char menuRelatorios(void);
 void telaRelatoriosClientes(void);
-void telaRelatorioProdutos(void);
-void telaRelatorioRetiradasTrimestrais(void);
-void telaRelatorioFinanceiro(void);
+void relatorioProduto(void);
+ProdutoLista* gerarRelatProd(void);
+void exibirProdutos(ProdutoLista*);
 ClienteLista* gerarRelatorioCliente(void);
 void relatorioCliente(void);
 void exibirLista(ClienteLista*);
