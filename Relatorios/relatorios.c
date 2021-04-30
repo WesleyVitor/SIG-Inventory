@@ -129,19 +129,22 @@ ClienteLista* gerarRelatorioCliente(){
     else{
    	 cliente = (ClienteLista *) malloc(sizeof(ClienteLista));
    	 while (fread(cliente, sizeof(Cliente), 1, fp)){
-        if ((lista == NULL) || (strcmp(cliente->nome, (lista)->nome) < 0)) {
+        if(cliente->status!='0'){
+          if ((lista == NULL) || (strcmp(cliente->nome, (lista)->nome) < 0)) {
           cliente->prox = lista;
           lista = cliente;
-        } else  {
-          ClienteLista* ant = lista;
-          ClienteLista* atu = (lista)->prox;
-          while ((atu != NULL) && (strcmp(atu->nome, cliente->nome) < 0)) {
-            ant = atu;
-            atu = atu->prox;
+          } else  {
+            ClienteLista* ant = lista;
+            ClienteLista* atu = (lista)->prox;
+            while ((atu != NULL) && (strcmp(atu->nome, cliente->nome) < 0)) {
+              ant = atu;
+              atu = atu->prox;
+            }
+            ant->prox = cliente;
+            cliente->prox = atu;
           }
-          ant->prox = cliente;
-          cliente->prox = atu;
         }
+        
         cliente = (ClienteLista *) malloc(sizeof(ClienteLista));
    	 }
    	 free(cliente);
@@ -161,6 +164,7 @@ void relatorioCliente(){
 }
 
 void exibirLista(ClienteLista *aux){
+  limparTela();
   printf("\n\n");
   printf("****************************************\n");
 	printf("*** Relatório dos Clientes Cadastrados ***\n");
@@ -168,6 +172,7 @@ void exibirLista(ClienteLista *aux){
   printf("\n");
 	while (aux != NULL){
     	printf("Nome do cliente:       %s\n", aux->nome);
+      printf("CPF/CNPJ do cliente:   %s\n", aux->cnpj_cpf);
       printf("Rua:                   %s\n", aux->rua);
       printf("Bairo:                 %s\n", aux->bairro);
       printf("Número:                %s\n", aux->numero);
