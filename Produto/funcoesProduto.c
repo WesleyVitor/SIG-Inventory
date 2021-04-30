@@ -187,6 +187,7 @@ Produto* telaCadastroProduto(void){
   scanf("%[^\n]",produto->descricaoProd);
   getchar();
   produto->status = '1';
+  produto->prox = NULL;
   printf("\n///                                                                         ///\n");
   printf("///                                                                         ///\n");
   printf("///             = = = = = = = = = = = = = = = = = = = = =                   ///\n");

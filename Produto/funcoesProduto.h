@@ -7,6 +7,7 @@ struct produto{
   double precoUnitarioProd;
   char descricaoProd[100];
   char status;
+  Produto* prox;
 };
 
 char menuProduto(void);

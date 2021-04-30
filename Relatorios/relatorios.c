@@ -13,7 +13,7 @@ void navegacaoMenuRelatorios(void){
         relatorioCliente();
         break;
       case '2':
-        telaRelatorioProdutos();
+        relatorioProduto();
         break;
       case '3':
         telaRelatorioRetiradasTrimestrais();
@@ -76,7 +76,7 @@ void telaRelatoriosClientes(void){
   getchar();
 }
 
-void telaRelatorioProdutos(void){
+void exibirProdutos(ProdutoLista* prod){
   limparTela();
   printf("\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -89,9 +89,54 @@ void telaRelatorioProdutos(void){
   printf("///                                                                         ///\n");
   printf("///////////////////////////////////////////////////////////////////////////////\n");
   printf("///                                                                         ///\n");
-  printf("\n");
+  while (prod != NULL){
+    printf("    Código do produto:              %s\n", prod->codigoProd);
+    printf("    Nome do produto:                %s\n", prod->nomeProd);
+    printf("    Quantidade do produto:          %d\n", prod->quantidadeProd);
+    printf("    Marca do produto:               %s\n", prod->marcaProd);
+    printf("    Preço unitário (R$):            %.2lf\n", prod->precoUnitarioProd);
+    printf("    Descrição do produto:           %s\n", prod->descricaoProd);
+    printf("\n\n");
+    prod = prod->prox;
+  }
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
   getchar();
+}
+
+void relatorioProduto(void){
+  ProdutoLista* lista;
+  lista = gerarRelatProd();
+  exibirProdutos(lista);
+}
+
+//gera relatorio na ordem direta
+ProdutoLista* gerarRelatProd(void){
+  FILE* fp;
+  ProdutoLista* produto;
+  ProdutoLista* lista;
+  ProdutoLista* anterior;
+  lista = NULL;
+
+  fp = fopen("Dados/Produto.dat", "rb");
+  if (fp == NULL){
+   printf("Erro na abertura do arquivo... \n");
+   return NULL;
+  }else{
+    produto = (ProdutoLista*) malloc(sizeof(ProdutoLista));
+    while (fread(produto, sizeof(ProdutoLista), 1, fp)){
+      if (lista == NULL){
+        lista = produto;
+        anterior = produto;
+      }else{
+        anterior->prox = produto;
+        anterior = produto;
+      }
+      produto = (ProdutoLista*) malloc(sizeof(ProdutoLista));
+    }
+    return lista;
+  }
+  free(produto);
+  fclose(fp);
 }
 
 void telaRelatorioRetiradasTrimestrais(void){
