@@ -558,7 +558,7 @@ Retirada* atualizarRetirada(Retirada* retirada, char tipo){
 
 int gravarDadosRetirada(Retirada *retirada){
   FILE *arq;
-  arq = fopen("retiradas.dat", "ab");
+  arq = fopen("Dados/Retiradas.dat", "ab");
   if (arq == NULL){
     return 0;
   }
@@ -570,7 +570,7 @@ int gravarDadosRetirada(Retirada *retirada){
 Retirada* pesquisarDadosRetirada(char *codigo_retirada){
   FILE *arq;
   Retirada *retirada;
-  arq = fopen("retiradas.dat","rb");
+  arq = fopen("Dados/Retiradas.dat","rb");
   if(arq==NULL){
     return NULL;
   }
@@ -590,7 +590,7 @@ int regravarDadosRetirada(Retirada* retirada){
   FILE* arq;
   Retirada* retiradaLida;
   int achou=0;
-  arq = fopen("retiradas.dat","r+b");
+  arq = fopen("Dados/Retiradas.dat","r+b");
   if(arq == NULL){
     fclose(arq);
     return 0;
