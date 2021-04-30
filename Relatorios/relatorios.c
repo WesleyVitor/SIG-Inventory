@@ -98,12 +98,14 @@ ProdutoLista* gerarRelatProd(void){
   }else{
     produto = (ProdutoLista*) malloc(sizeof(ProdutoLista));
     while (fread(produto, sizeof(ProdutoLista), 1, fp)){
-      if (lista == NULL){
-        lista = produto;
-        anterior = produto;
-      }else{
-        anterior->prox = produto;
-        anterior = produto;
+      if (produto->status != '0'){
+        if (lista == NULL){
+          lista = produto;
+          anterior = produto;
+        }else{
+          anterior->prox = produto;
+          anterior = produto;
+        }
       }
       produto = (ProdutoLista*) malloc(sizeof(ProdutoLista));
     }
