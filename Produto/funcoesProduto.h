@@ -24,3 +24,4 @@ void tratarValidacaoNome(void);
 void exibirProduto(Produto*);
 Produto* buscarProduto(char*);
 int AtualizarProduto(void);
+int regravarDadosProduto(Produto*);

@@ -5,8 +5,8 @@
 #include "retirada.h"
 #include "../Validacao/validacoes.h"
 #include "../TelasUteis/telas.h"
-
-
+#include "../Produto/funcoesProduto.h"
+#include "../Cliente/funcoesCliente.h"
 //funcao navegacaoMenuRetirada
 void navegacaoMenuRetirada(void){
   char opcao;
@@ -188,13 +188,44 @@ char menuRetirada(void){
 //retorna tela dependendo do status retornado
 void verificaCadastroRetirada(void){
   Retirada *retirada;
+  Produto *produto;
+  int atualizarProdutos;
   retirada = telaCadastroRetirada();
+  
+  
   if (!gravarDadosRetirada(retirada)){
     telaErroGravacaoArquivo();
+    
+
   }else{
     telaConfirmarGravacaoArquivo();
+    //Atualizar quantidade em estoque
+    produto = buscarProduto(retirada->codigoProd);
+    produto->quantidadeProd = produto->quantidadeProd - retirada->quantidadeProd;
+    atualizarProdutos = regravarDadosProduto(produto);
+    if(atualizarProdutos == 1){
+      telaConfirmarAtualizarDadosArquivo();
+    }else{
+      telaErroAtualizarDadosArquivo();
+    }
   }
   free(retirada);
+}
+
+int buscarProdutoValido(char* produtoCod){
+  if(buscarProduto(produtoCod)==NULL){
+    return 0;
+  }else{
+    return 1;
+  }
+}
+
+int buscarClienteValido(char* cpf_cnpj){
+  if(buscarCliente(cpf_cnpj)==NULL){
+    return 0;
+  }else{
+    return 1;
+  }
 }
 
 // menu de Retirada: submenu Cadastrar
@@ -229,7 +260,7 @@ Retirada* telaCadastroRetirada(void){
   printf("                  Código do Produto:                ");
   scanf("%[^\n]", retirada->codigoProd);
   getchar();
-  while(!verificarDigitos(retirada->codigoProd)){
+  while((!verificarDigitos(retirada->codigoProd)) || (!buscarProdutoValido(retirada->codigoProd))){
     tratarValidacaoProdutoRetirada();
     scanf("%[^\n]", retirada->codigoProd);
     getchar();
@@ -245,7 +276,7 @@ Retirada* telaCadastroRetirada(void){
   printf("                  CPF/CNPJ do Cliente:              ");
   scanf("%[^\n]", retirada->cnpjCpfCliente);
   getchar();
-  while(!validarCNPJ_CPF(retirada->cnpjCpfCliente)){
+  while((!validarCNPJ_CPF(retirada->cnpjCpfCliente)) || (!buscarClienteValido(retirada->cnpjCpfCliente))){
     tratarValidacaoCNPJCPFRetirada();
     scanf("%[^\n]", retirada->cnpjCpfCliente);
     getchar();
