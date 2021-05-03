@@ -1,3 +1,5 @@
+
+
 typedef struct retirada Retirada;
 struct retirada{
   char codigoRet[10];
@@ -41,3 +43,7 @@ void tratarValidacaoCNPJCPF(void);
 void tratarValidacaoCodRetirada(void);
 double tratarValidacaoPrecoRetirada(void);
 int tratarValidacaoQuantRetirada(void);
+
+//Produtos e clientes validos
+int buscarProdutoValido(char*);
+int buscarClienteValido(char*);
