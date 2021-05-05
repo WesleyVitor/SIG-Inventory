@@ -544,18 +544,23 @@ Cliente* editarCliente(Cliente* cliente, char opcaoAtualizar, char* valorRecente
     //Atualizar o nome.
     case 'a':
       strcpy(cliente->nome,valorRecente);
+      break;
     //Atualizar a Rua
     case 'b':
       strcpy(cliente->rua,valorRecente);
+      break;
     //Atualizar o Bairro  
     case 'c':
       strcpy(cliente->bairro,valorRecente);
+      break;
     //Atualizar o Número
     case 'd':
       strcpy(cliente->numero,valorRecente);
+      break;
     //Atualizar o Complemento
     case 'e':
-      strcpy(cliente->complemento,valorRecente);       
+      strcpy(cliente->complemento,valorRecente); 
+      break;      
   }
   return cliente;
 }
